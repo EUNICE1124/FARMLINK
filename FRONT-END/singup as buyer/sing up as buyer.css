@@ -1,0 +1,190 @@
+/*
+|----------------------------------------------------------
+| GLOBAL & BODY STYLES 
+|----------------------------------------------------------
+*/
+html {
+    font-size: 16px; 
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E8F5E9; 
+    margin: 1;
+    padding: 0;
+  
+}
+
+.signup-container {
+    position: relative;
+}
+
+/*
+|----------------------------------------------------------
+| HEADER SECTION (Top Green Area) 
+|----------------------------------------------------------
+*/
+.header-section {
+    background: linear-gradient(to bottom, #4CAF50, #5CB85C);
+    height: 150px; 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    justify-content: flex-end;
+    padding: 10px; 
+    padding-bottom: 50px; 
+    position: relative;
+    z-index: 1; 
+}
+
+/* Top-left user icon - Reduced size */
+.user-icon-bg.small {
+    position: absolute;
+    top: 15px; 
+    left: 15px;
+    width: 45px; 
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+    font-size: 1.25rem; 
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.greeting {
+    font-size: 1.5rem; 
+    font-weight: 700;
+    margin: 0;
+    margin-left: 10px; 
+}
+
+.welcome-text {
+    font-size: 0.875rem; 
+    font-weight: 400;
+    margin: 0;
+    margin-left: 10px;
+    opacity: 0.9;
+}
+
+/*
+|----------------------------------------------------------
+| INPUT CARD SECTION (White Area) - MAXIMUM REDUCTION
+|----------------------------------------------------------
+*/
+.input-card {
+    background-color: white;
+    /* Reduced internal padding */
+    padding: 10px 15px; 
+    position: absolute;
+    /* Card overlap position */
+    top: 100px; 
+    left: 0;
+    right: 0;
+    /* Extra padding at the bottom for scroll comfort */
+    padding-bottom: 30px; 
+    border-top-left-radius: 40px; 
+    border-top-right-radius: 40px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2; 
+}
+
+.section-title {
+    font-size: 1.25rem; 
+    font-weight: 500;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px; 
+}
+
+/* --- Input Groups --- */
+.input-group {
+    margin-bottom: 6px; 
+    display: flex; 
+    align-items: center;
+    /* Reduced padding for shorter fields */
+    padding: 8px 10px; 
+    background-color: #F0FFF0; 
+    border-radius: 8px;
+}
+
+/* Icons */
+.input-group i {
+    color: #4CAF50;
+    font-size: 1rem; 
+    margin-right: 10px; 
+}
+
+/* Input Fields */
+.input-group input {
+    flex-grow: 1; 
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.9375rem; 
+    padding: 0; 
+    color: #333;
+    &::placeholder {
+        color: #999;
+    }
+}
+
+
+/* --- Privacy Checkbox Group --- */
+.privacy-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    font-size: 0.8125rem; 
+    color: #333; 
+}
+
+.privacy-checkbox-group input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    margin-right: 6px;
+    accent-color: #4CAF50;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.privacy-checkbox-group label {
+    line-height: 1.4;
+}
+
+.policy-link {
+    color: #4CAF50; 
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- Sign Up Button --- */
+.continue-btn {
+    width: 100%;
+    /* Reduced button height */
+    padding: 10px; 
+    background-color: #66BB6A; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem; 
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* --- Login Link --- */
+.login-link-text {
+    text-align: center;
+    margin-top: 10px; 
+    font-size: 0.875rem; 
+    color: #666;
+}
+
+.login-link {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+}
