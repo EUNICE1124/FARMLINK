@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Dashboard</title>
+    <link rel="stylesheet" href="/Front_end/Farmer dashboard/Farmer dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-screen dashboard-screen">
+        
+        <header class="dashboard-header">
+            <div class="user-info">
+                <p>Hi, Farmer John</p>
+                <div class="header-icons">
+                    <i class="fas fa-bell"></i>
+                    <div class="user-avatar-small">
+                        <i class="fas fa-user-circle"></i> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search products, orders or customers">
+            </div>
+
+            <div class="performance-controls">
+                <h2 class="performance-title">Performance Dashboard</h2>
+                <div class="filter-dropdown">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Last 30 days</span>
+                </div>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card sales-card">
+                    <p class="metric-value">12,500cfa</p>
+                    <p class="metric-label">Total Sales</p>
+                </div>
+                <div class="metric-card orders-card">
+                    <p class="metric-value">18</p>
+                    <p class="metric-label">Total Orders</p>
+                    <p class="metric-subtext">2 new customers acquired</p>
+                </div>
+                <div class="metric-card revenue-card">
+                    <div class="revenue-trend-row">
+                        <p class="metric-trend-value">12,500CFA</p>
+                        <p class="metric-label">Revenue Trend</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-products-section">
+                <div class="products-header">
+                    <h3 class="section-title">Top 5 products by revenue</h3>
+                    <p class="view-units-label">View by units sold</p>
+                </div>
+                <ul class="product-list">
+                    <li class="product-item">
+                        <span class="product-name">Plantain</span>
+                        <span class="product-value">4,500cfa</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Cassava</span>
+                        <span class="product-value">3,000cfa</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Potatoes</span>
+                        <span class="product-value">2,000cfa</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Onions</span>
+                        <span class="product-value">1,500cfa</span>
+                    </li>
+                    <li class="product-item">
+                        <span class="product-name">Ginger</span>
+                        <span class="product-value">1,000cfa</span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-user-circle"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="/Front_end/Farmer dashboard/Farmer dashboard.JS"></script>
+</body>
+</html>

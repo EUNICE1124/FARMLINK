@@ -1,0 +1,184 @@
+/* Custom properties for easy color management */
+:root {
+    --primary-green: #38a832; 
+    --light-green-bg: #e6f5e6; 
+    --vibrant-green-text: #2c8c28; 
+    --text-dark: #333;
+    --text-light: #fff;
+    --background-gray: #f2f2f2;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* App Screen (Mobile View) */
+.app-screen {
+    width: 100%;
+    max-width: 400px;
+    height: 800px; /* Use 100vh for a fluid height in production */
+    background-color: var(--background-gray);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 1. The Green Header Section --- */
+.header-section {
+    background: var(--primary-green);
+    height: 40%;
+    color: var(--text-light);
+    padding: 40px 25px 0;
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    z-index: 1; /* Below the card curve */
+}
+
+.avatar-bg {
+    width: 55px;
+    height: 55px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar-bg i {
+    font-size: 26px;
+    color: var(--text-light);
+}
+
+.greeting {
+    font-size: 34px;
+    margin-top: 10px;
+    font-weight: 800;
+}
+
+.welcome-text {
+    font-size: 18px;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* --- 2. The White Form Card with the Curve --- */
+.form-card {
+    background-color: #fff;
+    position: absolute;
+    top: 35%; /* Controls how far down the curve starts */
+    left: 0;
+    right: 0;
+    min-height: 70%;
+    
+    /* THE CURVE: Large border radius on the top corners */
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    
+    padding: 40px 25px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+    z-index: 2; /* CRITICAL: Must be higher than header to overlap it */
+}
+
+/* Input Styles */
+.input-container {
+    margin-bottom: 25px;
+}
+
+.input-container label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.text-input {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    background-color: var(--light-green-bg);
+    color: var(--text-dark);
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Location Selector Styles */
+.location-label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.location-input-group {
+    margin-bottom: 40px;
+}
+
+.location-selector {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px 10px;
+    background-color: var(--light-green-bg);
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.location-placeholder {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    color: var(--vibrant-green-text);
+    font-weight: 500;
+}
+
+.location-separator {
+    width: 1px;
+    height: 20px;
+    background-color: var(--vibrant-green-text);
+    margin: 0 5px;
+}
+
+/* Continue Button */
+.continue-button {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 25px;
+}
+
+.continue-button:active {
+    background-color: #2a8025;
+    transform: translateY(1px);
+}
+
+/* Skip Link */
+.skip-link {
+    display: block;
+    text-align: right;
+    color: var(--primary-green);
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+}

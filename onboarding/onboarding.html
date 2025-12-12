@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Onboarding</title>
+    <link rel="stylesheet" href="/Front_end/CSS/onboarding.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="onboarding-container">
+        <div class="header-section role-header">
+            <div class="user-icon-bg small">
+                <i class="fas fa-seedling"></i> </div>
+
+            <h2 class="welcome-title">Welcome to</h2>
+            <h1 class="app-name">FARM LINK</h1>
+            <p class="tagline">Connecting farmers to the market.</p>
+
+            <p class="instruction-text">
+                Tell us who you are, so we can tailor your FarmLink experience.
+            </p>
+        </div>
+
+        <div class="role-selection-cards">
+
+            <div class="role-card" data-role="Farmer">
+                <div class="role-icon-placeholder"></div> 
+                <p class="role-title">I'm A **Farmer**</p>
+                <p class="role-description">For those who grow the goodness.</p>
+            </div>
+
+            <div class="role-card" data-role="Buyer">
+                <div class="role-icon-placeholder"></div>
+                <p class="role-title">I'm A **Buyer**</p>
+                <p class="role-description">For those who savor the goodness.</p>
+            </div>
+
+        </div>
+
+        <button id="continueBtn" class="continue-btn" disabled>Continue</button>
+    </div>
+
+    <script src="/Front_end/JS/onboarding.js"></script>
+</body>
+
+</html>
