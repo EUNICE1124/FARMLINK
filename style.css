@@ -1,0 +1,249 @@
+/* Define the primary green color and light grey background */
+:root {
+    --primary-green: #4CAF50; /* A standard, vibrant green */
+    --light-green: #d2e4d2; /* Used for the search bar background */
+    --text-color: #333;
+    --low-stock-red: #cc0000;
+    --background-color: #f7f7f7; /* Very light grey/off-white */
+}
+
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px; /* Simulating a mobile screen width */
+    margin: 0 auto;
+    padding: 15px;
+    background-color: rgb(7, 172, 75); /* The content area itself is white */
+    min-height: 100vh; /* Ensure it takes up the full height */
+    position: relative; /* Needed for FAB positioning */
+}
+
+h1, h2 {
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+}
+
+/* --- Header Section --- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.fa-bell {
+    margin-right: 15px;
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc; /* Placeholder color for the profile image */
+    border-radius: 50%;
+    border: 1px solid var(--primary-green);
+}
+
+/* --- Search Bar --- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--light-green); /* Lighter green background */
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    color: #8ce79b;
+}
+
+.search-bar .fa-search {
+    margin-right: 10px;
+    color: #66c68e;
+}
+
+/* --- Pending Order Section --- */
+.pending-order {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.pending-order h2 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.view-details-btn {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right; /* Position to the right, as seen in the image */
+    margin-top: -30px; /* Move it up to align with the 'Pending Order' text */
+    position: relative;
+    z-index: 10;
+}
+
+.sales-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    clear: both; /* Clear the float from the button */
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-item:first-child {
+    border-right: 1px solid #eee;
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.low-stock-alert {
+    color: var(--low-stock-red); /* Red text for the alert */
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.stat-subtext {
+    font-size: 0.7em;
+    color: #888;
+}
+
+
+/* --- Your Stocks Section --- */
+.your-stocks {
+    padding: 20px 0 80px 0; /* Add space for the bottom navigation */
+}
+
+.stock-table {
+    margin-top: 15px;
+}
+
+/* Simple Flexbox for table layout */
+.table-header, .stock-item {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.table-header {
+    font-weight: bold;
+    color: #666;
+}
+
+.col-image {
+    flex: 1; /* Smallest column */
+    max-width: 60px;
+}
+
+.col-name {
+    flex: 3;
+}
+
+.col-stock {
+    flex: 4;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.product-image-placeholder {
+    width: 45px;
+    height: 45px;
+    /* This replicates the bundled plantain image color */
+    background: linear-gradient(to bottom, #98781d, #cfa830, #98781d);
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.edit-icon {
+    color: var(--primary-green);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.view-all-btn {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    /* Positioning it similar to the image, aligned right and down */
+    float: right; 
+    margin-top: 20px; 
+}
+
+
+/* --- Floating Action Button (FAB) --- */
+.fab-add {
+    position: fixed; /* Use fixed for true floating behavior */
+    right: 20px;
+    bottom: 90px; /* Above the bottom navigation */
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 20;
+}
+
+/* --- Bottom Navigation --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background-color: white;
+    border-top: 1px solid #eee;
+    font-size: 1.5em;
+    color: #999;
+}
+
+.bottom-nav i.active {
+    color: var(--primary-green); /* Active icon is green */
+}
