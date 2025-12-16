@@ -1,0 +1,178 @@
+/* --- Reused Core Styles (Assuming they are in the same file) --- */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #333;
+}
+
+.onboarding-container {
+    width: 100%;
+    max-width: 400px;
+    /* Typical mobile width */
+    height: 100vh;
+    max-height: 800px;
+    position: relative;
+    background-color: #333;
+    /* Dark background matches the image */
+}
+
+
+/* --- Header Section (Green Area) --- */
+
+.header-section {
+    background-color: #4CAF50;
+    /* Primary Green */
+    color: white;
+    padding: 40px 20px 30px;
+    text-align: center;
+}
+
+.role-header {
+    padding-bottom: 25px;
+}
+
+.user-icon-bg.small {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    /* Center the icon */
+}
+
+.user-icon-bg.small i {
+    font-size: 20px;
+    color: white;
+}
+
+.welcome-title {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.app-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 5px 0;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.instruction-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 0 10px;
+    margin: 0;
+}
+
+
+/* --- Role Selection Cards --- */
+
+.role-selection-cards {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 15px;
+    background-color: #333;
+    /* Dark background extends down */
+    gap: 15px;
+}
+
+.role-card {
+    background-color: #EFEFEF;
+    /* Light gray background for cards */
+    color: #333;
+    padding: 20px 10px;
+    border-radius: 15px;
+    width: 45%;
+    /* Keeps them side-by-side */
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    /* Initial transparent border */
+    transition: border 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.role-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Style for when a card is selected (Active State) */
+
+.role-card.selected {
+    border: 2px solid #4CAF50;
+    /* Green border when selected */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    /* Subtle green glow */
+}
+
+.role-icon-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: black;
+    /* Black circle as shown in the image */
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+.role-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 5px;
+}
+
+.role-title strong {
+    font-weight: 700;
+}
+
+.role-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+
+/* --- Continue Button (Reused style, but positioned differently) --- */
+
+.continue-btn {
+    width: calc(100% - 40px);
+    /* 100% minus 20px padding on each side */
+    margin: 0 20px 30px 20px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s;
+}
+
+.continue-btn:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.continue-btn:disabled {
+    background-color: #A5D6A7;
+    /* Lighter green when disabled */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
