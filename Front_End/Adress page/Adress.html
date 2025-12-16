@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Registration</title>
+    <link rel="stylesheet" href="/Front_end/Adress page/Adress.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-screen">
+        
+        <div class="header-section">
+            <div class="avatar-bg">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1 class="greeting">HELLO!</h1>
+            <p class="welcome-text">Welcome to FarmLink</p>
+        </div>
+
+        <div class="form-card">
+            <form id="registrationForm">
+                
+                <div class="input-container">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="text-input" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="location-label">Location</div>
+
+                <div class="location-input-group">
+                    <div class="location-selector" tabindex="0" role="button" aria-label="Select location: Province, District, City">
+                        <span class="location-placeholder">Province</span>
+                        <span class="location-separator"></span>
+                        <span class="location-placeholder">District</span>
+                        <span class="location-separator"></span>
+                        <span class="location-placeholder">City</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="continue-button">Continue</button>
+            </form>
+
+            <a href="#" class="skip-link">Skip for now</a>
+        </div>
+    </div>
+
+    <script src="/Front_end/Adress page/Adress.JS"></script>
+</body>
+</html>

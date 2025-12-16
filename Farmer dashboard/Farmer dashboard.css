@@ -1,0 +1,301 @@
+/* Custom properties */
+:root {
+    --primary-green: #38a832; 
+    --secondary-green: #e6f5e6; 
+    --text-dark: #333;
+    --text-gray: #666;
+    --text-light: #fff;
+    --background-gray: #f2f2f2;
+    --card-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    --nav-height: 60px;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- App Screen (Mobile View) - Responsive Fix --- */
+.app-screen {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh; /* FIX: Use 100vh for fluid height */
+    background-color: var(--background-gray);
+    position: relative;
+    overflow-y: auto; /* FIX: Allow content to scroll */
+    overflow-x: hidden;
+}
+
+/* --- Dashboard Header (NOW LIGHT) --- */
+.dashboard-header {
+    background-color: var(--background-gray); 
+    padding: 20px 20px 10px;
+    padding-top: 50px; 
+    height: 110px; 
+    position: relative;
+    z-index: 1; 
+}
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.user-info p {
+    color: var(--text-dark); 
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icons i {
+    font-size: 20px;
+    color: var(--text-dark); 
+    margin-right: 15px;
+}
+
+.user-avatar-small {
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-green);
+    border: 2px solid var(--background-gray); 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.user-avatar-small i {
+    font-size: 18px;
+    color: #fff;
+    margin: 0;
+}
+
+/* --- Main Content --- */
+.main-content {
+    padding: 0 20px 20px;
+    background-color: var(--background-gray);
+    position: relative;
+    top: 0; 
+    padding-top: 0;
+    padding-bottom: var(--nav-height); 
+    z-index: 2;
+}
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff; 
+    border-radius: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: -15px; 
+}
+
+.search-bar i {
+    color: var(--primary-green);
+    margin-right: 10px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* Performance Controls - FIX: Add spacing */
+.performance-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* FIX: Added margin below to separate from metrics grid */
+    margin-bottom: 25px; 
+    margin-top: 5px; /* Slight margin from search bar if needed */
+}
+
+.performance-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-right: 15px;
+}
+
+.filter-dropdown {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Metrics Grid and Cards */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.metric-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-size: 14px;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.metric-subtext {
+    font-size: 12px;
+    color: var(--primary-green);
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.revenue-card .revenue-trend-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.metric-trend-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-green);
+}
+
+/* Top Products Section */
+.top-products-section {
+    margin-top: 30px;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.view-units-label {
+    font-size: 12px;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    font-weight: 500;
+    /* Staggered look */
+    margin-left: var(--item-margin, 0px);
+    width: calc(100% - var(--item-margin, 0px));
+}
+
+.product-item:nth-child(1) { --item-margin: 0px; }
+.product-item:nth-child(2) { --item-margin: 10px; }
+.product-item:nth-child(3) { --item-margin: 20px; }
+.product-item:nth-child(4) { --item-margin: 30px; }
+.product-item:nth-child(5) { --item-margin: 40px; }
+
+.product-name {
+    font-size: 14px;
+    color: var(--primary-green);
+}
+
+.product-value {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* --- Bottom Navigation Bar --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    width: 100%;
+    max-width: 400px;
+    height: var(--nav-height); 
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    padding: 0;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 12px;
+    transition: color 0.3s;
+}
+
+.nav-item i {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.nav-item.active {
+    color: var(--primary-green);
+}
