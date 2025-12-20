@@ -1,0 +1,138 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+.container {
+    width: 412px;
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    background-color: #0F3F09;
+}
+header{
+margin-top: 16px;
+    text-align: center;
+}
+
+ .user-icon{
+font-size: 24px;
+background: rgba(255, 255, 255, 0.2);
+width: 60px;
+height: 60px;
+border-radius: 50%;
+margin: 0 auto 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+} 
+
+
+header h1{
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px; 
+}
+header h1 span{
+    display: block;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.tagline{
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+.instruction{
+    font-size: 16px;
+    font-weight: lighter;
+    margin-bottom: 40px;
+    padding: 0 10px;
+}
+.role-selection{
+    gap: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.card{
+    cursor: pointer;
+}
+.card input{
+    display: none;
+}
+.card-content{
+    background-color: white;
+    color: #333;
+    padding: 20px 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s ;
+    height: 267px;
+    width: 186px;
+}
+
+
+.card h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-icon-bg.small i {
+    font-size: 20px;
+    color: black;
+}
+.card p{
+    font-size: 16px;
+    font-weight: lighter;
+    color: black;
+}
+.card input{
+    display: none;
+}
+.card input:checked + .card-content{
+    transform: scale(1.05);
+    
+}
+.btn-primary{
+    position: absolute;
+    bottom: 250px;
+    width: 379px;
+    height: 54px;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: #49DF1B;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+transition: opacity 0.3s;
+}
+.btn-primary:disabled{
+    opacity: 0.5;
+    cursor: pointer;
+}
