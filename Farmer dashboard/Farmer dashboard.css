@@ -19,21 +19,19 @@
 }
 
 body {
-    background-color: var(--background-gray);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* --- App Screen (Mobile View) - Responsive Fix --- */
-.app-screen {
-    width: 100%;
-    max-width: 400px;
-    height: 100vh; /* FIX: Use 100vh for fluid height */
+
+.container {
+    width: 412px;
+    height: 917px;
     background-color: var(--background-gray);
     position: relative;
-    overflow-y: auto; /* FIX: Allow content to scroll */
+    overflow-y: auto; 
     overflow-x: hidden;
 }
 
@@ -104,7 +102,7 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    background-color: #fff; 
+    background-color: #E6FBDF; 
     border-radius: 25px;
     margin-bottom: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -125,25 +123,21 @@ body {
     color: var(--text-dark);
 }
 
-/* Performance Controls - FIX: Add spacing */
 .performance-controls {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    /* FIX: Added margin below to separate from metrics grid */
     margin-bottom: 25px; 
-    margin-top: 5px; /* Slight margin from search bar if needed */
+    margin-top: 5px; 
 }
 
 .performance-title {
     font-size: 16px;
     font-weight: 600;
     color: var(--text-dark);
-    margin-right: 15px;
+    margin-left: 150px;
+    margin-top: 50px;
 }
 
 .filter-dropdown {
-    display: flex;
     align-items: center;
     padding: 8px 12px;
     background-color: #fff;
@@ -151,7 +145,9 @@ body {
     box-shadow: var(--card-shadow);
     color: var(--text-dark);
     font-size: 14px;
+    width: 150px;
     font-weight: 500;
+    
 }
 
 /* Metrics Grid and Cards */
