@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="mobile-container">
+        <header class="receipt-header">
+            <span class="icon">☰</span>
+            <h1>Payment Receipts</h1>
+            <span class="icon">🔔</span>
+        </header>
+
+        <div class="table-wrapper">
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DETAILS</th>
+                        <th>TOTAL AMOUNT</th>
+                        <th>DATE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="receiptData">
+                    <tr>
+                        <td>01</td>
+                        <td>Order #44</td>
+                        <td>5000</td>
+                        <td>26/12</td>
+                        <td><button class="download-btn" onclick="downloadReceipt('01')">download</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
