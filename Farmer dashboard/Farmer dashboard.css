@@ -236,15 +236,15 @@ body {
     color: var(--text-dark);
     font-weight: 500;
     /* Staggered look */
-    margin-left: var(--item-margin, 0px);
+    margin-right: var(--item-margin, 0px);
     width: calc(100% - var(--item-margin, 0px));
 }
 
 .product-item:nth-child(1) { --item-margin: 0px; }
-.product-item:nth-child(2) { --item-margin: 10px; }
-.product-item:nth-child(3) { --item-margin: 20px; }
-.product-item:nth-child(4) { --item-margin: 30px; }
-.product-item:nth-child(5) { --item-margin: 40px; }
+.product-item:nth-child(2) { --item-margin: 40px; }
+.product-item:nth-child(3) { --item-margin: 90px; }
+.product-item:nth-child(4) { --item-margin: 150px; }
+.product-item:nth-child(5) { --item-margin: 200px; }
 
 .product-name {
     font-size: 14px;
