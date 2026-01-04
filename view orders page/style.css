@@ -1,0 +1,130 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Main Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    max-width: 500px; /* Optional: centers the app on desktop */
+    margin: 0 auto;
+}
+
+/* Header Styling */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px 10px 15px;
+}
+
+.top-nav h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ph-bell {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* Search Bar Styling */
+.search-container {
+    padding: 10px 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #E8F5E9; /* Light green background from screenshot */
+    padding: 12px 15px;
+    border-radius: 30px;
+}
+
+.search-box i {
+    color: #666;
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #777;
+}
+
+/* Main Content Area */
+.content {
+    flex-grow: 1; /* Pushes the bottom nav down */
+    overflow-y: auto; /* Allows scrolling if content is long */
+}
+
+/* Bottom Navigation Styling */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px 0 25px 0; /* Extra bottom padding for mobile home indicators */
+    border-top: 1px solid #eee;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #888;
+    gap: 4px;
+    flex: 1;
+}
+
+.nav-item i {
+    font-size: 1.6rem;
+}
+
+.nav-item span {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Active State Styling */
+.nav-item.active {
+    color: #2E7D32; /* The green color for the selected item */
+}
+
+.nav-item.active i {
+    font-weight: bold;
+}
