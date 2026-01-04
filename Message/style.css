@@ -1,0 +1,90 @@
+:root {
+    --primary-green: #388e3c;
+    --light-green: #4caf50;
+    --bg-white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--bg-white);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Header Gradient */
+.main-header {
+    background: linear-gradient(to bottom, #1b5e20, #388e3c);
+    padding: 10px 15px;
+    color: white;
+}
+
+.top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-container {
+    background: white;
+    flex-grow: 1;
+    margin: 0 15px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--light-green);
+}
+
+.header-title {
+    font-size: 1.1rem;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    color: #333;
+    cursor: pointer;
+}
+
+.tab.active {
+    font-weight: bold;
+}
+
+/* Content */
+#messageDisplay {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-state {
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.message-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+}
+
