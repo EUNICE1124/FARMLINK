@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Sign-up</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <header class="auth-header">
+            <div class="user-icon-circle">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h1>HELLO!</h1>
+            <p>Welcome to FarmLink</p>
+        </header>
+
+        <main class="form-container">
+            <h2 class="form-title">Sign-up</h2>
+
+            <form id="signupForm">
+                <div class="input-field">
+                    <i class="far fa-user"></i>
+                    <input type="text" placeholder="Enter User Name" required>
+                </div>
+
+                <div class="input-field">
+                    <i class="far fa-envelope"></i>
+                    <input type="email" placeholder="Enter Email" required>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-phone-alt"></i>
+                    <input type="tel" placeholder="Enter Phone number" required>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="Enter Address">
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Enter password" required>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirm password" required>
+                </div>
+
+                <div class="terms-container">
+                    <input type="checkbox" id="privacy" required>
+                    <label for="privacy">I have read and agreed to the <a href="#">privacy policy</a></label>
+                </div>
+
+                <button type="submit" class="signup-btn">SIGN UP</button>
+            </form>
+
+            <p class="login-link">Already have an account? <a href="#">Log In</a></p>
+        </main>
+
+       
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
