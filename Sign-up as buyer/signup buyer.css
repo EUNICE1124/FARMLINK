@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #cbd2cb; /* Dark green base */
+    display: flex;
+    justify-content: center;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(to bottom, #2e7d32, #43a047);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.auth-header {
+    padding: 40px 30px;
+    color: white;
+}
+
+.user-icon-circle {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.auth-header p {
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+/* Curved Form Area */
+.form-container {
+    background-color: white;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title {
+    color: #52f01a;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Input Styling */
+.input-field {
+    background-color: #e8f5e9;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+}
+
+.input-field i {
+    color: #4caf50;
+    font-size: 1.2rem;
+    width: 25px;
+}
+
+.input-field input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Checkbox & Button */
+.terms-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 10px 0 20px 0;
+    font-size: 0.85rem;
+    color: #4caf50;
+}
+
+.terms-container a {
+    color: #4caf50;
+    text-decoration: underline;
+}
+
+.signup-btn {
+    width: 100%;
+    background-color: #52f01a;
+    color: #1b5e20;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.login-link {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.login-link a {
+    color: #2e7d32;
+    font-weight: bold;
+    text-decoration: none;
+}
+
