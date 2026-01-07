@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tracking-container">
+        <header class="header">
+            <h1>ORDER TRACKING</h1>
+            <label for="customerNum">customer number</label>
+            <input type="text" id="customerNum" placeholder="number" readonly>
+        </header>
+
+        <main class="stepper">
+            <div class="step" id="step1">
+                <div class="step-left">
+                    <span class="circle">1</span>
+                    <div class="line"></div>
+                </div>
+                <div class="step-right">
+                    <img src="images/package-icon.png" alt="Order Placed">
+                    <div class="text">
+                        <h3>ORDER PLACED</h3>
+                        <p>Your order is placed successfully</p>
+                        <p><strong>Estimated time: <span id="estTime">3 Days</span></strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step2">
+                <div class="step-left">
+                    <span class="circle">2</span>
+                    <div class="line"></div>
+                </div>
+                <div class="step-right">
+                    <img src="images/truck-icon.png" alt="On the way">
+                    <div class="text">
+                        <h3>ON THE WAY</h3>
+                        <p>Our agent will soon deliver the products</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step3">
+                <div class="step-left">
+                    <span class="circle">3</span>
+                </div>
+                <div class="step-right">
+                    <img src="images/delivered-icon.png" alt="Delivered">
+                    <div class="text">
+                        <h3>PRODUCT DELIVERED</h3>
+                        <p>Date of delivery</p>
+                        <p class="date-text" id="deliveryDate">Date</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="help-line">
+            <h3>HELP LINE</h3>
+            <p id="adminNumber">Admin number</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

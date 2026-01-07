@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #d4d6d4;
+    display: flex;
+    justify-content: center;
+}
+.tracking-container{
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    background-color: #55f31c; /* Bright Green */
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.header h1 { margin: 0 0 10px 0; font-size: 24px; }
+
+input {
+    width: 60%;
+    padding: 8px;
+    border: none;
+    text-align: center;
+}
+
+.stepper { padding: 40px 20px; }
+
+.step { display: flex; margin-bottom: 20px; }
+
+.step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.circle {
+    background-color: #f06292; /* Pink */
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.line {
+    border-left: 2px dotted #ccc;
+    height: 80px;
+    margin-top: 5px;
+}
+
+.step-right {
+     display: flex;
+     align-items: center;
+}
+
+.step-right img { 
+    width: 60px; 
+    margin-right: 20px;
+ }
+
+.text h3 { 
+    margin: 0; 
+    font-size: 16px;
+    text-transform: uppercase; 
+}
+
+.text p { 
+    margin: 5px 0; 
+    color: #555; 
+    font-size: 14px; 
+}
+
+.help-line {
+    text-align: center;
+    margin-top: 50px;
+    color:green;
+}
