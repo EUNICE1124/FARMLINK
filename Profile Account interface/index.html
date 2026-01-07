@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="top-bar">
+            <i class="fas fa-arrow-left"></i>
+        </header>
+
+        <main class="profile-content">
+            <h1 class="page-title">Profile</h1>
+
+            <section class="user-card" onclick="navigateTo('edit-profile')">
+                <img src="image/avatar.png" alt="User Avatar" class="profile-img">
+                <div class="user-details">
+                    <span class="user-name">Farm link</span>
+                    <span class="user-location">Yaounde, Cameroon</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </section>
+
+            <div class="section-group">
+                <h2 class="section-label">Settings</h2>
+                <div class="list-item" onclick="navigateTo('account')">
+                    <span class="item-text">Account Settings</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="list-item" onclick="navigateTo('following')">
+                    <div class="item-leading">
+                        <i class="fas fa-users-viewfinder green-icon"></i>
+                        <span class="item-text">Following</span>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="section-group">
+                <h2 class="section-label">Help</h2>
+                <div class="list-item" onclick="navigateTo('terms')">
+                    <div class="item-leading">
+                        <i class="far fa-file-alt green-icon"></i>
+                        <span class="item-text">Terms and Condition</span>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="logout-btn" id="logoutBtn">
+                <i class="fas fa-arrow-right-from-bracket"></i>
+                <span>Log out</span>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-shopping-basket"></i>
+                <span>Orders</span>
+            </div>
+            <div class="nav-item active">
+                <i class="fas fa-user-circle"></i>
+                <span>Account</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+.app-container {
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px; /* Space for bottom nav */
+}
+
+.top-bar {
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+.profile-content {
+    padding: 0 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+}
+
+/* Profile Card */
+.user-card {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-right: 15px;
+}
+
+.user-details {
+    flex-grow: 1;
+}
+
+.user-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.user-location {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* List Items */
+.section-group {
+    margin-bottom: 30px;
+}
+
+.section-label {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    cursor: pointer;
+}
+
+.item-leading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.green-icon {
+    color: #4caf50;
+    font-size: 1.2rem;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #d32f2f;
+    font-weight: bold;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+/* Bottom Nav Styling */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 450px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+.nav-item {
+    text-align: center;
+    color: #333;
+    font-size: 0.7rem;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 1.3rem;
+    margin-bottom: 3px;
+}
+
+.nav-item.active {
+    color: #4caf50;
+}
