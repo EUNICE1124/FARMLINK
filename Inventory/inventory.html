@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Inventory</title>
+    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <div class="mobile-container">
+        <header class="header">
+            <h1>Hi, Farmer John</h1>
+            <div class="header-icons">
+                <i class="bi bi-bell"></i>
+                <img src="https://i.pravatar.cc/150?u=farmerjohn" alt="Profile" class="avatar">
+            </div>
+        </header>
+
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" id="searchInput" placeholder="Search Products">
+            </div>
+        </div>
+
+        <h2 class="section-title">Your Inventory</h2>
+
+        <main class="inventory-list" id="inventoryList">
+    <div class="product-card">
+        <img src="images/unsplash_Ar0QYv-qtw4.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>Plantain</h3>
+                <span class="badge in-stock">In stock</span>
+            </div>
+            <p class="price">Cfa 2000/bunch</p>
+            <p class="remaining">70 bunch remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+
+    <div class="product-card">
+        <img src="images/unsplash_aIghKsc3H34.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>Tomatoes</h3>
+                <span class="badge in-stock">In stock</span>
+            </div>
+            <p class="price">Cfa 2000/basket</p>
+            <p class="remaining">70 basket remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+
+    <div class="product-card">
+        <img src="images/unsplash_k0MigzUz-vI.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>Potatoes</h3>
+                <span class="badge low-stock">Low</span>
+            </div>
+            <p class="price">Cfa 2000/bunch</p>
+            <p class="remaining">5 bunch remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+
+    <div class="product-card selected-card">
+        <img src="images/unsplash_HE_MjmWh9eQ.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>CORN</h3>
+                <span class="badge in-stock">In stock</span>
+            </div>
+            <p class="price">Cfa 2000/bucket</p>
+            <p class="remaining">50 bucket remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+
+    <div class="product-card">
+        <img src="images/unsplash_Q-XgpC5SLm4.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>cassava</h3>
+                <span class="badge in-stock">In stock</span>
+            </div>
+            <p class="price">Cfa 2000/tubar</p>
+            <p class="remaining">70 tubars remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+
+    <div class="product-card">
+        <img src="images/unsplash_dU9CwN0CD6I.png">
+        <div class="product-details">
+            <div class="detail-header">
+                <h3>Beans</h3>
+                <span class="badge low-stock">Low</span>
+            </div>
+            <p class="price">Cfa 2000/bucket</p>
+            <p class="remaining">6 bucket remaining</p>
+        </div>
+        <button class="edit-btn"><i class="bi bi-pencil-fill"></i></button>
+    </div>
+</main>
+
+        <button class="fab">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item active">
+                <i class="bi bi-collection-fill"></i>
+                <span>Products</span>
+            </div>
+            <div class="nav-item">
+                <i class="bi bi-basket3"></i>
+                <span>Orders</span>
+            </div>
+            <div class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Account</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="inventory.js"></script>
+</body>
+</html>
