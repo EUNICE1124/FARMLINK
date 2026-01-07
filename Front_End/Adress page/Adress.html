@@ -3,48 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmLink Registration</title>
-    <link rel="stylesheet" href="/Front_end/Adress page/Adress.css">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/HTML/Adress.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+
+    </head>
 <body>
+
     <div class="app-screen">
-        
         <div class="header-section">
-            <div class="avatar-bg">
-                <i class="fas fa-user"></i>
+            <div class="avatar-bg"><i class="fas fa-user"></i></div> 
+            <a href="#" class="skip-link">Skip For Now</a> 
+           <h1 class="greeting">Hello!</h1>
+            <p class="welcome-text">Welcome To FarmLink</p>
+        </div>
+
+        <form id="registrationForm" class="form-card">
+            
+            <div class="input-container">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" class="text-input" placeholder="Enter Full Name" required>
             </div>
-            <h1 class="greeting">HELLO!</h1>
-            <p class="welcome-text">Welcome to FarmLink</p>
-        </div>
-
-        <div class="form-card">
-            <form id="registrationForm">
+            
+            <div class="location-input-group">
+                <label class="location-label" for="province-select">Province:</label>
+                <select id="province-select" name="province" class="location-text-input" required>
+                    <option value="">Select Province</option>
+                    </select>
                 
-                <div class="input-container">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" class="text-input" placeholder="Enter your full name" required>
+                <label class="location-label">District & City:</label>
+                <div class="location-selector">
+                    <input type="text" id="district-input" name="district" class="location-text-input" placeholder="Enter District" required>
+                    <input type="text" id="city-input" name="city" class="location-text-input" placeholder="Enter City" required>
                 </div>
+            </div>
+            <button type="submit" class="continue-button">Continue</button>
+            <a href="#" class="skip-link-bottom">Not now, thanks.</a>
 
-                <div class="location-label">Location</div>
-
-                <div class="location-input-group">
-                    <div class="location-selector" tabindex="0" role="button" aria-label="Select location: Province, District, City">
-                        <span class="location-placeholder">Province</span>
-                        <span class="location-separator"></span>
-                        <span class="location-placeholder">District</span>
-                        <span class="location-separator"></span>
-                        <span class="location-placeholder">City</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="continue-button">Continue</button>
-            </form>
-
-            <a href="#" class="skip-link">Skip for now</a>
-        </div>
+        </form>
     </div>
 
-    <script src="/Front_end/Adress page/Adress.JS"></script>
+    <script src="/HTML/Adress.js"></script>
 </body>
 </html>

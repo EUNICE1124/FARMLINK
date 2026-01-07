@@ -1,3 +1,4 @@
+/* Custom properties for easy color management */
 :root {
     --primary-green: #38a832; 
     --light-green-bg: #e6f5e6; 
@@ -7,8 +8,10 @@
     --background-gray: #f2f2f2;
 }
 
+/* Base Styles */
 * {
-    box-sizing: border-box;
+    /* CRITICAL: Ensures padding and border are included in the element's total width */
+    box-sizing: border-box; 
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -26,10 +29,10 @@ body {
 .app-screen {
     width: 100%;
     max-width: 400px;
-    height: 800px; /* Use 100vh for a fluid height in production */
+    height: 800px; 
     background-color: var(--background-gray);
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,7 +45,7 @@ body {
     position: relative; 
     display: flex;
     flex-direction: column;
-    z-index: 1; /* Below the card curve */
+    z-index: 1; 
 }
 
 .avatar-bg {
@@ -77,18 +80,17 @@ body {
 .form-card {
     background-color: #fff;
     position: absolute;
-    top: 35%; /* Controls how far down the curve starts */
+    top: 35%; 
     left: 0;
     right: 0;
     min-height: 70%;
     
-    /* THE CURVE: Large border radius on the top corners */
     border-top-left-radius: 45px;
     border-top-right-radius: 45px;
     
     padding: 40px 25px;
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
-    z-index: 2; /* CRITICAL: Must be higher than header to overlap it */
+    z-index: 2; 
 }
 
 /* Input Styles */
@@ -96,14 +98,16 @@ body {
     margin-bottom: 25px;
 }
 
-.input-container label {
+.input-container label, .location-label {
     font-size: 14px;
     color: #888;
     margin-bottom: 5px;
     display: block;
 }
 
-.text-input {
+/* Base style for all text inputs and the Province dropdown */
+.text-input, 
+.location-text-input { 
     width: 100%;
     padding: 18px;
     border: none;
@@ -112,43 +116,35 @@ body {
     border-radius: 12px;
     font-size: 16px;
     outline: none;
+    /* Reset margin-right just in case */
+    margin-right: 0; 
 }
 
-/* Location Selector Styles */
-.location-label {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 5px;
+/* Style the select dropdown arrow */
+select.location-text-input {
+    appearance: none; 
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%2D%22292.4%22%3E%3Cpath%20fill%3D%22%2338a832%22%20d%3D%22M287%2069.9l-143.7%20143.7L1.6%2069.9z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 10px;
+    padding-right: 40px; 
 }
 
+
+/* Location Selector Styles (The container for District and City inputs) */
 .location-input-group {
     margin-bottom: 40px;
 }
 
 .location-selector {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 18px 10px;
-    background-color: var(--light-green-bg);
-    border-radius: 12px;
-    cursor: pointer;
-    user-select: none;
+    display: flex; 
+    justify-content: space-between;
+    gap: 5px; /* Space between District and City inputs */
 }
 
-.location-placeholder {
-    flex: 1;
-    text-align: center;
-    font-size: 16px;
-    color: var(--vibrant-green-text);
-    font-weight: 500;
-}
-
-.location-separator {
-    width: 1px;
-    height: 20px;
-    background-color: var(--vibrant-green-text);
-    margin: 0 5px;
+.location-selector .location-text-input {
+    flex: 1; 
+    width: 50px; 
 }
 
 /* Continue Button */
@@ -172,11 +168,12 @@ body {
 }
 
 /* Skip Link */
-.skip-link {
+.skip-link-bottom {
     display: block;
     text-align: right;
     color: var(--primary-green);
     font-size: 16px;
     text-decoration: none;
     font-weight: 500;
+    margin-top: -15px;
 }

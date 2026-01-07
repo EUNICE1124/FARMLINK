@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="product-header">
+            <i class="fa-solid fa-bars"></i>
+            <h1>Product Management</h1>
+            <i class="fa-regular fa-bell"></i>
+        </header>
+
+        <form id="productForm" class="form-body">
+            <div class="input-group">
+                <label>Image</label>
+                <div class="input-icon">
+                    <input type="file" id="productImage" hidden>
+                    <label for="productImage"><i class="fa-solid fa-arrow-up-from-bracket"></i></label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" id="name" placeholder="Enter product name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Price</label>
+                <input type="number" id="price" placeholder="Enter price" required>
+            </div>
+
+            <div class="input-group">
+                <label>Status</label>
+                <div class="checkbox-container">
+                    <div class="check-item">
+                        <input type="checkbox" id="statusFruit">
+                        <span>fruit</span>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="statusVegetable">
+                    <span>vegetable</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+    </div>
+
+    <script src="product-script.js"></script>
+</body>
+</html>

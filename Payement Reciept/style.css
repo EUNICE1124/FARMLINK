@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+/* Forces the "Android" narrow look */
+.mobile-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    min-height: 90vh;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Header styling */
+.receipt-header {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-header h1 {
+    font-size: 1.2rem;
+}
+
+/* Table styling to match the dark theme */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Allows scrolling if table is too wide */
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #333; /* Dark background from image */
+    color: white;
+    font-size: 11px;
+}
+
+.receipt-table th, .receipt-table td {
+    border: 0.5px solid #555;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.receipt-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Green download button */
+.download-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 10px;
+    cursor: pointer;
+}
