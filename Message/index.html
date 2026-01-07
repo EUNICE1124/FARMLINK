@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages Interface</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="top-row">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="search-container">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="header-title">Messages</span>
+                    <i class="fas fa-search"></i>
+                </div>
+                <i class="far fa-bell notification-icon"></i>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <div class="tab" onclick="filterMessages('all')">All</div>
+            <div class="tab active" onclick="filterMessages('unread')">Unread</div>
+            <div class="tab" onclick="filterMessages('all')">All</div>
+        </nav>
+
+        <main id="messageDisplay">
+            <div class="empty-state">
+                <p>No Messages</p>
+            </div>
+        </main>
+         
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
