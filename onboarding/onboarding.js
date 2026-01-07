@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle card selection
     function handleRoleSelection(event) {
-        // Remove 'selected' class from all cards
         roleCards.forEach(card => {
             card.classList.remove('selected');
         });
