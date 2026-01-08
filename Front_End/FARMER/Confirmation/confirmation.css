@@ -1,0 +1,121 @@
+:root {
+    --primary-green: #49D71B;
+    --dark-green: #0F3F09;
+    --bg-gradient: linear-gradient(180deg, #0d4d25 0%, #051a0b 100%);
+    --white: #ffffff;
+    --light-gray: #f4f4f4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header Section with Curved Shape */
+.header-shape {
+    background: var(--primary-green);
+    height: 250px;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.header-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Success Page / Overlay Modal */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-card {
+    background: var(--white);
+    width: 90%;
+    border-radius: 25px;
+    padding: 40px 20px;
+    text-align: center;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.thumb-icon {
+    font-size: 4rem;
+    color: yellow;
+    margin-bottom: 20px;
+}
+
+.success-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #49D71B;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.skip-btn {
+    flex: 1;
+    background: #e0e0e0;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-btn {
+    flex: 2;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
