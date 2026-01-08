@@ -1,7 +1,16 @@
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const resultsArea = document.getElementById('resultsArea');
+// Check who is using the search
+const userRole = localStorage.getItem('userRole'); // 'farmer' or 'buyer'
 
+const searchPlaceholder = document.querySelector('.search-input');
+
+if (userRole === 'farmer') {
+    searchPlaceholder.placeholder = "Search for customers...";
+} else {
+    searchPlaceholder.placeholder = "Search for fresh produce...";
+}
 let recentSearches = [];
 
 searchBtn.addEventListener('click', () => {
