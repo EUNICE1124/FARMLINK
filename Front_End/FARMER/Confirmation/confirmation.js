@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipBtn = document.querySelector('.skip-btn');
 
     completeProfileBtn.addEventListener('click', () => {
-        window.location.href = '../address/address.html';
+        window.location.href = '../adress page/address.html';
     });
 
     skipBtn.addEventListener('click', () => {
