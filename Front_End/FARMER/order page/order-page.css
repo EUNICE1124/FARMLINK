@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    height: 736px;
+    width: 360px;
+    background-color: white;
+    position: relative;
+}
+
+.header {
+    background: linear-gradient(to bottom, #49DF1B, #28790F);
+    padding: 30px;
+    color: white;
+    border-radius: 0px;
+    text-align: left;
+}
+
+.info-box {
+    margin-top:20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    margin:20px 18px;
+    font-size:14px;
+}
+
+.i {
+    width: 24px;
+    height: 24px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.confirm-btn { 
+    display: block; 
+    width: 300px;
+    height: 64px;
+    padding: 16px;
+    margin: 20px;
+    background-color: #49DF1B;
+    color: #F5EEEE;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+}
+
+.reject-btn {
+    display:block;
+    width: 300px;
+    height: 64px;
+    padding: 16px;
+    margin: 20px;
+    background-color: #777;
+    color: #FFF9F9;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+}
