@@ -1,35 +1,37 @@
-// Function to fetch order details
 async function fetchOrderData() {
     try {
-        // Replace with your actual API endpoint
-        // const response = await fetch('https://api.yourdomain.com/order-status/123');
-        // const data = await response.json();
+        // Replace '1' with the actual Order ID from your URL or session
+        const orderId = 1; 
+        const response = await fetch(`http://localhost:3000/api/orders/status/${orderId}`);
+        
+        if (!response.ok) throw new Error('Order not found');
+        
+        const data = await response.json();
 
-        // Mock Data for demonstration
-        const data = {
-            customerNumber: "+1 234 567 890",
-            adminNumber: "+1 800 555 0199",
-            statusStep: 2, // Highlights current progress
-            deliveryDate: "Oct 24, 2023"
-        };
-
-        // Populate fields
+        // Populate fields with real database data
         document.getElementById('customerNum').value = data.customerNumber;
         document.getElementById('adminNumber').innerText = data.adminNumber;
         document.getElementById('deliveryDate').innerText = data.deliveryDate;
 
-        // Logic to highlight active steps could be added here
+        // Visual tracking logic
         updateVisualStatus(data.statusStep);
 
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching order status:", error);
+        // Fallback UI if server is down
+        document.getElementById('deliveryDate').innerText = "Status Unavailable";
     }
 }
 
 function updateVisualStatus(step) {
-    // You can change opacity or colors of steps 1, 2, or 3 based on 'step'
-    console.log("Current order stage:", step);
+    // Logic to highlight circles/lines in your UI
+    const steps = document.querySelectorAll('.status-step'); // Assuming you have these classes
+    steps.forEach((el, index) => {
+        if (index + 1 <= step) {
+            el.style.opacity = "1";
+            el.style.color = "var(--primary-green)";
+        } else {
+            el.style.opacity = "0.5";
+        }
+    });
 }
-
-// Initialize on page load
-window.onload = fetchOrderData;
