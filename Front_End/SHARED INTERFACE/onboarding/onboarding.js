@@ -22,18 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 2. Handle Navigation
-    continueBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        if (selectedRole) {
-            // SAVE the role so the Login and Search pages can see it later
-            localStorage.setItem('userRole', selectedRole.toLowerCase());
-
-            // ROUTING LOGIC:
-            window.location.href = '../signup/signup.html';
-
-        } else {
-            alert('Please select a role to continue.');
+    continueBtn.addEventListener('click', function () {
+        if (selectedRole === 'farmer') {
+            window.location.href = '../../farmer/signup as farmer/signup.html';
+        }
+        else if (selectedRole === 'buyer') {
+            window.location.href = '../../buyer/sign-up as buyer/signup buyer.html';
         }
     });
 });
