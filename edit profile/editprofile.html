@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="style3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="phone">
+
+    <!-- HEADER -->
+    <div class="header">
+        <span class="back-arrow">&#8592;</span>
+        <h2>Edit Profile</h2>
+    </div>
+
+    <!-- PROFILE IMAGE -->
+    <div class="profile-section">
+        <div class="profile-img">
+            <img src="images/profile.jpeg.jfif" id="profilePic" alt="Profile">
+            <input type="file" id="imageInput" hidden>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form">
+
+      <label for="fullName">Full Name</label>
+<input type="text" id="fullName" placeholder="Farm Link">
+
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="farmlink@gmail.com">
+
+<label for="phone">Phone number</label>
+<input type="tel" id="phone" placeholder="675788901">
+
+<label for="gender">Gender</label>
+<select id="gender">
+    <option value="">Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+</select>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <span>🏠</span>
+            <p>Home</p>
+        </div>
+        <div class="nav-item">
+            <span>📦</span>
+            <p>Products</p>
+        </div>
+        <div class="nav-item">
+            <span>🛒</span>
+            <p>Orders</p>
+        </div>
+        <div class="nav-item green">
+            <span>👤</span>
+            <p>Account</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

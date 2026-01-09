@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+
+<div class="phone">
+
+    <div class="header">
+        <span class="menu">☰</span>
+        <h1>Product Management</h1>
+        <span class="bell">🔔</span>
+    </div>
+
+    <button class="add-btn">＋ ADD NEW PRODUCTS</button>
+
+    <!-- IMAGE UPLOAD -->
+    <div class="image-box">
+        <input type="file" id="image" accept="image/*">
+        <div class="upload" id="uploadBtn">⬆</div>
+        <img id="preview" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:20px;">
+    </div>
+
+    <label>Product Name</label>
+    <input type="text" id="name" placeholder="banana">
+
+    <label>Description</label>
+    <textarea id="desc" placeholder="it nice"></textarea>
+
+    <div class="stats">
+        <div class="card">
+            <h2>3500cfa</h2>
+            <p>Today's Sales</p>
+        </div>
+        <div class="card">
+            <h2>4 Items</h2>
+            <p>Low stock alert</p>
+            <span>Replenish now</span>
+        </div>
+    </div>
+
+    <label>Category</label>
+    <input type="text" id="category" placeholder="fruits">
+
+    <button class="save-btn" id="saveBtn">Save Product</button>
+
+</div>
+
+<script src="product.js"></script>
+</body>
+</html>
