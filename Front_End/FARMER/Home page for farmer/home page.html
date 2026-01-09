@@ -3,93 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmer John Dashboard</title>
+    <title>Farmer Home - FarmLink</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="home page.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header class="dashboard-header">
-            <h1>Hi, Farmer John</h1>
-            <div class="header-icons">
-                <i class="fas fa-bell"></i>
-                <div class="user-avatar"></div>
+
+    <div class="mobile-container">
+        <header class="home-header">
+            <div class="header-top">
+                <h2 id="display-name">Hi, Farmer John</h2>
+                <div class="header-icons">
+                    <i class="bi bi-bell"></i>
+                    <div class="profile-thumb">
+                        <img src="../../BUYER/buyer home page/images/1740037285443.jpg" alt="User">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search products, orders or customers">
             </div>
         </header>
-
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <span>Search products, orders or customers</span>
-        </div>
-
-        <section class="pending-order">
-            <h2>Pending Order (3)</h2>
-            <button class="view-details-btn">View Details</button>
-            <div class="sales-stats">
-                <div class="stat-item">
-                    <span class="stat-value">3500cfa</span>
-                    <span class="stat-label">Today's Sales</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">4 Items</span>
-                    <span class="stat-label low-stock-alert">Low stock alert</span>
-                    <span class="stat-subtext">Replenish now</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="your-stocks">
-            <h2>Your Stocks</h2>
+        <div class="scroll-content">
+        <main class="content-area">
             
-            <div class="stock-table">
-                <div class="table-header">
-                    <div class="col-image">Image</div>
-                    <div class="col-name">Product Name</div>
-                    <div class="col-stock">Current stock</div>
+            <div class="card pending-order-card">
+                <div class="pending-info">
+                    <h3>Pending Order <span>(3)</span></h3>
                 </div>
-
-                <div class="stock-item">
-                    <div class="col-image"><div class="product-image-placeholder"></div></div>
-                    <div class="col-name">Plantains</div>
-                    <div class="col-stock">
-                        5 bunch remaining
-                        <i class="fas fa-pencil-alt edit-icon"></i>
-                    </div>
-                </div>
-
-                <div class="stock-item">
-                    <div class="col-image"><div class="product-image-placeholder"></div></div>
-                    <div class="col-name">Plantains</div>
-                    <div class="col-stock">
-                        5 bunch remaining
-                        <i class="fas fa-pencil-alt edit-icon"></i>
-                    </div>
-                </div>
-
-                <div class="stock-item">
-                    <div class="col-image"><div class="product-image-placeholder"></div></div>
-                    <div class="col-name">Plantains</div>
-                    <div class="col-stock">
-                        5 bunch remaining
-                        <i class="fas fa-pencil-alt edit-icon"></i>
-                    </div>
-                </div>
+                <button class="btn-view-details">View Details</button>
             </div>
 
-            <button class="view-all-btn">View all products</button>
-        </section>
+           <div class="split-card">
+    <div class="stat-half" id="sales-trigger">
+        <h2 class="green-text">3500cfa</h2>
+        <p>Today's Sales</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stat-half" id="stock-trigger">
+        <h2 class="green-text">4 Items</h2>
+        <p>Low stock alert</p>
+        <a href="#" class="action-link">Replenish now</a>
+    </div>
+</div>
+
+            <section class="stocks-section">
+                <h3>Your Stocks</h3>
+                <div class="table-header">
+                    <span>Image</span>
+                    <span>Product Name</span>
+                    <span>Current stock</span>
+                </div>
+                
+                <div class="stock-list">
+                    <div class="stock-row">
+                       <img src="../../BUYER/buyer home page/images/images.jpg" alt="" class="product-img">
+                        <div class="p-name">Corn</div>
+                        <div class="p-status">1 bag remaining</div>
+                        <i class="bi bi-pencil"></i>
+                    </div>
+                    <div class="stock-row">
+                        <img src="../../BUYER/buyer home page/images/download (1).jpg" alt="" class="product-img">
+                        <div class="p-name">Peper</div>
+                        <div class="p-status">5 kg remaining</div>
+                        <i class="bi bi-pencil"></i>
+                    </div>
+                </div>
+
+                <button class="btn-view-all">View all products</button>
+            </section>
+        </main>
 
         <button class="fab-add">
-            <i class="fas fa-plus"></i>
+            <i class="bi bi-plus"></i>
         </button>
+        </div>
 
         <nav class="bottom-nav">
-            <i class="fas fa-home active"></i>
-            <i class="fas fa-archive"></i>
-            <i class="fas fa-shopping-cart"></i>
-            <i class="fas fa-camera"></i>
+            <div class="nav-item active">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="bi bi-box-seam"></i>
+                <span>Products</span>
+            </div>
+            <div class="nav-item">
+                <i class="bi bi-basket"></i>
+                <span>Orders</span>
+            </div>
+            <div class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Account</span>
+            </div>
         </nav>
     </div>
-    <script src="home page.js"></script>
+<script src="home page.js"></script>
 </body>
 </html>

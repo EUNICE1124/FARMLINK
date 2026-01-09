@@ -1,61 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Search Functionality
-    const searchInput = document.getElementById('productSearch');
-    const stockItems = document.querySelectorAll('.your-stocks .stock-item:not(.header)');
+    
+    const farmerName = localStorage.getItem('farmerName') || 'Farmer John';
+    const nameDisplay = document.getElementById('display-name');
+    if (nameDisplay) {
+        nameDisplay.textContent = `Hi, ${farmerName}`;
+    }
 
-    searchInput.addEventListener('keyup', (e) => {
-        const searchText = e.target.value.toLowerCase();
+
+    const salesPart = document.getElementById('sales-trigger');
+    const stockPart = document.getElementById('stock-trigger');
+
+    if (salesPart) {
+        salesPart.addEventListener('click', () => {
+            console.log("Navigating to Performance Dashboard...");
+            // Redirects to the performance dashboard folder
+            window.location.href = '../farmer dashboard/farmer dashboard.html';
+        });
+    }
+
+    if (stockPart) {
+        stockPart.addEventListener('click', () => {
+            console.log("Navigating to Inventory/Stocks...");
+            // Redirects to the products management page
+            window.location.href = '../inventory/inventory.html';
+        });
+    }
+
+    // 3. FLOATING ACTION BUTTON (FAB)
+    const fabAdd = document.querySelector('.fab-add');
+    if (fabAdd) {
+        fabAdd.addEventListener('click', () => {
+            // Redirect to the "Add New Product" form
+            window.location.href = '../add products/index.html';
+        });
+    }
+
+    // 4. SEARCH BAR LOGIC
+
+    const searchInput = document.getElementById('farmer-search');
+
+    searchInput.addEventListener('keyup', function () {
         
-        stockItems.forEach(item => {
-            const productName = item.querySelector('.col-name').textContent.toLowerCase();
+        const filter = searchInput.value.toLowerCase();
+
+        
+        const rows = document.querySelectorAll('.stock-row');
+
+        rows.forEach(row => {
             
-            // Show item if its name contains the search text, hide otherwise
-            if (productName.includes(searchText)) {
-                item.style.display = 'grid';
+            const productName = row.querySelector('.p-name').textContent.toLowerCase();
+
+            
+            if (productName.indexOf(filter) > -1) {
+                row.style.display = ""; // 
             } else {
-                item.style.display = 'none';
+                row.style.display = "none"; 
             }
         });
     });
-});
 
+    // 5. BOTTOM NAVIGATION ACTIVE STATE
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+    
+            navItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
 
-// 2. Simulated Stock Edit Function
-function editStock(productId) {
-    const stockElement = document.querySelector(`.stock-item[data-product="${productId}"] .col-current`);
-    const currentStock = stockElement.getAttribute('data-stock');
-    const productName = stockElement.closest('.stock-item').querySelector('.col-name').textContent;
-
-    // Prompt the user for the new stock count
-    const newStock = prompt(`Enter new stock count for ${productName}:`, currentStock);
-
-    if (newStock !== null && !isNaN(newStock) && newStock.trim() !== "") {
-        const newStockValue = parseInt(newStock, 10);
-        
-        // Update the display text and the data attribute
-        stockElement.textContent = `${newStockValue} bunch remaining `;
-        stockElement.setAttribute('data-stock', newStockValue);
-        
-        // Re-add the edit icon (since it was overwritten by .textContent)
-        const editIcon = document.createElement('i');
-        editIcon.className = 'fas fa-pen edit-icon';
-        editIcon.setAttribute('onclick', `editStock('${productId}')`);
-        stockElement.appendChild(editIcon);
-
-        alert(`Stock for ${productName} updated to ${newStockValue}.`);
-    } else if (newStock !== null) {
-        alert('Invalid input. Stock not updated.');
-    }
-}
-
-// 3. Simulated View Details Function
-function viewOrderDetails() {
-    alert('Navigating to Orders page to view details for the 3 pending orders...');
-    // In a real application, this would redirect the user: 
-    // window.location.href = '/orders.html';
-}
-
-// 4. Simulated Add Product Function (attached via event listener in HTML)
-document.querySelector('.add-product-button').addEventListener('click', () => {
-    alert('Opening form to add a new product...');
+            
+            const label = item.querySelector('span').textContent.toLowerCase();
+            if (label !== 'home') {
+            
+            }
+        });
+    });
 });

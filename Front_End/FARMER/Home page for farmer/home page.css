@@ -1,248 +1,235 @@
 :root {
-    --primary-green: #4CAF50; /* A standard, vibrant green */
-    --light-green: #d2e4d2; /* Used for the search bar background */
+    --primary-green: #28790F; /* Darker, richer green for buttons and active states */
+    --light-green-bg: #E6FBDF; /* Very light green for search bar */
+    --card-bg: #e5e5e5;
+    --light-green: #49DF1B;
     --text-color: #333;
-    --low-stock-red: #cc0000;
-    --background-color: #f7f7f7; /* Very light grey/off-white */
+    --mobile-width: 412px;
+    --nav-height: 60px;
 }
 
-/* Base Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 0;
+* { margin: 0; 
+    padding: 0; 
+   box-sizing: border-box; 
+   font-family: 'Segoe UI', sans-serif; 
 }
 
-.container {
-    max-width: 600px; /* Simulating a mobile screen width */
-    margin: 0 auto;
-    padding: 15px;
-    background-color: rgba(233, 238, 235, 0.877); /* The content area itself is white */
-    min-height: 100vh; /* Ensure it takes up the full height */
-    position: relative; /* Needed for FAB positioning */
+body { background-color: #fff; 
+    display: flex; 
+    justify-content: center; 
 }
 
-h1, h2 {
-    color: var(--text-color);
-    margin: 0 0 10px 0;
-}
+.mobile-container {
+     width: 100%;
+     background-color: #FFFFFF;
+      max-width: 414px; 
+      min-height: 100vh; 
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-/* --- Header Section --- */
-.dashboard-header {
+/* Header & Search */
+.home-header {
+padding: 20px; 
+}
+.header-top {
+     display: flex; 
+     justify-content: space-between; 
+     align-items: center; 
+     margin-bottom: 20px; 
+    }
+.header-icons {
+     display: flex; 
+     align-items: center; 
+     gap: 15px; 
+     font-size: 1.5rem; 
+    }
+.profile-thumb img { 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%;
+     border: 1px solid #ccc; }
+
+.search-container {
+    background: #eefdf3;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+.search-container input {
+     border: none; 
+     background: transparent; 
+     margin-left: 10px; 
+     width: 100%; 
+     outline: none; 
+    }
+
+/* Cards */
+.content-area { 
+    padding: 0 20px; 
+    
+}
+.scroll-content{
+    flex: 1;
+    overflow-y: auto;
     padding-bottom: 20px;
 }
-
-.header-icons {
-    display: flex;
-    align-items: center;
-    font-size: 1.2em;
-    color: #666;
-}
-
-.fa-bell {
-    margin-right: 15px;
-}
-
-.user-avatar {
-    width: 30px;
-    height: 30px;
-    background-color: #ccc; /* Placeholder color for the profile image */
-    border-radius: 50%;
-    border: 1px solid var(--primary-green);
-}
-
-/* --- Search Bar --- */
-.search-bar {
-    display: flex;
-    align-items: center;
-    background-color: var(--light-green); /* Lighter green background */
-    border-radius: 8px;
-    padding: 10px 15px;
+.split-card { 
+   background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    display: flex; 
+    align-items: stretch; 
     margin-bottom: 20px;
-    color: #8ce79b;
-}
+    overflow: hidden; 
+ }
 
-.search-bar .fa-search {
-    margin-right: 10px;
-    color: #66c68e;
+.pending-order-card { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
 }
-
-/* --- Pending Order Section --- */
-.pending-order {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.pending-order h2 {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.view-details-btn {
-    background-color: var(--primary-green);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-weight: bold;
+.pending-info h3 span {
+     color: var(--muted-text); 
+    }
+.btn-view-details {
+     background: var(--light-green); 
+     border: none; 
+     padding: 10px 15px;
+      border-radius: 8px; 
+      font-weight: bold; 
+      cursor: pointer; 
+    }
+.stat-half {
+    flex: 1; /* Gives both sides equal width */
+    padding: 20px;
     cursor: pointer;
-    float: right; /* Position to the right, as seen in the image */
-    margin-top: -30px; /* Move it up to align with the 'Pending Order' text */
-    position: relative;
-    z-index: 10;
+    transition: background 0.2s;
 }
 
-.sales-stats {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
-    clear: both; /* Clear the float from the button */
+/* Visual feedback when tapping/clicking */
+.stat-half:active {
+    background-color: #f0fdf4;
 }
 
-.stat-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.divider {
+    width: 1px;
+    background-color: #eee; /* The thin line dividing the card */
+    margin: 15px 0; /* Optional: adds a little gap at top/bottom of line */
 }
 
-.stat-item:first-child {
-    border-right: 1px solid #eee;
-}
-
-.stat-value {
-    font-size: 1.8em;
+.green-text {
+    color: #15803d;
+    font-size: 1.4rem;
     font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 5px;
 }
 
-.stat-label {
-    font-size: 0.8em;
-    color: #666;
+.stat-half p {
+    font-size: 0.85rem;
+    color: var(--muted-text);
 }
 
-.low-stock-alert {
-    color: var(--low-stock-red); /* Red text for the alert */
+.action-link {
+    color: #15803d;
+    font-size: 0.75rem;
     font-weight: bold;
-    font-size: 0.9em;
-}
-
-.stat-subtext {
-    font-size: 0.7em;
-    color: #888;
+    text-decoration: none;
+    display: block;
+    margin-top: 4px;
 }
 
 
-/* --- Your Stocks Section --- */
-.your-stocks {
-    padding: 20px 0 80px 0; /* Add space for the bottom navigation */
+/* Table Section */
+.stocks-section h3 {
+     margin: 20px 0 10px;
+     }
+.table-header { 
+    display: grid;
+     grid-template-columns: 60px 1fr 1fr 20px; 
+     font-size: 0.85rem; font-weight: bold; 
+     padding-bottom: 10px; 
+    }
+.stock-row {
+     display: grid; 
+     grid-template-columns: 60px 1fr 1fr 20px;
+      align-items: center; 
+      padding: 10px 0;
+       border-top: 1px solid #eee; }
+.img-placeholder { 
+    width: 45px; 
+    height: 45px; 
+    background: #eee; 
+    border-radius: 4px; 
 }
-
-.stock-table {
-    margin-top: 15px;
-}
-
-/* Simple Flexbox for table layout */
-.table-header, .stock-item {
-    display: flex;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    align-items: center;
-    font-size: 0.9em;
-}
-
-.table-header {
-    font-weight: bold;
-    color: #666;
-}
-
-.col-image {
-    flex: 1; /* Smallest column */
-    max-width: 60px;
-}
-
-.col-name {
-    flex: 3;
-}
-
-.col-stock {
-    flex: 4;
-    text-align: right;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.product-image-placeholder {
+.product-img { 
     width: 45px;
-    height: 45px;
-    /* This replicates the bundled plantain image color */
-    background: linear-gradient(to bottom, #98781d, #cfa830, #98781d);
-    border: 1px solid #ddd;
-    border-radius: 3px;
+     height: 45px; 
+     object-fit: cover; 
+     border-radius: 4px;
+     }
+.p-name, .p-status {
+     font-size: 0.9rem; 
+    }
+.p-status { 
+    color: var(--muted-text); 
 }
 
-.edit-icon {
-    color: var(--primary-green);
-    margin-left: 10px;
-    cursor: pointer;
-}
+.btn-view-all {
+     width: 100%; 
+     background: var(--light-green); 
+     color: #fff; border: none; 
+     padding: 12px; 
+     border-radius: 25px; 
+     font-weight: bold; 
+     margin-top: 15px; 
+    }
 
-.view-all-btn {
-    background-color: var(--primary-green);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-weight: bold;
-    cursor: pointer;
-    /* Positioning it similar to the image, aligned right and down */
-    float: right; 
-    margin-top: 20px; 
-}
-
-
-/* --- Floating Action Button (FAB) --- */
-.fab-add {
-    position: fixed; /* Use fixed for true floating behavior */
-    right: 20px;
-    bottom: 90px; /* Above the bottom navigation */
+/* FAB & Bottom Nav */
+.fab-add { 
+    position: fixed;
+    bottom: calc(var(--nav-height) + 15px); 
+    right: calc(50% - (var(--mobile-width) / 2) + 30px);
     width: 50px;
     height: 50px;
+    border-radius: 15px;
     background-color: var(--primary-green);
     color: white;
     border: none;
-    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.0);
     font-size: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     cursor: pointer;
-    z-index: 20;
-}
+    z-index: 100;
+ }
 
-/* --- Bottom Navigation --- */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    background-color: white;
-    border-top: 1px solid #eee;
-    font-size: 1.5em;
-    color: #999;
-}
-
-.bottom-nav i.active {
-    color: var(--primary-green); /* Active icon is green */
+     position: fixed; 
+     bottom: 0;
+      width: 100%; 
+      max-width: 414px; 
+      background: #fff; 
+      display: flex; 
+      justify-content: space-around; 
+      padding: 10px 0;
+       border-top: 1px solid #eee; 
+    }
+.nav-item {
+     display: flex; 
+     flex-direction: column;
+      align-items: center; 
+      color: #888; 
+      font-size: 0.8rem; 
+      cursor: pointer; 
+    }
+.nav-item.active {
+     color: var(--light-green); 
+    }
+.nav-item i { 
+    font-size: 1.4rem; 
 }
