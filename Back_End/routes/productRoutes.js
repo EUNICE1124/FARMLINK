@@ -8,4 +8,7 @@ router.get('/', productController.getAllProducts);
 // Matches: POST http://localhost:3000/api/cart
 router.post('/cart', productController.addToCart);
 
+// For: fetch('.../api/products/cart', { method: 'POST' })
+router.post('/cart', productController.addToCart);
+
 module.exports = router;
