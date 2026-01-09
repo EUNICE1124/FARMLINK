@@ -16,24 +16,30 @@ signupForm.addEventListener('submit', async (e) => {
         alert("Passwords do not match!");
         return;
     }
-
-    // Mock API Call
+    // Send Data to Backend
     console.log("Sending data to FarmLink API...", formData);
     
-    try {
-        // Simulate network request
-        const response = await simulateRegisterAPI(formData);
-        alert(response.message);
-        // Redirect logic here
-    } catch (err) {
-        alert("Registration failed. Please try again.");
-    }
-});
-
-function simulateRegisterAPI(data) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({ status: 200, message: "Welcome to FarmLink! Account created." });
-        }, 1500);
+   try {
+    const response = await fetch('http://localhost:3000/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            phone: formData.phone,
+            password: formData.passwords[0].value
+        })
     });
-}
+
+    const result = await response.json();
+
+    if (response.ok) {
+        alert("Welcome to FarmLink! Account created.");
+        window.location.href = 'login.html'; // Redirect to login
+    } else {
+        alert("Registration failed: " + result.message);
+    }
+} catch (err) {
+    console.error("Connection Error:", err);
+    alert("Could not connect to the server.");
+}});
