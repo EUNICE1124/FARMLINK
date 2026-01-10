@@ -108,3 +108,32 @@ exports.getLatestOrder = async (req, res) => {
         res.status(500).json({ message: "Error fetching latest order", error: err.message });
     }
 };
+// GET /api/orders/:orderId - Fetch specific order details
+exports.getOrderDetails = async (req, res) => {
+    const orderId = req.params.orderId;
+    try {
+        const [order] = await db.execute(
+            `SELECT o.id as orderId, u.name as customerName, o.total_amount as amount, o.status 
+             FROM orders o 
+             JOIN users u ON o.customer_id = u.id 
+             WHERE o.id = ?`, 
+            [orderId]
+        );
+
+        if (order.length === 0) return res.status(404).json({ message: "Order not found" });
+        res.status(200).json(order[0]);
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching order", error: err.message });
+    }
+};
+
+//  PUT /api/orders/status - Update order status (Confirm/Reject)
+exports.updateOrderStatus = async (req, res) => {
+    const { orderId, status } = req.body; // status: 'CONFIRMED' or 'REJECTED'
+    try {
+        await db.execute('UPDATE orders SET status = ? WHERE id = ?', [status, orderId]);
+        res.status(200).json({ message: `Order ${status.toLowerCase()} successfully` });
+    } catch (err) {
+        res.status(500).json({ message: "Update failed", error: err.message });
+    }
+};

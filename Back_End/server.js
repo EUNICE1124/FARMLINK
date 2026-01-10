@@ -15,7 +15,8 @@ app.use(express.json()); // Parses body data
 // This makes the URLs: http://localhost:3001/api/users and /api/login
 
 
-
+app.get('/api/orders/:orderId', productController.getOrderDetails);
+app.put('/api/orders/status', productController.updateOrderStatus);
 app.get('/api/farmer/inventory/:userId', userController.getInventory);
 app.get('/api/farmer/home-summary/:userId', userController.getHomeSummary);
 app.get('/api/finance/revenue', productController.getFinancialRecords);

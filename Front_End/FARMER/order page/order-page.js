@@ -1,81 +1,61 @@
-/* ===== 1. ORDER DATA (Example) ===== */
-const order = {
-  orderId: "ORD-10245",
-  customerName: "John Doe",
-  amount: 25000,
-  status: "PENDING" // PENDING | CONFIRMED | REJECTED
-};
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. GET ORDER ID FROM URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id') || "1"; // Default to 1 for testing
 
+    // DOM ELEMENTS
+    const customerEl = document.querySelector('.row:nth-child(1) .label');
+    const orderIdEl = document.querySelector('.row:nth-child(2) .label');
+    const amountEl = document.querySelector('.row:nth-child(3) .label');
+    const statusEl = document.querySelector('.row:nth-child(4) .label');
+    
+    const confirmBtn = document.querySelector('.confirm-btn');
+    const rejectBtn = document.querySelector('.reject-btn');
 
-/* ===== 2. DOM ELEMENTS ===== */
-const customerEl = document.getElementById("customer");
-const orderIdEl = document.getElementById("orderId");
-const amountEl = document.getElementById("amount");
-const statusEl = document.getElementById("status");
+    // 2. FETCH ORDER DATA
+    async function loadOrderDetails() {
+        try {
+            const response = await fetch(`http://localhost:3001/api/orders/${orderId}`);
+            const order = await response.json();
 
-const confirmBtn = document.getElementById("confirmBtn");
-const rejectBtn = document.getElementById("rejectBtn");
+            if (response.ok) {
+                // Update text content next to the icons
+                customerEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>${order.customerName}</span>`);
+                orderIdEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>#${order.orderId}</span>`);
+                amountEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>CFA ${order.amount}</span>`);
+                statusEl.nextElementSibling.insertAdjacentHTML('afterend', `<span id="current-status">${order.status}</span>`);
+                
+                if(order.status !== 'PENDING') {
+                    confirmBtn.disabled = true;
+                    rejectBtn.disabled = true;
+                    confirmBtn.style.opacity = '0.5';
+                }
+            }
+        } catch (error) {
+            console.error("Error loading order:", error);
+        }
+    }
 
+    // 3. UPDATE STATUS FUNCTION
+    async function handleStatusUpdate(newStatus) {
+        try {
+            const response = await fetch('http://localhost:3001/api/orders/status', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderId: orderId, status: newStatus })
+            });
 
-/* ===== 3. RENDER ORDER DETAILS ===== */
-function renderOrder(order) {
-  customerEl.textContent = order.customerName;
-  orderIdEl.textContent = order.orderId;
-  amountEl.textContent = `₦${order.amount.toLocaleString()}`;
-  statusEl.textContent = order.status;
-}
+            if (response.ok) {
+                alert(`Order ${newStatus}!`);
+                location.reload(); // Refresh to show updated status
+            }
+        } catch (error) {
+            alert("Failed to update order.");
+        }
+    }
 
+    confirmBtn.addEventListener('click', () => handleStatusUpdate('CONFIRMED'));
+    rejectBtn.addEventListener('click', () => handleStatusUpdate('REJECTED'));
 
-/* ===== 4. VALIDATION ===== */
-function canUpdateOrder(order) {
-  return order.status === "PENDING";
-}
-
-
-/* ===== 5. CONFIRM ORDER ===== */
-function confirmOrder(order) {
-  if (!canUpdateOrder(order)) {
-    alert("This order has already been processed.");
-    return;
-  }
-
-  order.status = "CONFIRMED";
-  updateOrder(order);
-}
-
-
-/* ===== 6. REJECT ORDER ===== */
-function rejectOrder(order) {
-  if (!canUpdateOrder(order)) {
-    alert("This order has already been processed.");
-    return;
-  }
-
-  order.status = "REJECTED";
-  updateOrder(order);
-}
-
-
-/* ===== 7. UPDATE ORDER (UI + BACKEND HOOK) ===== */
-function updateOrder(order) {
-  renderOrder(order);
-
-
-  alert(`Order ${order.status} successfully`);
-}
-
-
-/* ===== 8. BUTTON EVENTS ===== */
-confirmBtn.addEventListener("click", () => {
-  confirmOrder(order);
-});
-
-rejectBtn.addEventListener("click", () => {
-  rejectOrder(order);
-});
-
-
-/* ===== 9. INITIALIZE ON PAGE LOAD ===== */
-document.addEventListener("DOMContentLoaded", () => {
-  renderOrder(order);
+    loadOrderDetails();
 });
