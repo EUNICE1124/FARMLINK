@@ -135,3 +135,32 @@ exports.getDashboardData = async (req, res) => {
         res.status(500).json({ message: "Error fetching dashboard data", error: err.message });
     }
 };
+// GET /api/farmer/home-summary/:id - Fetch summary for Home Page
+exports.getHomeSummary = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        // Get user name
+        const [user] = await db.execute('SELECT name FROM users WHERE id = ?', [userId]);
+        
+        // Get count of pending orders (Assuming an 'orders' table exists)
+        const [orders] = await db.execute(
+            'SELECT COUNT(*) as pendingCount FROM orders WHERE farmer_id = ? AND status = "Pending"', 
+            [userId]
+        );
+
+        // Get top 4 recent products (Assuming a 'products' table exists)
+        const [products] = await db.execute(
+            'SELECT name, status, image_url FROM products WHERE farmer_id = ? LIMIT 4', 
+            [userId]
+        );
+
+        res.status(200).json({
+            farmerName: user[0]?.name || 'Farmer',
+            pendingOrders: orders[0].pendingCount,
+            inventory: products
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching home summary", error: err.message });
+    }
+};
