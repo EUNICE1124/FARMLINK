@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 1. FETCH HOME DATA
     if (userId) {
         try {
-            const response = await fetch(`http://localhost:5000/api/farmer/home-summary/${userId}`);
+            const response = await fetch(`http://localhost:3001/api/farmer/home-summary/${userId}`);
             const data = await response.json();
 
             if (response.ok) {

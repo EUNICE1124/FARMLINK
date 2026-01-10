@@ -16,6 +16,7 @@ app.use(express.json()); // Parses body data
 
 
 
+app.get('/api/farmer/inventory/:userId', userController.getInventory);
 app.get('/api/farmer/home-summary/:userId', userController.getHomeSummary);
 app.get('/api/finance/revenue', productController.getFinancialRecords);
 app.get('/api/users/dashboard/:id', userController.getDashboardData);

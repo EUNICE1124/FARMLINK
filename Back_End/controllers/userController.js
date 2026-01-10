@@ -164,3 +164,18 @@ exports.getHomeSummary = async (req, res) => {
         res.status(500).json({ message: "Error fetching home summary", error: err.message });
     }
 };
+// GET /api/farmer/inventory/:userId - Fetch all products for a specific farmer
+exports.getInventory = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const [products] = await db.execute(
+            'SELECT id, name, price, quantity, unit, status, image_url FROM products WHERE farmer_id = ?',
+            [userId]
+        );
+
+        res.status(200).json(products);
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching inventory", error: err.message });
+    }
+};
