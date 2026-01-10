@@ -7,5 +7,6 @@ router.post('/', orderController.createOrder);
 
 // GET http://localhost:3000/api/orders/status/:id (To Track)
 router.get('/status/:id', orderController.getOrderStatus);
+router.get('/latest', orderController.getLatestOrder);
 
 module.exports = router;

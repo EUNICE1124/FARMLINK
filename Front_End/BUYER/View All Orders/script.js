@@ -1,19 +1,21 @@
-// URL for your order data API
-const ORDER_API = "https://your-api.com/get-latest-order";
+const ORDER_API = "http://localhost:3000/api/orders/latest";
 
 async function fetchOrderData() {
     try {
         const response = await fetch(ORDER_API);
+        
+        if (!response.ok) throw new Error('Network response was not ok');
+        
         const data = await response.json();
 
-        // Filling the table with API data
-        document.getElementById('orderId').textContent = data.id || "#1024";
-        document.getElementById('customer').textContent = data.customerName || "John Doe";
-        document.getElementById('items').textContent = data.productCount || "5 Boxes";
-        document.getElementById('status').textContent = data.status || "Pending";
-        document.getElementById('orderDate').textContent = data.date || "2025-12-26";
+        // Filling the table with real API data
+        document.getElementById('orderId').textContent = data.id;
+        document.getElementById('customer').textContent = data.customerName;
+        document.getElementById('items').textContent = data.productCount;
+        document.getElementById('status').textContent = data.status;
+        document.getElementById('orderDate').textContent = data.date;
 
-    } catch (error) {
+    }catch (error) {
         console.log("Error fetching API, using mock data instead.");
         // Static data for testing
         document.getElementById('orderId').textContent = "FL-990";
