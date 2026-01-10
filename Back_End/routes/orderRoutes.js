@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
 
-// POST http://localhost:3000/api/orders (To Create)
-router.post('/', orderController.createOrder);
-
-// GET http://localhost:3000/api/orders/status/:id (To Track)
-router.get('/status/:id', orderController.getOrderStatus);
 router.get('/latest', orderController.getLatestOrder);
+router.get('/', orderController.getAllOrders); // Matches fetch('http://localhost:3001/api/orders')
+router.patch('/:id', orderController.updateOrderStatus); // Matches fetch('http://localhost:3001/api/orders/${orderId}')
+router.post('/', orderController.placeOrder); 
+router.get('/status/:id', orderController.getOrderStatus);
 
 module.exports = router;

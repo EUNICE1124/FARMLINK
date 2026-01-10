@@ -1,4 +1,4 @@
-const ORDER_API = "http://localhost:3000/api/orders/latest";
+const ORDER_API = "http://localhost:3001/api/orders/latest";
 
 async function fetchOrderData() {
     try {

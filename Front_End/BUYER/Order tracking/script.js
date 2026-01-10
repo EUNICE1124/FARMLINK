@@ -2,7 +2,7 @@ async function fetchOrderData() {
     try {
         // Replace '1' with the actual Order ID from your URL or session
         const orderId = 1; 
-        const response = await fetch(`http://localhost:3000/api/orders/status/${orderId}`);
+        const response = await fetch(`http://localhost:3001/api/orders/status/${orderId}`);
         
         if (!response.ok) throw new Error('Order not found');
         

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             productGrid.innerHTML = '<p>Loading fresh produce...</p>';
             
             // Link to the backend route we will create below
-            const response = await fetch(`http://localhost:3000/api/products?category=${category}`);
+            const response = await fetch(`http://localhost:3001/api/products?category=${category}`);
             const products = await response.json();
             
             renderProducts(products);
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const productName = productCard.querySelector('.card-title').textContent;
 
                 try {
-                    const response = await fetch('http://localhost:3000/api/cart', {
+                    const response = await fetch('http://localhost:3001/api/cart', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ product_id: productId, quantity: 1 })

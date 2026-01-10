@@ -1,68 +1,110 @@
 const db = require('../config/db');
 
-// --- PART 1: PLACING THE ORDER (From Checkout Page) ---
-exports.createOrder = async (req, res) => {
-    const { name, city, region, phone, provider, total } = req.body;
+// GET /api/orders
+exports.getAllOrders = async (req, res) => {
     try {
-        const sql = `INSERT INTO orders 
-            (customer_name, city, region, phone_number, payment_method, total_amount, status_step) 
-            VALUES (?, ?, ?, ?, ?, ?, 1)`; // Start at step 1
-        
-        const [result] = await db.query(sql, [name, city, region, phone, provider, total]);
-        res.status(201).json({ orderId: result.insertId });
+        const [rows] = await db.execute('SELECT * FROM orders ORDER BY placed_time DESC');
+        res.status(200).json(rows);
     } catch (err) {
-        res.status(500).json({ error: "Failed to save order" });
+        res.status(500).json({ message: "Error fetching orders", error: err.message });
     }
 };
 
-// --- PART 2: TRACKING THE ORDER (From Status Page) ---
-exports.getOrderStatus = async (req, res) => {
-    const orderId = req.params.id;
+// PATCH /api/orders/:id
+exports.updateOrderStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body; // Expects { status: "Processing" }
+
     try {
-        const [rows] = await db.query(
-            "SELECT phone_number, status_step, DATE_FORMAT(created_at, '%b %d, %Y') as deliveryDate FROM orders WHERE id = ?", 
-            [orderId]
+        const [result] = await db.execute(
+            'UPDATE orders SET status = ? WHERE id = ?',
+            [status, id]
         );
 
-        if (rows.length > 0) {
-            res.json({
-                customerNumber: rows[0].phone_number,
-                adminNumber: "+237 600 000 000",
-                statusStep: rows[0].status_step,
-                deliveryDate: rows[0].deliveryDate
-            });
-        } else {
-            res.status(404).json({ message: "Order not found" });
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Order not found" });
         }
-    } catch (error) {
-        res.status(500).json({ error: "Database error" });
+        res.status(200).json({ message: "Status updated successfully" });
+    } catch (err) {
+        res.status(500).json({ message: "Error updating status", error: err.message });
     }
 };
-// --- NEW: Fetch Latest Order for UI ---
+// POST new order (from Checkout Page)
+exports.placeOrder = async (req, res) => {
+    // These keys match your checkout script.js: name, city, region, phone, provider, total
+    const { name, city, region, phone, provider, total } = req.body;
+
+    try {
+        const [result] = await db.execute(
+            `INSERT INTO orders (customer_name, city, region, phone, provider, total_price, status) 
+             VALUES (?, ?, ?, ?, ?, ?, 'New')`,
+            [name, city, region, phone, provider, total]
+        );
+
+        res.status(201).json({ 
+            message: "Order placed successfully", 
+            orderId: result.insertId 
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to place order", error: err.message });
+    }
+};
+// GET /api/orders/status/:id
+exports.getOrderStatus = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const [rows] = await db.execute(
+            'SELECT id, status, phone FROM orders WHERE id = ?', 
+            [id]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        const order = rows[0];
+        let step = 1;
+
+        // Logic to map database status to UI steps
+        if (order.status === 'Shipped') step = 2;
+        if (order.status === 'Complete') step = 3;
+
+        res.status(200).json({
+            customerNumber: order.phone,
+            adminNumber: "677-xxx-xxx", // Static help line or from config
+            deliveryDate: "To be confirmed",
+            statusStep: step
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Database error", error: err.message });
+    }
+};
+// GET /api/orders/latest
 exports.getLatestOrder = async (req, res) => {
     try {
-        // Query to get the single most recent order
-        const sql = `
-            SELECT id, customer_name, total_amount, status_step, 
-            DATE_FORMAT(created_at, '%Y-%m-%d') as orderDate 
-            FROM orders 
-            ORDER BY created_at DESC LIMIT 1`;
-        
-        const [rows] = await db.query(sql);
+        // Fetch the single most recent order
+        const [rows] = await db.execute(
+            `SELECT id, customer_name, total_price, status, 
+             DATE_FORMAT(created_at, '%b %d, %Y') as formatted_date 
+             FROM orders ORDER BY id DESC LIMIT 1`
+        );
 
-        if (rows.length > 0) {
-            // Mapping DB columns to the names expected by your frontend
-            res.json({
-                id: `FL-${rows[0].id}`,
-                customerName: rows[0].customer_name,
-                productCount: "Items in Cart", // You can expand this with a JOIN later
-                status: rows[0].status_step === 1 ? "Pending" : "Processing",
-                date: rows[0].orderDate
-            });
-        } else {
-            res.status(404).json({ message: "No orders found" });
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "No orders found" });
         }
+
+        const order = rows[0];
+        
+        // Map database fields to the keys expected by your script.js
+        res.status(200).json({
+            id: `FL-${order.id}`,
+            customerName: order.customer_name,
+            productCount: "Items detail in database", // You can expand this with a join table
+            status: order.status,
+            date: order.formatted_date
+        });
     } catch (err) {
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ message: "Error fetching latest order", error: err.message });
     }
 };

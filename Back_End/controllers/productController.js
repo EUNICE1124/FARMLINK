@@ -1,47 +1,36 @@
 const db = require('../config/db');
 
-// --- 1. BUYER: Get Products ---
-exports.getMarketplace = async (req, res) => {
+// GET /api/products?category=Vegetables
+exports.getProducts = async (req, res) => {
     const { category } = req.query;
     try {
-        let sql = "SELECT * FROM products";
+        let query = 'SELECT * FROM products';
         let params = [];
 
         if (category && category !== 'All') {
-            sql += " WHERE category = ?";
+            query += ' WHERE category = ?';
             params.push(category);
         }
 
-        const [products] = await db.query(sql, params);
-        res.json(products);
+        const [rows] = await db.execute(query, params);
+        res.status(200).json(rows);
     } catch (err) {
-        res.status(500).json({ error: "Failed to fetch products" });
+        res.status(500).json({ message: "Error loading products", error: err.message });
     }
 };
 
-// --- 2. FARMER: Upload New Product ---
-exports.uploadProduct = async (req, res) => {
-    const { name, price, category, stock, farmer_id } = req.body;
-    try {
-        const sql = "INSERT INTO products (name, price, category, stock_quantity, farmer_id) VALUES (?, ?, ?, ?, ?)";
-        await db.query(sql, [name, price, category, stock, farmer_id]);
-        res.status(201).json({ message: "Product listed successfully!" });
-    } catch (err) {
-        res.status(500).json({ error: "Failed to upload product" });
-    }
-};
-
-// --- 3. BUYER: Add to Cart ---
+// POST /api/cart
 exports.addToCart = async (req, res) => {
-    const { product_id, quantity } = req.body;
-    // In a full system, user_id comes from the login session
-    const user_id = 1; 
+    // These keys match your index.js: product_id, quantity_label, user_id
+    const { product_id, quantity_label, user_id } = req.body; 
 
     try {
-        const sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
-        await db.query(sql, [user_id, product_id, quantity]);
-        res.status(201).json({ message: "Added to database cart" });
+        await db.execute(
+            'INSERT INTO cart (product_id, user_id, quantity, quantity_label) VALUES (?, ?, ?, ?)',
+            [product_id, user_id, 1, quantity_label]
+        );
+        res.status(201).json({ message: "Added to cart successfully!" });
     } catch (err) {
-        res.status(500).json({ error: "Failed to add to cart" });
+        res.status(500).json({ message: "Database error", error: err.message });
     }
 };
