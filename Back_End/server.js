@@ -13,10 +13,18 @@ app.use(express.json()); // Parses body data
 
 // Route Linking
 // This makes the URLs: http://localhost:3001/api/users and /api/login
-app.use('/api', adminRoutes);
+
+
+
+app.get('/api/finance/revenue', productController.getFinancialRecords);
+app.get('/api/users/dashboard/:id', userController.getDashboardData);
 app.use('/api/users', userRoutes);
-app.use('/api/', productRoutes); // Cart & products logic is inside the same router here
-app.use('/api/orders', orderRoutes);  // Logic for order management
+app.use('/api/orders', orderRoutes);  
+app.post('/api/users/address', userController.registerAddress);
+app.put('/api/users/profile', userController.updateProfile);
+app.use('/api/', productRoutes); 
+app.use('/api', adminRoutes);
+
 
 const PORT = 3001; 
 app.listen(PORT, () => {

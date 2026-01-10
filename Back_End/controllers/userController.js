@@ -55,3 +55,83 @@ exports.registerUser = async (req, res) => {
         res.status(500).json({ message: "Registration failed", error: err.message });
     }
 };
+//   POST /api/users/address - Logic for the Address Form (From Address.html)
+exports.registerAddress = async (req, res) => {
+    const { fullName, province, district, city, userId } = req.body;
+
+    try {
+        // We use UPDATE instead of INSERT because the user account already exists 
+        // after the confirmation page.
+        const [result] = await db.execute(
+            'UPDATE users SET name = ?, province = ?, district = ?, city = ? WHERE id = ?',
+            [fullName, province, district, city, userId]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ 
+            message: "Profile completed successfully! Redirecting to dashboard." 
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to update address", error: err.message });
+    }
+};
+//PUT /api/users/profile - Update user profile details
+exports.updateProfile = async (req, res) => {
+    const { userId, fullName, email, phone, gender } = req.body;
+
+    try {
+        // Validation: Ensure userId is provided
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const [result] = await db.execute(
+            'UPDATE users SET name = ?, email = ?, phone = ?, gender = ? WHERE id = ?',
+            [fullName, email, phone, gender, userId]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ message: "Profile updated successfully!" });
+    } catch (err) {
+        // Handle duplicate email if someone tries to change to an existing email
+        if (err.code === 'ER_DUP_ENTRY') {
+            res.status(409).json({ message: "Email already in use" });
+        } else {
+            res.status(500).json({ message: "Update failed", error: err.message });
+        }
+    }
+};
+// GET /api/users/dashboard/:id - Fetch data for the Farmer Dashboard
+exports.getDashboardData = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        // Fetch user name and location
+        const [user] = await db.execute(
+            'SELECT name, province, city FROM users WHERE id = ?', 
+            [userId]
+        );
+
+        if (user.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // In a real app, you would also fetch sales stats, orders, etc.
+        res.status(200).json({
+            userName: user[0].name,
+            location: `${user[0].city}, ${user[0].province}`,
+            stats: {
+                totalSales: "125,000", // Example static data for now
+                activeOrders: 5
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching dashboard data", error: err.message });
+    }
+};

@@ -1,4 +1,3 @@
-// Replace the static 'const orders = [...]' with this:
 let orders = []; 
 
 async function loadRealOrders() {
