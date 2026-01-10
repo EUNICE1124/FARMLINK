@@ -8,5 +8,6 @@ router.post('/users', adminController.addUser);
 
 // Route for Admin Login page
 router.post('/login', adminController.adminLogin);
+router.post('/users/register', adminController.registerUser);
 
 module.exports = router;
