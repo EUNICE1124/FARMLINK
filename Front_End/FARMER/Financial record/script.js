@@ -1,33 +1,36 @@
 // --- API CONFIGURATION ---
 const API_CONFIG = {
-    BASE_URL: 'https://your-api-domain.com/api',
-    REVENUE_DATA_ENDPOINT: '/finance/revenue-trends',
+    BASE_URL: 'http://localhost:3001/api',
+    REVENUE_DATA_ENDPOINT: '/finance/revenue',
     HEADERS: { 'Content-Type': 'application/json' }
 };
 
-// Initialize Chart
+// Initialize Chart with empty data first
 const ctx = document.getElementById('revenueChart').getContext('2d');
 let revenueChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
-        datasets: [
-            { label: 'Blue', data: [4.3, 2.5, 3.5, 4.5], backgroundColor: '#4472c4' },
-            { label: 'Orange', data: [2.4, 4.4, 1.8, 2.8], backgroundColor: '#ed7d31' },
-            { label: 'Grey', data: [2.0, 2.0, 3.0, 5.0], backgroundColor: '#a5a5a5' }
-        ]
+        labels: [], // Will be filled by API
+        datasets: [{
+            label: 'Revenue (CFA)',
+            data: [], // Will be filled by API
+            backgroundColor: ['#4472c4', '#ed7d31', '#a5a5a5', '#ffc000']
+        }]
     },
     options: {
         responsive: true,
         plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, max: 6 } }
+        scales: { y: { beginAtZero: true } }
     }
 });
 
 // --- API FETCH FUNCTION ---
 async function fetchFinancialTrends() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
     try {
-        const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.REVENUE_DATA_ENDPOINT}`, {
+        const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.REVENUE_DATA_ENDPOINT}?userId=${userId}`, {
             method: 'GET',
             headers: API_CONFIG.HEADERS
         });
@@ -35,19 +38,23 @@ async function fetchFinancialTrends() {
         if (response.ok) {
             const apiData = await response.json();
             
-            // Update chart with API data
-            // Example: revenueChart.data.datasets[0].data = apiData.blueSeries;
+            // Extract labels and values for Chart.js
+            const labels = apiData.map(item => item.category);
+            const values = apiData.map(item => item.total);
+
+            // Update chart
+            revenueChart.data.labels = labels;
+            revenueChart.data.datasets[0].data = values;
             revenueChart.update();
         }
     } catch (error) {
-        console.warn("API not found, showing default mock data.");
+        console.error("Error loading financial data:", error);
     }
 }
 
-// Event Listeners for Buttons
-document.getElementById('btnHistory').addEventListener('click', () => {
-    alert("Loading Transaction History...");
-});
+// Load data when page opens
+document.addEventListener('DOMContentLoaded', fetchFinancialTrends);
 
-// Run on load
-window.onload = fetchFinancialTrends;
+// Button placeholders
+document.getElementById('btnHistory').addEventListener('click', () => alert('Showing History...'));
+document.getElementById('btnReceipts').addEventListener('click', () => alert('Opening Receipts...'));

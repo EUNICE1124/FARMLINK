@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Send data to your Node.js/MySQL Backend
         try {
-            const response = await fetch('http://localhost:3000/api/products/save', {
+            const response = await fetch('http://localhost:3001/api/products/save', {
                 method: 'POST', // Use POST to create/save a new product
                 headers: {
                     'Content-Type': 'application/json'
