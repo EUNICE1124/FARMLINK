@@ -5,8 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nameDisplay) {
         nameDisplay.textContent = `Hi, ${farmerName}`;
     }
+    
+    const profileThumb = document.querySelector('.profile-thumb');
 
+    if (profileThumb) {
+        profileThumb.style.cursor = 'pointer'; // Makes it look clickable
+        profileThumb.addEventListener('click', () => {
+            // Path: jump out of 'home' and into 'profile'
+            window.location.href = '../profile account interface/index.html';
+        });
+    }
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-view-details')) {
+            console.log("Pending Order Details Clicked!");
 
+            window.location.href = '../order management/index.html';
+        }
+    });
+   
     const salesPart = document.getElementById('sales-trigger');
     const stockPart = document.getElementById('stock-trigger');
 
@@ -26,15 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. FLOATING ACTION BUTTON (FAB)
-    const fabAdd = document.querySelector('.fab-add');
-    if (fabAdd) {
-        fabAdd.addEventListener('click', () => {
-            // Redirect to the "Add New Product" form
-            window.location.href = '../add products/index.html';
+    const fabButton = document.querySelector('.fab-add');
+
+    if (fabButton) {
+        fabButton.addEventListener('click', () => {
+            // Path: jump out of 'home' and into 'products'
+            window.location.href = '../upload product/index4.html';
         });
     }
-
     // 4. SEARCH BAR LOGIC
 
     const searchInput = document.getElementById('farmer-search');
@@ -58,20 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // 5. BOTTOM NAVIGATION ACTIVE STATE
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-    
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            
-            const label = item.querySelector('span').textContent.toLowerCase();
-            if (label !== 'home') {
-            
-            }
+   
         });
-    });
-});

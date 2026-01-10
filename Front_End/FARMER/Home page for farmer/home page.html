@@ -20,11 +20,14 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="search-container">
-                <i class="bi bi-search"></i>
-                <input type="text" placeholder="Search products, orders or customers">
-            </div>
+            <div class="search-container" style="position: relative; z-index: 10000;">
+    <input type="text" 
+           id="farmer-search" 
+           placeholder="Search for products or orders..." 
+           style="cursor: pointer;"
+           onclick="window.location.href='../../shared interface/search/index.html'">
+</div>
+           
         </header>
         <div class="scroll-content">
         <main class="content-area">
@@ -64,7 +67,7 @@
                        <img src="../../BUYER/buyer home page/images/images.jpg" alt="" class="product-img">
                         <div class="p-name">Corn</div>
                         <div class="p-status">1 bag remaining</div>
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil" onclick="window.location.href='../upload product/index4.html?product=tomato'"></i>></i>
                     </div>
                     <div class="stock-row">
                         <img src="../../BUYER/buyer home page/images/download (1).jpg" alt="" class="product-img">
@@ -74,7 +77,8 @@
                     </div>
                 </div>
 
-                <button class="btn-view-all">View all products</button>
+                <button class="btn-view-all" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../inventory/inventory.html'">View all products</button>
             </section>
         </main>
 
@@ -84,19 +88,22 @@
         </div>
 
         <nav class="bottom-nav">
-            <div class="nav-item active">
+            <div class="nav-item active" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../home page for farmer/home page.html'" >
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../inventory/inventory.html'">
                 <i class="bi bi-box-seam"></i>
                 <span>Products</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" style="z-index: 100000; position: relative;" onclick="window.location.href='../order management/index.html'">
                 <i class="bi bi-basket"></i>
                 <span>Orders</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../profile account interface/index.html'">
                 <i class="bi bi-person"></i>
                 <span>Account</span>
             </div>
