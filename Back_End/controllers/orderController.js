@@ -38,3 +38,31 @@ exports.getOrderStatus = async (req, res) => {
         res.status(500).json({ error: "Database error" });
     }
 };
+// --- NEW: Fetch Latest Order for UI ---
+exports.getLatestOrder = async (req, res) => {
+    try {
+        // Query to get the single most recent order
+        const sql = `
+            SELECT id, customer_name, total_amount, status_step, 
+            DATE_FORMAT(created_at, '%Y-%m-%d') as orderDate 
+            FROM orders 
+            ORDER BY created_at DESC LIMIT 1`;
+        
+        const [rows] = await db.query(sql);
+
+        if (rows.length > 0) {
+            // Mapping DB columns to the names expected by your frontend
+            res.json({
+                id: `FL-${rows[0].id}`,
+                customerName: rows[0].customer_name,
+                productCount: "Items in Cart", // You can expand this with a JOIN later
+                status: rows[0].status_step === 1 ? "Pending" : "Processing",
+                date: rows[0].orderDate
+            });
+        } else {
+            res.status(404).json({ message: "No orders found" });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Database error" });
+    }
+};
