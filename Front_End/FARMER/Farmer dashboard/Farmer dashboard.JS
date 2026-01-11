@@ -18,6 +18,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Failed to fetch dashboard data:', error);
         }
     }
+    const timeDropdown = document.getElementById('time-range');
+    const salesText = document.getElementById('total-sales');
+
+    // Fake data to simulate the change
+    const performanceData = {
+        "7": { sales: "$350", orders: "12" },
+        "30": { sales: "$1,200", orders: "45" },
+        "90": { sales: "$4,100", orders: "130" },
+        "365": { sales: "$15,000", orders: "520" }
+    };
+
+    if (timeDropdown) {
+        timeDropdown.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            const newData = performanceData[selectedValue];
+
+            // Add a small fade effect or just swap the text
+            salesText.style.opacity = 0;
+
+            setTimeout(() => {
+                salesText.innerText = newData.sales;
+                salesText.style.opacity = 1;
+            }, 200);
+
+            console.log(`Updated dashboard for the last ${selectedValue} days.`);
+        });
+    }
 
     // 2. NAVIGATION LOGIC
     navItems.forEach(item => {
@@ -29,11 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const pageName = item.querySelector('span').textContent;
             
             // Route to different pages based on selection
-            if (pageName === 'Account') {
-                window.location.href = '../profile page/editprofile.html';
-            } else if (pageName === 'Home') {
-                window.location.href = 'Farmer dashboard.html';
-            }
+         
             // Add more routes as you build them
         });
     });

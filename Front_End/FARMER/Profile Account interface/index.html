@@ -16,14 +16,16 @@
         <main class="profile-content">
             <h1 class="page-title">Profile</h1>
 
-            <section class="user-card" onclick="navigateTo('edit-profile')">
-                <img src="image/avatar.png" alt="User Avatar" class="profile-img">
-                <div class="user-details">
-                    <span class="user-name">Farm link</span>
-                    <span class="user-location">Yaounde, Cameroon</span>
-                </div>
-                <i class="fas fa-chevron-right"></i>
-            </section>
+            <a href="../edit profile/editProfile.html" class="user-card-link">
+    <section class="user-card">
+        <img src="image/avatar.png" alt="User Avatar" class="profile-img">
+        <div class="user-details">
+            <span class="user-name">Farm link</span>
+            <span class="user-location">Yaounde, Cameroon</span>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+    </section>
+</a>
 
             <div class="section-group">
                 <h2 class="section-label">Settings</h2>
@@ -58,15 +60,18 @@
         </main>
 
         <nav class="bottom-nav">
-            <div class="nav-item">
+            <div class="nav-item" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../home page for farmer/home page.html'" >
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../inventory/inventory.html'" >
                 <i class="fas fa-box"></i>
                 <span>Products</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-item" style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../../admin/order management/index.html'" >
                 <i class="fas fa-shopping-basket"></i>
                 <span>Orders</span>
             </div>
