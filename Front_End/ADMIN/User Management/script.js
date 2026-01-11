@@ -10,7 +10,7 @@ async function fetchUsers() {
     try {
         userListContainer.innerHTML = '<p style="padding:20px;">Loading users...</p>';
         
-        const response = await fetch('http://localhost:3000/api/users');
+        const response = await fetch('http://localhost:3001/api/users');
         if (!response.ok) throw new Error('Failed to connect to server');
         
         const users = await response.json();
@@ -76,22 +76,27 @@ searchInput.addEventListener('input', (e) => {
 fabButton.addEventListener('click', async () => {
     const name = prompt("Enter User Name:");
     const email = prompt("Enter User Email:");
+if (name && email) {
+    try {
+        const response = await fetch('http://localhost:3001/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, role: 'Buyer', password: 'defaultPassword' })
+        });
 
-    if (name && email) {
-        try {
-            const response = await fetch('http://localhost:3000/api/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email })
-            });
+        const result = await response.json();
 
-            if (response.ok) {
-                fetchUsers(); // Refresh the list to show the new user
-            }
-        } catch (error) {
-            alert("Could not save user to MySQL.");
+        if (response.ok) {
+            fetchUsers(); 
+        } else if (response.status === 409 || result.error?.includes('Duplicate')) {
+            // This catches the Error 1062 we saw in your logs!
+            alert("Error: This email is already registered in FARMLINK.");
         }
+    } catch (error) {
+        alert("Server is offline. Please check Port 3001.");
     }
+}
+   
 });
 
 // Start the app
