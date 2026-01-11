@@ -4,7 +4,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
-
+const searchRoutes = require('./routes/searchRoutes');
 const app = express();
 
 // Middleware
@@ -27,7 +27,7 @@ app.post('/api/users/address', userController.registerAddress);
 app.put('/api/users/profile', userController.updateProfile);
 app.use('/api/', productRoutes); 
 app.use('/api', adminRoutes);
-
+app.use('/api/search', searchRoutes);
 
 const PORT = 3001; 
 app.listen(PORT, () => {
