@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
 const adminRoutes = require('./routes/adminRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -29,7 +30,7 @@ app.use('/api/', productRoutes);
 app.use('/api', adminRoutes);
 
 
-const PORT = 3001; 
+const PORT = process.env.PORT||3001; 
 app.listen(PORT, () => {
     console.log(`✅ FARMLINK Backend running on http://localhost:${PORT}`);
     console.log(`🛢️  Connecting to MySQL on Port 3000`);
