@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            /* Ensure the body doesn't cause its own scrollbar if you want a mobile look */
+            min-height: 100vh; 
+        }
+
+        /* Container simulating the app screen */
+        .app-screen {
+            width: 360px; /* Standard mobile width */
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            overflow: hidden;
+            /* Remove the 100vh height from the screen container if you want the page content to dictate the length */
+        }
+        
+        /* --- 1. Green Toolbar (Navigation and Search) --- */
+        /* This is now the very top bar of the application */
+        .green-toolbar {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            background-color: #388e3c; /* A deep, consistent green */
+            padding: 0 10px;
+        }
+
+        .icon-button {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .search-container {
+            flex-grow: 1; 
+            display: flex;
+            align-items: center;
+            background-color: white; 
+            border-radius: 25px;
+            margin: 0 10px;
+            padding: 0 10px;
+            height: 38px;
+            position: relative;
+        }
+
+        .search-icon {
+            color: #388e3c; 
+            font-size: 16px;
+        }
+
+        /* Centered "Messages" text */
+        .title-overlay {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #388e3c; 
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .notification-bell {
+            font-size: 20px;
+            color: white;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+
+        /* --- 2. Tab Navigation --- */
+        .tab-nav {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        .tab-item {
+            padding: 15px 5px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+            text-align: center;
+            flex-grow: 1;
+            font-weight: bold;
+        }
+
+        .tab-item.active {
+            color: #388e3c; 
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; 
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #388e3c; 
+        }
+
+        /* --- 3. Main Content Area --- */
+        .content-area {
+            height: 400px; 
+            padding: 50px 15px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .no-messages-text {
+            margin-top: 50px;
+            color: #aaaaaa; 
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-screen">
+        <div class="green-toolbar">
+            <i class="fas fa-bars icon-button" style="margin-right: 15px;"></i>
+            <i class="fas fa-arrow-left icon-button"></i>
+            
+            <div class="search-container">
+                 <i class="fas fa-search search-icon"></i>
+                 <span class="title-overlay">Messages</span>
+            </div>
+            
+            <i class="fas fa-bell notification-bell"></i>
+        </div>
+
+        <div class="tab-nav">
+            <div class="tab-item">All</div>
+            <div class="tab-item active">Unread</div>
+            <div class="tab-item">All</div> 
+        </div>
+
+        <div class="content-area">
+            <div class="no-messages-text">
+                No Messages
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
