@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Search page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="device-container">
+        <header class="top-nav">
+            <div class="menu-icon">☰</div>
+            <div class="search-bar-container">
+                <span class="back-btn">←</span>
+                <input type="text" id="mainSearchInput" placeholder="Search">
+                <span class="search-glass">🔍</span>
+            </div>
+            <div class="bell-icon">🔔</div>
+        </header>
+
+        <main class="search-content">
+            <div class="recent-header" id="toggleRecent">
+                <span>Recent Searches</span>
+                <span class="chevron">></span>
+            </div>
+
+            <div id="resultsArea" class="display-area">
+                <p class="empty-msg">No Recent Searches</p>
+                <ul id="historyList" class="hidden"></ul>
+            </div>
+
+            <button id="execSearch" class="btn-search">Search</button>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
