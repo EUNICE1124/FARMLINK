@@ -34,4 +34,5 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Connection error! Is your MySQL server running?");
         }
     });
+    
 });
