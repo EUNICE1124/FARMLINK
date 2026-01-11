@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details Page</title>
+    <link rel="stylesheet" href="productdetails.css">
+</head>
+<body>
+
+<div class="phone">
+
+    <!-- HEADER -->
+    <div class="header">
+        <span class="back-arrow">&#8592;</span>
+        <h2>product details page</h2>
+    </div>
+
+    <!-- IMAGE WITH ICON -->
+    <div class="image-box" id="imageBox">
+        <img src="tomato.jpg" id="previewImage" alt="Product Image">
+        <div class="image-icon">📷</div>
+        <input type="file" id="imageInput" accept="image/*" hidden>
+    </div>
+
+    <!-- FORM -->
+    <div class="form">
+
+        <label>product Name</label>
+        <input type="text" id="productName" placeholder="tomato">
+
+        <label>category</label>
+        <input type="text" id="category" placeholder="fruit">
+
+        <label>Quantity</label>
+        <input type="number" id="quantity" placeholder="10">
+
+        <label>amount</label>
+        <input type="text" id="amount" placeholder="2300frs">
+
+        <label>Description</label>
+        <textarea id="description" placeholder="freshly picked"></textarea>
+
+    </div>
+
+    <!-- SAVE BUTTON -->
+    <button class="save-btn" id="saveBtn">save changes</button>
+
+</div>
+
+<script src="product.js"></script>
+</body>
+</html>
+

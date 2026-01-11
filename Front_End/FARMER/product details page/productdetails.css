@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.phone {
+    width: 360px;
+    height: 700px;
+    background: #f8f9f5;
+    border-radius: 20px;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.back-arrow {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.header h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* IMAGE BOX */
+.image-box {
+    position: relative;
+    margin: 15px;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #ddd;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CAMERA ICON */
+.image-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* FORM */
+.form {
+    padding: 0 15px;
+}
+
+.form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #e0e0e0;
+    outline: none;
+    font-size: 14px;
+}
+
+.form textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* SAVE BUTTON */
+.save-btn {
+    width: 90%;
+    margin: 20px auto 0;
+    display: block;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #3cff00;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
