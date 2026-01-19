@@ -35,7 +35,7 @@ signupForm.addEventListener('submit', async (e) => {
 
     if (response.ok) {
         alert("Welcome to FarmLink! Account created.");
-        window.location.href = 'login.html'; // Redirect to login
+        window.location.href = '../buyer home page/index.html'; // Redirect to login
     } else {
         alert("Registration failed: " + result.message);
     }
