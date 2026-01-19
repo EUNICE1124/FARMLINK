@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 alert('Registration Successful! Redirecting...');
-                // window.location.href = 'dashboard.html'; 
+                 window.location.href = 'dashboard.html'; 
             } else {
                 alert('Error: ' + result.message);
             }
