@@ -21,10 +21,8 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
         const data = await response.json();
 
         if (response.ok) {
-            // Store the token for future requests (Auth)
-            localStorage.setItem('adminToken', data.token);
-            alert('Login Successful!');
-            window.location.href = 'user-management.html'; // Move to next interface
+            localStorage.setItem('adminToken', data.token); // Saves the token sent by adminController
+            window.location.href = '../User Management/index.html'; // Redirects the admin
         } else {
             alert('Error: ' + data.message);
         }
