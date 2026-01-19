@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const reader = new FileReader();
             reader.onload = () => {
                 profilePic.src = reader.result;
-                // Note: In a real app, you'd upload this image file to the server/S3
+
             };
             reader.readAsDataURL(file);
         }
