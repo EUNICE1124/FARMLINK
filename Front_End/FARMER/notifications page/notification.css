@@ -1,0 +1,50 @@
+/* body center */
+body {
+    margin: 0;
+    height: 100vh;
+    background: #f7f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* phone container */
+.phone {
+    width: 360px;
+    height: 640px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* header */
+.header {
+    height: 50px;
+    background: linear-gradient(#4CAF50, #2e7d32);
+    color: #130b0b;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+/* back arrow */
+.back {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* title */
+.title {
+    font-size: 14px;
+}
+
+/* content */
+.content {
+    height: calc(100% - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    font-size: 16px;
+}
