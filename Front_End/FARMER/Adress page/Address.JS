@@ -20,43 +20,46 @@ document.addEventListener('DOMContentLoaded', () => {
         provinceSelect.appendChild(opt);
     });
 
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    // Address.JS - Update the submit event listener
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        const formData = {
-            fullName: fullNameInput.value.trim(),
-            province: provinceSelect.value,
-            district: districtInput.value.trim(),
-            city: cityInput.value.trim()
-        };
+    // Grab the logged-in User ID from localStorage
+    const userId = localStorage.getItem('userId'); 
 
-        // Basic Validation
-        if (formData.fullName.length < 2) {
-            alert('Please enter a valid name.');
-            return;
+    if (!userId) {
+        alert("Session expired. Please log in again.");
+        window.location.href = '/Front_End/SHARED INTERFACE/log in/index.html'; // Redirect if no user found
+        return;
+    }
+
+    const formData = {
+        userId: userId, // Add this line!
+        fullName: fullNameInput.value.trim(),
+        province: provinceSelect.value,
+        district: districtInput.value.trim(),
+        city: cityInput.value.trim()
+    };
+
+    try {
+        const response = await fetch('http://localhost:3001/api/users/address', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Address saved! Redirecting to your dashboard...');
+            window.location.href = '../home/farmer_home.html'; 
+        } else {
+            // This will show the specific error from the backend
+            alert('Error: ' + result.message);
         }
-
-        try {
-            // Sending data to the Node.js backend
-            const response = await fetch('http://localhost:3001/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                alert('Registration Successful! Redirecting...');
-                 window.location.href = 'dashboard.html'; 
-            } else {
-                alert('Error: ' + result.message);
-            }
-        } catch (error) {
-            console.error('Connection error:', error);
-            alert('Could not connect to the server. Is your backend running?');
-        }
-    });
+    } catch (error) {
+        console.error('Connection error:', error);
+        alert('Could not connect to the server.');
+    }
+});
 });

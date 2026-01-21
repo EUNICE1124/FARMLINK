@@ -1,51 +1,42 @@
 const imageInput = document.getElementById("image");
-const preview = document.getElementById("preview");
 const saveBtn = document.getElementById("saveBtn");
 
-// Show preview when image selected
-imageInput.addEventListener("change", () => {
-    const file = imageInput.files[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onload = () => {
-            preview.src = reader.result;
-            preview.style.display = "block";
-            document.getElementById("uploadBtn").style.display = "none";
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-// Save product
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener("click", async () => {
     if(!imageInput.files[0]){
         alert("Please select an image.");
         return;
     }
 
     const formData = new FormData();
-    formData.append("image", imageInput.files[0]);
+    // 1. Key must be 'productImage' to match your Multer config
+    formData.append("productImage", imageInput.files[0]);
     formData.append("name", document.getElementById("name").value);
-    formData.append("description", document.getElementById("desc").value);
-    formData.append("category", document.getElementById("category").value);
+    
+    // 2. Map 'price' (your controller uses price, your HTML uses stats card/input)
+    // If you add a price input, use its ID here.
+    formData.append("price", "2500"); 
 
-    fetch("http://localhost:3000/product/upload", {
-        method: "POST",
-        body: formData
-    }).then(res => res.json())
-      .then(data => {
-          alert(data.message);
-          // Reset form
-          document.getElementById("name").value = "";
-          document.getElementById("desc").value = "";
-          document.getElementById("category").value = "";
-          preview.style.display = "none";
-          document.getElementById("uploadBtn").style.display = "block";
-          imageInput.value = "";
-      })
-      .catch(err => {
-          console.error(err);
-          alert("Error saving product");
-      });
+    // 3. Category Logic
+    const category = document.getElementById("category")?.value || "Other";
+    formData.append("isFruit", category.toLowerCase() === 'fruit');
+    formData.append("isVegetable", category.toLowerCase() === 'vegetable');
+
+    try {
+        // 4. Point to the CORRECT port (3001) and merged route
+        const response = await fetch("http://localhost:3001/api/marketplace/save", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        if(response.ok) {
+            alert("Product successfully uploaded to FarmLink!");
+            location.reload(); // Refresh to show changes
+        } else {
+            alert("Upload failed: " + data.error);
+        }
+    } catch (error) {
+        console.error("Connection Error:", error);
+        alert("Could not connect to the backend server.");
+    }
 });
-

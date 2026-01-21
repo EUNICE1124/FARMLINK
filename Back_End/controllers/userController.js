@@ -57,25 +57,26 @@ exports.registerUser = async (req, res) => {
 };
 //   POST /api/users/address - Logic for the Address Form (From Address.html)
 exports.registerAddress = async (req, res) => {
-    const { fullName, province, district, city, userId } = req.body;
+    // 1. Get data from the request body
+    const { userId, fullName, province, district, city } = req.body;
+
+    // 2. Validation: Ensure all fields and the userId are present
+    if (!userId || !fullName || !province || !district || !city) {
+        return res.status(400).json({ message: "All fields are required, including User ID." });
+    }
+
+    // 3. SQL Query: Make sure these match your table columns exactly
+    const sql = `
+        INSERT INTO user_addresses (user_id, full_name, province, district, city) 
+        VALUES (?, ?, ?, ?, ?)
+    `;
 
     try {
-        // We use UPDATE instead of INSERT because the user account already exists 
-        // after the confirmation page.
-        const [result] = await db.execute(
-            'UPDATE users SET name = ?, province = ?, district = ?, city = ? WHERE id = ?',
-            [fullName, province, district, city, userId]
-        );
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        res.status(200).json({ 
-            message: "Profile completed successfully! Redirecting to dashboard." 
-        });
+        const [result] = await db.execute(sql, [userId, fullName, province, district, city]);
+        res.status(200).json({ message: "Address saved successfully!", id: result.insertId });
     } catch (err) {
-        res.status(500).json({ message: "Failed to update address", error: err.message });
+        console.error("Database Error:", err.message);
+        res.status(500).json({ message: "Database error: " + err.message });
     }
 };
 //PUT /api/users/profile - Update user profile details
@@ -200,5 +201,50 @@ exports.loginUser = async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ message: "Login failed", error: err.message });
+    }
+};
+// Check if the user's account is active before showing the confirmation
+exports.checkAccountStatus = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const [user] = await db.execute("SELECT id FROM users WHERE id = ?", [userId]);
+        if (user.length > 0) {
+            res.status(200).json({ status: 'Verified' });
+        } else {
+            res.status(404).json({ status: 'Not Found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+// GET /api/users/dashboard/:userId - Fetch dashboard data for a specific user
+exports.getDashboardData = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        // 1. Get User Name
+        const [user] = await db.execute("SELECT name FROM users WHERE id = ?", [userId]);
+        
+        // 2. Get Total Sales & Order Count (assuming you have an 'orders' table)
+        // If you don't have an orders table yet, these will return 0
+        const [stats] = await db.execute(`
+            SELECT 
+                IFNULL(SUM(total_amount), 0) AS totalSales, 
+                COUNT(id) AS orderCount 
+            FROM orders 
+            WHERE farmer_id = ?`, [userId]);
+
+        if (user.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({
+            userName: user[0].name,
+            totalSales: stats[0].totalSales,
+            orderCount: stats[0].orderCount
+        });
+    } catch (err) {
+        console.error("Dashboard Error:", err.message);
+        res.status(500).json({ message: "Error loading dashboard data" });
     }
 };

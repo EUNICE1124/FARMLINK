@@ -6,18 +6,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userId = localStorage.getItem('userId');
     
     if (userId) {
-        try {
-            const response = await fetch(`http://localhost:3001/api/users/dashboard/${userId}`);
-            const data = await response.json();
-            
-            if (response.ok) {
-                // Update the greeting with the real name from the database
-                userNameElement.textContent = `HI, ${data.userName}`;
-            }
-        } catch (error) {
-            console.error('Failed to fetch dashboard data:', error);
+    try {
+        const response = await fetch(`http://localhost:3001/api/users/dashboard/${userId}`);
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Update UI with real data
+            document.querySelector('.user-info p').textContent = `HI, ${data.userName}`;
+            document.getElementById('total-sales').textContent = `${data.totalSales.toLocaleString()} CFA`;
+            document.getElementById('total-orders').textContent = data.orderCount;
         }
+    } catch (error) {
+        console.error('Failed to fetch dashboard data:', error);
     }
+}
     const timeDropdown = document.getElementById('time-range');
     const salesText = document.getElementById('total-sales');
 
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // Route to different pages based on selection
          
-            // Add more routes as you build them
+           
         });
     });
 
@@ -65,6 +67,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = document.querySelector('.search-bar input');
     searchInput.addEventListener('input', (e) => {
         console.log('Searching for:', e.target.value);
-        // You could add a fetch call here for a search API in the future
+       
     });
 });

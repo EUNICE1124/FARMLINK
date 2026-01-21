@@ -25,19 +25,45 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('logoutBtn').addEventListener('click', () => {
     const confirmLogout = confirm("Are you sure you want to log out?");
     if (confirmLogout) {
-        fetch('https://api.example.com/logout', { method: 'POST' })
-            .then(() => {
-                alert("Logged out successfully");
-                
-            })
-            .catch(() => {
-        
-                alert("Session cleared (Mock)");
-            });
+        // 1. Clear local credentials
+        localStorage.removeItem('userId');
+        localStorage.removeItem('farmerName');
+        localStorage.removeItem('role');
+
+        alert("Logged out successfully");
+        // 2. Redirect to login page
+        window.location.href = '../../SHARED INTERFACE/log in/index.html';
     }
 });
 
+const express = require('express');
+const router = express.Router();
+const marketplaceController = require('../controllers/marketplaceController');
+const upload = require('../middleware/multerConfig'); 
 
-window.onload = () => {
-    console.log("Profile data loaded from API.");
-};
+/**
+ * @route   GET /api/marketplace
+ * @desc    Fetch all products with Farmer details (Buyer View)
+ */
+router.get('/', marketplaceController.getAllMarketplaceProducts);
+
+/**
+ * @route   GET /api/marketplace/grid
+ * @desc    Fetch products for the home grid with category filters
+ */
+router.get('/grid', marketplaceController.getProductsGrid);
+
+/**
+ * @route   POST /api/marketplace/save
+ * @desc    Save a new product with an image (Farmer/Admin View)
+ * @access  Private (Farmer)
+ */
+router.post('/save', upload.single('productImage'), marketplaceController.saveProduct);
+
+/**
+ * @route   POST /api/marketplace/cart/add
+ * @desc    Add a product to the user's shopping cart
+ */
+router.post('/cart/add', marketplaceController.addToCart);
+
+module.exports = router;

@@ -1,77 +1,56 @@
+// node.js
 document.addEventListener('DOMContentLoaded', async function () {
-    const productGrid = document.querySelector('.product-grid'); // Ensure your HTML has this class
-    const categoryButtons = document.querySelectorAll('.category-btn');
+    const productGrid = document.querySelector('.recently-listed-grid'); 
+    const savedUser = JSON.parse(localStorage.getItem('farmlink_user')) || { id: 0, name: "Guest" };
 
-    /**
-     * 1. FETCH PRODUCTS FROM DATABASE
-     * Replaces static HTML with real data from MySQL
-     */
-    async function loadProducts(category = 'All') {
+    const profileName = document.querySelector('#profileName');
+    if (profileName) profileName.textContent = savedUser.name;
+
+    async function loadProducts() {
         try {
-            productGrid.innerHTML = '<p>Loading fresh produce...</p>';
-            
-            // Link to the backend route we will create below
-            const response = await fetch(`http://localhost:3001/api/products?category=${category}`);
+            const response = await fetch(`http://localhost:3001/api/marketplace/grid?category=All`);
+            if (!response.ok) throw new Error("Server down");
             const products = await response.json();
-            
             renderProducts(products);
         } catch (error) {
-            productGrid.innerHTML = '<p style="color:red;">Could not load products. Please check server.</p>';
+            console.error("Fetch error:", error);
+            productGrid.innerHTML = "<p class='error-msg'>Check if server is running on port 3001</p>";
         }
     }
 
-    /**
-     * 2. RENDER PRODUCTS TO UI
-     */
     function renderProducts(products) {
-        if (products.length === 0) {
-            productGrid.innerHTML = '<p>No products available in this category.</p>';
-            return;
-        }
-
-        productGrid.innerHTML = products.map(product => `
-            <div class="product-card" data-id="${product.id}">
-                <img src="${product.image_url || 'placeholder.jpg'}" alt="${product.name}">
-                <div class="card-content">
-                    <h3 class="card-title">${product.name}</h3>
-                    <p class="card-price">$${product.price}</p>
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                </div>
+    if (!productGrid) return;
+    productGrid.innerHTML = products.map(product => `
+        <div class="product-card" data-id="${product.id}">
+            <img src="${product.image_url || 'images/images.jpg'}" alt="${product.name}" class="product-image">
+            <div class="product-details">
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">${product.price}cfa</div>
+                <button class="add-to-cart-btn">
+                    <i class="bi bi-plus"></i>
+                </button>
             </div>
-        `).join('');
+        </div>
+    `).join('');
+    attachCartEvents();
+}
 
-        // Re-attach listeners to the new buttons
-        attachCartEvents();
-    }
-
-    /**
-     * 3. ADD TO CART (Backend POST)
-     */
     function attachCartEvents() {
-        const buttons = document.querySelectorAll('.add-to-cart-btn');
-        buttons.forEach(button => {
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.addEventListener('click', async function () {
-                const productCard = this.closest('.product-card');
-                const productId = productCard.dataset.id;
-                const productName = productCard.querySelector('.card-title').textContent;
+                const productId = this.closest('.product-card').dataset.id;
+                const cartData = { product_id: productId, user_id: savedUser.id, quantity_label: "1 unit" };
 
                 try {
-                    const response = await fetch('http://localhost:3001/api/cart', {
+                    const res = await fetch('http://localhost:3001/api/marketplace/cart/add', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ product_id: productId, quantity: 1 })
+                        body: JSON.stringify(cartData)
                     });
-
-                    if (response.ok) {
-                        alert(`${productName} added to database cart!`);
-                    }
-                } catch (error) {
-                    alert("Server error: Could not add to cart.");
-                }
+                    if (res.ok) alert("Added to cart!");
+                } catch (err) { alert("Cart server error."); }
             });
         });
     }
-
-    // Initial Load
     loadProducts();
 });

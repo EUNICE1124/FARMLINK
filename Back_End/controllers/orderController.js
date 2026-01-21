@@ -25,15 +25,30 @@ exports.getLatestOrder = (req, res) => {
 };
 
 // GET /api/orders/:orderId
+
 exports.getOrderDetails = async (req, res) => {
     const orderId = req.params.orderId;
-    try {
-        const [order] = await db.execute('SELECT * FROM orders WHERE id = ?', [orderId]);
-        if (order.length === 0) return res.status(404).json({ message: "Order not found" });
-        res.status(200).json(order[0]);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching order", error: err.message });
-    }
+    // Join with products table to show what they are buying
+    const query = `
+        SELECT o.id, o.customer_name, o.status, o.total_amount, p.name AS product_name 
+        FROM orders o
+        JOIN products p ON o.product_id = p.id
+        WHERE o.id = ?`;
+
+    db.query(query, [orderId], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (results.length === 0) return res.status(404).json({ message: "Order not found" });
+
+        const order = results[0];
+        // Send data back in the format the JS expects
+        res.status(200).json({
+            customerName: order.customer_name,
+            orderId: order.id,
+            amount: order.total_amount,
+            status: order.status,
+            productName: order.product_name
+        });
+    });
 };
 /**
  * 2. POST NEW ORDER (From Checkout Page)
@@ -131,5 +146,41 @@ exports.addToCart = (req, res) => {
             return res.status(500).json({ message: "Database error", error: err });
         }
         res.status(201).json({ message: "Successfully added to cart", cartId: result.insertId });
+    });
+};
+/**
+ * FETCH ALL ORDERS
+ * Matches: fetch('http://localhost:3001/api/orders')
+ */
+exports.getAllOrders = (req, res) => {
+    // JOIN with users to get the Customer Name for the UI
+    const query = `
+        SELECT o.*, u.name AS customer_name 
+        FROM orders o 
+        LEFT JOIN users u ON o.customer_id = u.id 
+        ORDER BY o.id DESC
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(200).json(results);
+    });
+};
+
+/**
+ * UPDATE ORDER STATUS
+ * Matches: fetch('http://localhost:3001/api/orders/${orderId}', { method: 'PATCH' ... })
+ */
+exports.updateStatusPatch = (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const query = "UPDATE orders SET status = ? WHERE id = ?";
+
+    db.query(query, [status, id], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (result.affectedRows === 0) return res.status(404).json({ message: "Order not found" });
+        
+        res.status(200).json({ message: "Status updated successfully" });
     });
 };

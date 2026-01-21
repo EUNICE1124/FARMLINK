@@ -17,19 +17,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch(`http://localhost:3001/api/orders/${orderId}`);
             const order = await response.json();
-
             if (response.ok) {
-                // Update text content next to the icons
-                customerEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>${order.customerName}</span>`);
-                orderIdEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>#${order.orderId}</span>`);
-                amountEl.nextElementSibling.insertAdjacentHTML('afterend', `<span>CFA ${order.amount}</span>`);
-                statusEl.nextElementSibling.insertAdjacentHTML('afterend', `<span id="current-status">${order.status}</span>`);
-                
-                if(order.status !== 'PENDING') {
-                    confirmBtn.disabled = true;
-                    rejectBtn.disabled = true;
-                    confirmBtn.style.opacity = '0.5';
-                }
+                 // Correctly accessing the keys sent by the updated controller
+                  customerEl.nextElementSibling.innerHTML = `<span>${order.customerName}</span>`;
+                  orderIdEl.nextElementSibling.innerHTML = `<span>#${order.orderId}</span>`;
+                  amountEl.nextElementSibling.innerHTML = `<span>CFA ${order.amount}</span>`;
+                  statusEl.nextElementSibling.innerHTML = `<span id="current-status">${order.status}</span>`;
+    
+                  // Logic to show the product name if you add a row for it in HTML
+                  if(order.productName) {
+                            console.log("Buying product:", order.productName);
+                     }
             }
         } catch (error) {
             console.error("Error loading order:", error);

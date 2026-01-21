@@ -1,63 +1,45 @@
-// --- 1. CONFIGURATION & MOCK DATA ---
-const API_BASE_URL = "https://your-api-endpoint.com/api";
+const API_BASE_URL = "http://localhost:3001/api";
 
 // --- 2. PRODUCT MANAGEMENT LOGIC ---
 // Captures data from the Product Management screen (IMG-20251226-WA0005.jpg)
 const handleAddProduct = async () => {
     const product = {
         name: document.getElementById('pName')?.value,
-        description: document.getElementById('pDesc')?.value,
-        category: document.getElementById('pCat')?.value,
-        timestamp: new Date().toISOString()
+        price: 0, // Added because productController.saveProduct expects price
+        isFruit: document.getElementById('pCat')?.value === 'Fruit',
+        isVegetable: document.getElementById('pCat')?.value === 'Vegetable'
     };
 
-    if (!product.name) {
-        alert("Please enter a product name.");
-        return;
-    }
-
     try {
-        console.log("Sending to API:", product);
-        // Real API Call:
-        // const response = await fetch(`${API_BASE_URL}/products`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(product)
-        // });
-        
-        alert("Product added successfully (Simulated)!");
+        const response = await fetch(`${API_BASE_URL}/products/save`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product)
+        });
+        const result = await response.json();
+        alert(result.message);
     } catch (error) {
         console.error("API Error:", error);
     }
 };
-
 // --- 3. ORDERS LOGIC ---
 // Fills the table in the Orders screen (IMG-20251226-WA0003.jpg)
 const loadOrders = async () => {
     const orderIdElem = document.getElementById('orderId');
-    if (!orderIdElem) return; // Only runs if we are on the Orders page
+    if (!orderIdElem) return;
 
     try {
-        // Example of fetching from an API
-        // const res = await fetch(`${API_BASE_URL}/latest-order`);
-        // const data = await res.json();
+        const res = await fetch(`${API_BASE_URL}/orders/latest`); // Path from orderController
+        const data = await res.json();
         
-        // Mock Data for display
-        const data = {
-            id: "FL-8821",
-            customer: "Amadou Diallo",
-            items: "12kg Tomatoes",
-            status: "Delivered",
-            date: "26/12/2025"
-        };
-
-        document.getElementById('orderId').textContent = data.id;
-        document.getElementById('customer').textContent = data.customer;
-        document.getElementById('items').textContent = data.items;
+        // Use the exact keys from orderController.js
+        document.getElementById('orderId').textContent = data.id; 
+        document.getElementById('customer').textContent = data.customerName; // Changed from .customer
+        document.getElementById('items').textContent = data.productCount;    // Changed from .items
         document.getElementById('status').textContent = data.status;
         document.getElementById('orderDate').textContent = data.date;
     } catch (err) {
-        console.error("Failed to load orders", err);
+        console.error("Failed to load orders from Node.js controller", err);
     }
 };
 

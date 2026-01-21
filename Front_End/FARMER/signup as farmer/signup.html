@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarmLink Sign Up - Farmers</title>
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
     <link rel="stylesheet" href="signup.css">
 </head>
 <body>
@@ -19,46 +17,45 @@
             </div>
         </div>
 
-        <form class="signup-form">
+        <form class="signup-form" id="registrationForm">
             <h2>Sign Up</h2>
             
             <div class="input-group">
                 <i class="bi bi-person-circle icon"></i> 
-                <input type="text" placeholder="Enter User Name">
+                <input type="text" id="name" placeholder="Enter User Name" required>
             </div>
             
             <div class="input-group">
                 <i class="bi bi-envelope-fill icon"></i> 
-                <input type="email" placeholder="Enter Email"> 
+                <input type="email" id="email" placeholder="Enter Email" required> 
             </div>
             
-            <div class="input-group selected-input">
+            <div class="input-group">
                 <i class="bi bi-phone-fill icon"></i> 
-                <input type="tel" placeholder="Enter Phone number">
+                <input type="tel" id="phone" placeholder="Enter Phone number">
             </div>
 
             <div class="input-group">
-                <i class="bi bi-geo-alt-fill icon"></i> 
-                <input type="text" placeholder="Enter Farm/Business Address ">
+                <i class="bi bi-people-fill icon"></i>
+                <select id="role" style="width: 100%; border: none; outline: none; background: transparent;">
+                    <option value="Farmer">Farmer</option>
+                    <option value="Buyer">Buyer</option>
+                </select>
             </div>
 
-            <div class="input-group">
-                <i class="bi bi-map-fill icon"></i> 
-                <input type="text" placeholder="Enter City, Region">
-            </div>
-            
             <div class="input-group">
                 <i class="bi bi-lock-fill icon"></i> 
-                <input type="password" placeholder="Create Password">
+                <input type="password" id="password" placeholder="Create Password" required>
             </div>
 
-            <button class="signup-btn">SIGN UP</button>
+            <button type="submit" class="signup-btn">SIGN UP</button>
 
             <p class="login-link">
-                Already have an account? <a href="#">Log In</a>
+                Already have an account? <a href="/Front_End/SHARED INTERFACE/log in/index.html">Log In</a>
             </p>
         </form>
     </div>
+
     <script src="signup.js"></script>
 </body>
 </html>
