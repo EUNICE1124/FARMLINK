@@ -11,5 +11,6 @@ router.put('/profile', userController.updateProfile);   // Matches exports.updat
 router.get('/dashboard/:id', userController.getDashboardData); 
 router.get('/home-summary/:id', userController.getHomeSummary);
 router.get('/inventory/:userId', userController.getInventory);
+router.post('/login', userController.loginUser);
 
 module.exports = router;
