@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Checkout - Farmlink</title>
     <link rel="stylesheet" href="stlye.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+
 <div class="checkout-container">
     <header class="checkout-header">
         <button class="back-btn" onclick="goBack()"><i class="bi bi-arrow-left"></i></button>
@@ -29,122 +30,75 @@
                 <i class="bi bi-truck"></i> Delivery
             </button>
             <button class="toggle-btn" id="btn-pickup" onclick="toggleMethod('pickup')">
-                Self Pickup
+                <i class="bi bi-shop"></i> Pickup
             </button>
         </div>
 
-        <div class="section-title">Delivery Address</div>
-        <div class="card address-card">
-            <div class="address-text">
-                <strong id="display-name">John Doe</strong><br>
-                <span id="display-city">Yaounde</span><br>
-                <span id="display-region">Center Region</span>
-            </div>
-            <button class="change-btn" onclick="openModal()">Change</button>
-        </div>
-
-        <div class="section-title">Contact Information</div>
         <div class="input-group">
-            <input type="text" id="input-name" placeholder="Full Name" value="John Doe">
-            <input type="tel" id="input-phone" placeholder="Phone number" class="highlighted-input">
+            <label>Full Name</label>
+            <input type="text" id="input-name" placeholder="Enter your name">
         </div>
 
-        <div class="card summary-card">
-            <div class="summary-info">
-                <span class="summary-label">Order Summary Preview</span>
-                <div class="total-price">Total: CFA 5000</div>
-                <span class="subtext">(Inc. Delivery)</span>
+        <div class="section-title">Shipping Address</div>
+        <div class="address-box" onclick="openModal()">
+            <div class="address-info">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div>
+                    <strong id="display-city">Yaoundé</strong><br>
+                    <span id="display-region">Centre Region</span>
+                </div>
             </div>
-            <button class="continue-btn" onclick="validateAndGoToPayment()">Continue to Payment</button>
+            <i class="bi bi-chevron-right"></i>
         </div>
+
+        <button class="next-step-btn" onclick="nextStep(2)">
+            Next: Payment Method <i class="bi bi-arrow-right"></i>
+        </button>
     </div>
 
     <div id="payment-section" style="display: none;">
-        <div class="summary-static-card">
-            <p class="section-label">Delivering to:</p>
-            <div class="address-display">
-                <strong class="confirm-name">John Doe</strong><br>
-                <span class="confirm-city">Yaounde</span><br>
-                <span class="confirm-region">Center Region</span>
-            </div>
-        </div>
-
-        <div class="section-title">Select payment Method</div>
-        <div class="momo-options">
-            <button class="momo-btn" id="btn-mtn" onclick="selectMomo('mtn')">
-                <img src="images/image 4.png" alt="MTN"> MTN MOMO
+        <div class="section-title">Select Payment Provider</div>
+        <div class="provider-container">
+            <button id="btn-mtn" class="provider-btn" onclick="selectProvider('mtn')">
+                <img src="images\image 4.png" width="30" alt="MTN"> MTN MoMo
             </button>
-            <button class="momo-btn" id="btn-orange" onclick="selectMomo('orange')">
-                <img src="images/image 5.png" alt="Orange" onerror="this.src='https'">ORANGE MONEY
+            <button id="btn-orange" class="provider-btn" onclick="selectProvider('orange')">
+                <img src="images\image 5.png" width="30" alt="Orange"> Orange Money
             </button>
         </div>
 
-        <div class="momo-input-wrapper">
-            <input type="tel" id="momo-phone" placeholder="Enter phone number">
-            <i class="bi bi-telephone"></i>
+        <div class="input-group" style="margin-top: 20px;">
+            <label>MoMo Number</label>
+            <input type="text" id="momo-phone" placeholder="6xx xxx xxx">
         </div>
 
-        <div class="card summary-card">
-            <div class="summary-info">
-                <span class="summary-label">Order Summary Preview</span>
-                <div class="total-price">Total: CFA 5000</div>
-                <span class="subtext">(Inc. Delivery)</span>
+        <button class="next-step-btn" onclick="nextStep(3)">
+            Next: Review Order <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+
+    <div id="review-section" style="display: none;">
+        <div class="section-title">Order Summary</div>
+        <div class="summary-card">
+            <div class="total-row">
+                <span>Subtotal:</span>
+                <span>CFA 5,000</span>
             </div>
-            <button class="continue-btn" onclick="navigateToStep(3)">Continue to Review Order</button>
+            <div class="total-row">
+                <span>Delivery Fee:</span>
+                <span>CFA 1,500</span>
+            </div>
+            <hr>
+            <div class="total-row grand-total">
+                <span>Grand Total:</span>
+                <span id="display-total">CFA 6,500</span>
+            </div>
         </div>
-    </div>
-   <div id="review-section" style="display: none;">
-    <div class="card review-card">
-        <div class="card-header-flex">
-            <span class="section-label">Delivery Details</span>
-            <button class="edit-link" onclick="navigateToStep(1)">Edit</button>
-        </div>
-        <div class="review-details">
-            <p>Confirmed address:</p>
-            <p id="review-address"></p>
-            <p><strong>Method:</strong> Standard Delivery (CFA 1,500)</p>
-        </div>
-    </div>
 
-    <div class="card review-card">
-        <div class="card-header-flex">
-            <span class="section-label">Payment Method</span>
-            <button class="edit-link" onclick="navigateToStep(2)">Edit</button>
-        </div>
-        <div class="review-details">
-            <p>Mobile Money (<span id="review-momo-type">MTN Momo</span> ending in <span id="review-phone-last">88</span>)</p>
-        </div>
+        <button class="place-order-btn" onclick="placeOrder()">
+            Place Order and Pay
+        </button>
     </div>
-
-    <div class="card review-card">
-        <span class="section-label">Items in Order</span>
-        <div class="order-item-row">
-            <span>Corns (5kg)</span>
-            <span>CFA 5,000</span>
-        </div>
-       
-    </div>
-
-    <div class="card review-card">
-        <span class="section-label">Order Total</span>
-        <div class="total-row">
-            <span>Subtotal:</span>
-            <span>CFA 5000</span>
-        </div>
-        <div class="total-row">
-            <span>Delivery Fee:</span>
-            <span>CFA 1,500</span>
-        </div>
-        <div class="total-row grand-total">
-            <span>Grand Total:</span>
-            <span>CFA 6,500</span>
-        </div>
-    </div>
-
-    <button class="place-order-btn" onclick="placeOrder()">
-        Place Order and Pay CFA 6,500
-    </button>
-</div>
 
     <nav class="bottom-nav">
         <div class="nav-item"><i class="bi bi-house-door"></i><br>Home</div>
@@ -161,13 +115,15 @@
             <button class="close-modal" onclick="closeModal()">&times;</button>
         </div>
         <ul class="location-list">
-            <li onclick="updateAddress('Yaoundé', 'Centre Region')">Yaoundé</li>
-            <li onclick="updateAddress('Douala', 'Littoral Region')">Douala</li>
-            <li onclick="updateAddress('Bafoussam', 'West Region')">Bafoussam</li>
+            <li onclick="updateAddress('Yaoundé', 'Centre Region')">Yaoundé (Centre)</li>
+            <li onclick="updateAddress('Douala', 'Littoral Region')">Douala (Littoral)</li>
+            <li onclick="updateAddress('Bafoussam', 'West Region')">Bafoussam (West)</li>
+            <li onclick="updateAddress('Bamenda', 'North West')">Bamenda (North West)</li>
         </ul>
     </div>
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

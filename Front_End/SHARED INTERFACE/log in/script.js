@@ -1,36 +1,38 @@
 const loginForm = document.getElementById('loginForm');
-
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const credentials = {
-        user: document.getElementById('username').value,
-        pass: document.getElementById('password').value
-    };
+    const email = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    console.log("Authenticating with FarmLink API...", credentials);
-
-    // Mock API Call Simulation
     try {
-        const result = await simulateLogin(credentials);
-        if (result.authenticated) {
-            alert("Welcome back!");
-            // Proceed to the dashboard (Farmer John screen)
+        const response = await fetch('http://localhost:3001/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.authenticated) {
+            // 1. Store the user data (including role) in localStorage
+            localStorage.setItem('farmlink_user', JSON.stringify(result.user));
+
+            alert(`Welcome, ${result.user.name}!`);
+
+            // 2. Redirect based on position (Role)
+            if (result.user.role === 'Farmer') {
+                window.location.href = '../FARMER/Home page for farmer/home page.html'; // Farmer's home page
+            } else if (result.user.role === 'Buyer') {
+                window.location.href = '../BUYER/buyer home page/index.html'; // Buyer's home page (Red Corn product page)
+            } else {
+                alert("Role not recognized. Contact admin.");
+            }
+        } else {
+            alert(result.message || "Login failed");
         }
     } catch (err) {
-        alert("Authentication failed. Check your username or password.");
+        console.error("Connection Error:", err);
+        alert("Server is offline. Ensure 'node server.js' is running.");
     }
 });
-
-function simulateLogin(data) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Simplified logic for example
-            if (data.user && data.pass.length > 3) {
-                resolve({ authenticated: true });
-            } else {
-                reject({ authenticated: false });
-            }
-        }, 800);
-    });
-}

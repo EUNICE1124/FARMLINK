@@ -25,12 +25,14 @@ exports.addToCart = async (req, res) => {
     const { product_id, quantity_label, user_id } = req.body; 
 
     try {
+        // Updated to match your 'cart' table columns exactly
         await db.execute(
-            'INSERT INTO cart (product_id, user_id, quantity, quantity_label) VALUES (?, ?, ?, ?)',
-            [product_id, user_id, 1, quantity_label]
+            'INSERT INTO cart (product_id, user_id, quantity_label) VALUES (?, ?, ?)',
+            [product_id, user_id, quantity_label]
         );
         res.status(201).json({ message: "Added to cart successfully!" });
     } catch (err) {
+        console.error("Database Error:", err.message);
         res.status(500).json({ message: "Database error", error: err.message });
     }
 };

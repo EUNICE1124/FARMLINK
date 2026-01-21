@@ -179,3 +179,26 @@ exports.getInventory = async (req, res) => {
         res.status(500).json({ message: "Error fetching inventory", error: err.message });
     }
 };
+// POST /api/users/login - Authenticate user
+exports.loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Query must include 'role' to differentiate users
+        const [rows] = await db.execute(
+            'SELECT id, name, email, role FROM users WHERE email = ? AND password = ?', 
+            [email, password]
+        );
+
+        if (rows.length > 0) {
+            res.status(200).json({ 
+                authenticated: true, 
+                user: rows[0] // Returns { id, name, email, role }
+            });
+        } else {
+            res.status(401).json({ authenticated: false, message: "Invalid credentials" });
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Login failed", error: err.message });
+    }
+};

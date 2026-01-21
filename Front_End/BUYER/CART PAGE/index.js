@@ -1,49 +1,53 @@
-// Variable to store the currently selected quantity
-let selectedQuantity = null;
+document.addEventListener('DOMContentLoaded', () => {
+    const pricePerKg = 1000; 
+    let selectedQuantity = 5; 
 
-document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', function () {
-        // Remove active class from all chips
-        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    const chips = document.querySelectorAll('.chip');
+    const priceDisplay = document.querySelector('.btn-value');
+    const cartBtn = document.querySelector('.cart-action-btn');
 
-        // Add active class to the clicked one
-        this.classList.add('active');
+    // Get real user data from localStorage
+    const savedUser = JSON.parse(localStorage.getItem('farmlink_user')) || { name: "Guest", phone: "00000000", id: 0 };
 
-        // Store the selection (e.g., "1kg" or "500g")
-        selectedQuantity = this.innerText;
-        console.log("Selected quantity:", selectedQuantity);
-    });
-});
-
-// Add to Cart with Backend Connection
-document.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
-    if (!selectedQuantity) {
-        alert('Please select a quantity first!');
-        return;
-    }
-
-    // Prepare data for the backend
-    const cartData = {
-        product_id: 1, // This would normally be dynamic based on the page
-        quantity_label: selectedQuantity,
-        user_id: 123 // Assuming a logged-in user
-    };
-
-    try {
-        const response = await fetch('http://localhost:3001/api/cart/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(cartData)
+    chips.forEach(chip => {
+        chip.addEventListener('click', function () {
+            chips.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            selectedQuantity = parseInt(this.innerText);
+            if (priceDisplay) priceDisplay.textContent = `${selectedQuantity * pricePerKg}cfa`;
         });
+    });
 
-        if (response.ok) {
-            alert(`Success: ${selectedQuantity} added to your cart!`);
-        } else {
-            const error = await response.json();
-            alert('Error: ' + error.message);
-        }
-    } catch (error) {
-        console.error('Connection failed:', error);
-        alert('Could not connect to the database server.');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', async () => {
+            const cartData = {
+                product_id: 1, 
+                quantity_label: `${selectedQuantity}kg`,
+                user_id: savedUser.id // Now using real ID
+            };
+
+            try {
+                const response = await fetch('http://localhost:3001/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cartData)
+                });
+
+                if (response.ok) {
+                    // SUCCESS CHOICES
+                    const userChoice = confirm(`✅ ${selectedQuantity}kg added to cart!\n\nClick "OK" to CHECKOUT now.\nClick "Cancel" to KEEP SHOPPING for more products.`);
+                    
+                    if (userChoice) {
+                        window.location.href = '../checkout buyer/index.html'; // Go to payment
+                    } else {
+                        window.location.href = '../buyer home page/index.html'; // Go back to products
+                    }
+                } else {
+                    alert('❌ Server Error: Please try again.');
+                }
+            } catch (error) {
+                alert('⚠️ Connection Error: Ensure your server is running.');
+            }
+        });
     }
 });

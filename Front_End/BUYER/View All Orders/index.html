@@ -3,44 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmLink Orders</title>
+    <title>My Order | FarmLink</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="phone-container">
         <header class="hero-header">
-            <div class="profile-circle">
-                <span class="user-icon">👤</span>
+            <div class="profile-nav">
+                <div class="profile-circle">👤</div>
+                <button class="logout-btn">Logout</button>
             </div>
-            <h1>HELLO!</h1>
-            <p>Welcome to FarmLink</p>
+            <h1>MY ORDER</h1>
+            <p>Tracking your fresh harvest</p>
         </header>
 
         <main class="order-content">
-            <h2 class="section-title">Orders</h2>
+            <h2 class="section-title">Order Details</h2>
             
             <div class="order-table">
                 <div class="table-row">
-                    <div class="label">Order ID</div>
-                    <div class="value" id="orderId"></div>
+                    <span class="label">Order Reference</span>
+                    <span class="value" id="orderId">Loading...</span>
                 </div>
                 <div class="table-row">
-                    <div class="label">Customer</div>
-                    <div class="value" id="customer"></div>
+                    <span class="label">Customer</span>
+                    <span class="value" id="customer">Loading...</span>
                 </div>
                 <div class="table-row">
-                    <div class="label">Items</div>
-                    <div class="value" id="items"></div>
+                    <span class="label">Items</span>
+                    <span class="value" id="items">Loading...</span>
                 </div>
                 <div class="table-row">
-                    <div class="label">Status</div>
-                    <div class="value" id="status"></div>
+                    <span class="label">Delivery Status</span>
+                    <span class="value status-badge" id="status">Checking...</span>
                 </div>
                 <div class="table-row">
-                    <div class="label">Date</div>
-                    <div class="value" id="orderDate"></div>
+                    <span class="label">Order Date</span>
+                    <span class="value" id="orderDate">--/--/--</span>
                 </div>
+            </div>
+            
+            <div class="action-footer">
+                <button class="support-btn" onclick="location.href='tel:677000000'">Contact Support</button>
             </div>
         </main>
     </div>

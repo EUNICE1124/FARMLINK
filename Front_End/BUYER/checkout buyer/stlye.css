@@ -80,6 +80,26 @@ body {
 .step.active {
     background: var(--primary-green);
 }
+.next-step-btn {
+    width: 100%;
+    background-color: var(--bright-green);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.next-step-btn:hover {
+    background-color: var(--primary-green);
+}
 
 /* Toggle Buttons */
 .toggle-container {
@@ -200,6 +220,11 @@ input {
     color: #44bd23; 
     font-size: 20px;
     pointer-events: none;
+}
+/* This makes the MTN/Orange buttons change color when clicked */
+.provider-btn.selected {
+    border: 2px solid var(--bright-green);
+    background-color: #f0fff0;
 }
 /* Review Page Specifics */
 .review-card {

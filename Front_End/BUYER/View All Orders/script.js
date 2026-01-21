@@ -4,27 +4,28 @@ async function fetchOrderData() {
     try {
         const response = await fetch(ORDER_API);
         
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) {
+            throw new Error(`Server responded with status: ${response.status}`);
+        }
         
         const data = await response.json();
 
-        // Filling the table with real API data
-        document.getElementById('orderId').textContent = data.id;
-        document.getElementById('customer').textContent = data.customerName;
-        document.getElementById('items').textContent = data.productCount;
-        document.getElementById('status').textContent = data.status;
-        document.getElementById('orderDate').textContent = data.date;
+        // Sanitize and Fill Data
+        document.getElementById('orderId').textContent = data.id || "N/A";
+        document.getElementById('customer').textContent = data.customerName || "User";
+        document.getElementById('items').textContent = data.productCount || "0 items";
+        document.getElementById('status').textContent = data.status || "Pending";
+        document.getElementById('orderDate').textContent = data.date || "Just now";
 
-    }catch (error) {
-        console.log("Error fetching API, using mock data instead.");
-        // Static data for testing
-        document.getElementById('orderId').textContent = "FL-990";
-        document.getElementById('customer').textContent = "Abena Mensah";
-        document.getElementById('items').textContent = "3kg Bananas";
-        document.getElementById('status').textContent = "Processing";
-        document.getElementById('orderDate').textContent = "Dec 26, 2025";
+    } catch (error) {
+        console.error("Critical API Error:", error.message);
+        
+        // Fail-safe Mock Data for offline testing
+        document.getElementById('orderId').textContent = "FL-OFFLINE";
+        document.getElementById('status').textContent = "Server Connection Error";
+        document.getElementById('status').style.color = "red";
     }
 }
 
-// Run the function when the page loads
-window.onload = fetchOrderData;
+// Initialized on load
+window.addEventListener('DOMContentLoaded', fetchOrderData);
