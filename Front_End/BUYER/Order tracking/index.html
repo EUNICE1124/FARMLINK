@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Tracking</title>
+    <title>Order Tracking - Farmlink</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="tracking-container">
         <header class="header">
             <h1>ORDER TRACKING</h1>
-            <label for="customerNum">customer number</label>
-            <input type="text" id="customerNum" placeholder="number" readonly>
+            <label for="customerNum">Customer Number</label>
+            <input type="text" id="customerNum" placeholder="Number" readonly>
         </header>
 
         <main class="stepper">
-            <div class="step" id="step1">
+            <div class="step status-step" id="step1">
                 <div class="step-left">
                     <span class="circle">1</span>
                     <div class="line"></div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="step" id="step2">
+            <div class="step status-step" id="step2">
                 <div class="step-left">
                     <span class="circle">2</span>
                     <div class="line"></div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="step" id="step3">
+            <div class="step status-step" id="step3">
                 <div class="step-left">
                     <span class="circle">3</span>
                 </div>
@@ -66,5 +66,9 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Automatically trigger the data fetch when the page loads
+        window.onload = fetchOrderData;
+    </script>
 </body>
 </html>
