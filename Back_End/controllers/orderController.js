@@ -119,3 +119,17 @@ exports.updateOrderStatus = (req, res) => {
         res.status(200).json({ message: "Status updated to " + status });
     });
 };
+// New function to match index.js logic
+exports.addToCart = (req, res) => {
+    const { product_id, quantity_label, user_id } = req.body; // Matches index.js keys
+
+    const query = "INSERT INTO cart (product_id, user_id, quantity_label) VALUES (?, ?, ?)";
+    
+    db.query(query, [product_id, user_id, quantity_label], (err, result) => {
+        if (err) {
+            console.error("Database Error:", err);
+            return res.status(500).json({ message: "Database error", error: err });
+        }
+        res.status(201).json({ message: "Successfully added to cart", cartId: result.insertId });
+    });
+};
