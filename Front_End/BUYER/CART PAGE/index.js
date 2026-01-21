@@ -1,57 +1,69 @@
-// 1. Variable to store the currently selected quantity
-let selectedQuantity = null;
+/**
+ * FarmLink - Product Page Logic
+ * Handles quantity selection, price calculation, and backend connection.
+ */
 
-// 2. Select quantity chips
+// 1. Configuration & Initial State
+let selectedQuantity = 5; // Default matches the 'active' class in your HTML
+const pricePerKg = 1000;  // Calculation: 5000Cfa / 5kg = 1000Cfa per kg
+
+const priceDisplay = document.querySelector('.btn-value');
+const cartBtn = document.querySelector('.cart-action-btn');
+
+// 2. Quantity Selection & Price Calculus
 document.querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', function () {
-        // Remove active class from all chips
+        // UI: Toggle active classes
         document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-
-        // Add active class to the clicked one
         this.classList.add('active');
 
-        // Store the selection (e.g., "5kg")
-        selectedQuantity = this.innerText;
-        console.log("Selected quantity:", selectedQuantity);
+        // Logic: Extract number from text (e.g., "10kg" -> 10)
+        selectedQuantity = parseInt(this.innerText);
+        
+        // Calculus: Update the total price display
+        const newTotal = selectedQuantity * pricePerKg;
+        priceDisplay.textContent = `${newTotal}cfa`;
+        
+        console.log(`User selected: ${selectedQuantity}kg. New Total: ${newTotal}Cfa`);
     });
 });
 
-// 3. Add to Cart Logic 
-const cartBtn = document.querySelector('.cart-action-btn');
-
+// 3. Backend Integration (Add to Cart / Place Order)
 if (cartBtn) {
     cartBtn.addEventListener('click', async () => {
-        console.log("Add to Cart clicked!");
+        const totalAmount = selectedQuantity * pricePerKg;
 
-        if (!selectedQuantity) {
-            alert('Please select a quantity first!');
-            return;
-        }
-
-        const cartData = {
-            product_id: 1, 
-            quantity_label: selectedQuantity,
-            user_id: 123 
+        // Data structure expected by orderController.placeOrder
+        const orderData = {
+            name: "Default Customer", // Suggestion: Pull from localStorage after login
+            phone: "677000000",
+            items: `${selectedQuantity}kg Red Corn`,
+            total: totalAmount,
+            city: "Yaoundé",
+            region: "Centre"
         };
 
         try {
-            const response = await fetch('http://localhost:3001/api/cart/add', {
+            const response = await fetch('http://localhost:3001/api/orders', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(cartData)
+                body: JSON.stringify(orderData)
             });
 
             if (response.ok) {
-                alert(`Success: ${selectedQuantity} added to your cart!`);
+                const result = await response.json();
+                alert(`Success! Order #${result.orderId} placed for ${totalAmount}Cfa.`);
+                // Optional: Redirect to tracking page
+                 window.location.href = '../Order tracking/index.html';
             } else {
                 const error = await response.json();
-                alert('Server Error: ' + error.message);
+                alert('Server Error: ' + (error.message || 'Could not place order'));
             }
         } catch (error) {
             console.error('Connection failed:', error);
-            alert('Could not connect to the server. Check if the backend is running on port 3001.');
+            alert('Backend Error: Ensure your Node.js server is running on port 3001.');
         }
     });
 } else {
-    console.error("Critical Error: Button with class '.cart-action-btn' not found in HTML!");
+    console.error("Critical Error: '.cart-action-btn' not found in HTML.");
 }
