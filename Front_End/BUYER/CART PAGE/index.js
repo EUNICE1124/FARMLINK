@@ -1,60 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Set default values to match the HTML "active" state
-    const pricePerKg = 1000; // Base: 5000cfa / 5kg
+    const pricePerKg = 1000; 
     let selectedQuantity = 5; 
 
     const chips = document.querySelectorAll('.chip');
     const priceDisplay = document.querySelector('.btn-value');
     const cartBtn = document.querySelector('.cart-action-btn');
 
-    // 2. Responsive Quantity & Price Calculus
+    // Get real user data from localStorage
+    const savedUser = JSON.parse(localStorage.getItem('farmlink_user')) || { name: "Guest", phone: "00000000", id: 0 };
+
     chips.forEach(chip => {
         chip.addEventListener('click', function () {
             chips.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
-
-            // Update quantity and recalculate price
             selectedQuantity = parseInt(this.innerText);
-            const newTotal = selectedQuantity * pricePerKg;
-
-            if (priceDisplay) {
-                priceDisplay.textContent = `${newTotal}cfa`;
-            }
+            if (priceDisplay) priceDisplay.textContent = `${selectedQuantity * pricePerKg}cfa`;
         });
     });
 
-    // 3. Backend Connection
     if (cartBtn) {
         cartBtn.addEventListener('click', async () => {
-            const totalAmount = selectedQuantity * pricePerKg;
-
-            // Map data to match orderController.js expected fields
-            const orderData = {
-                name: "Guest User", // Replace with real name if login is implemented
-                phone: "677000000",
-                city: "Yaounde",
-                region: "Centre",
-                items: `${selectedQuantity}kg Red Corn`,
-                total: totalAmount
+            const cartData = {
+                product_id: 1, 
+                quantity_label: `${selectedQuantity}kg`,
+                user_id: savedUser.id // Now using real ID
             };
 
             try {
-                // Pointing to the correct route in server.js/orderRoutes.js
-                const response = await fetch('http://localhost:3001/api/orders/cart/add', {
+                const response = await fetch('http://localhost:3001/api/cart/add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
+                    body: JSON.stringify(cartData)
                 });
 
                 if (response.ok) {
-                    const result = await response.json();
-                    alert(`✅ Order Placed! ID: ${result.orderId}`);
+                    // SUCCESS CHOICES
+                    const userChoice = confirm(`✅ ${selectedQuantity}kg added to cart!\n\nClick "OK" to CHECKOUT now.\nClick "Cancel" to KEEP SHOPPING for more products.`);
+                    
+                    if (userChoice) {
+                        window.location.href = '../checkout buyer/index.html'; // Go to payment
+                    } else {
+                        window.location.href = '../buyer home page/index.html'; // Go back to products
+                    }
                 } else {
-                    alert('❌ Server Error: Ensure your database has the "product_items" column.');
+                    alert('❌ Server Error: Please try again.');
                 }
             } catch (error) {
-                console.error('Connection failed:', error);
-                alert('⚠️ Backend Error: Make sure your node server.js is running on port 3001.');
+                alert('⚠️ Connection Error: Ensure your server is running.');
             }
         });
     }
