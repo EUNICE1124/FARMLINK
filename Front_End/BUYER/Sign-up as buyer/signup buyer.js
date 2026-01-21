@@ -24,7 +24,8 @@ signupForm.addEventListener('submit', async (e) => {
         // Simulate network request
         const response = await simulateRegisterAPI(formData);
         alert(response.message);
-        // Redirect logic here
+        // Redirect to buyer home page after successful signup
+        window.location.href = "../buyer home page/index.html";
     } catch (err) {
         alert("Registration failed. Please try again.");
     }
