@@ -26,3 +26,15 @@ exports.saveRolePreference = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+exports.selectRole = (req, res) => {
+    const { userId, role } = req.body; // 'farmer' or 'buyer'
+    
+    // Capitalize role to match your database conventions (e.g., 'Farmer')
+    const formattedRole = role.charAt(0).toUpperCase() + role.slice(1);
+    
+    const sql = "UPDATE users SET role = ? WHERE id = ?";
+    db.query(sql, [formattedRole, userId], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "Role updated successfully" });
+    });
+};

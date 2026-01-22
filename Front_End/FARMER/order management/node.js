@@ -1,18 +1,16 @@
 let orders = []; 
 
 async function loadRealOrders() {
+    const userId = localStorage.getItem('userId'); // Ensure we only get THIS farmer's orders
     try {
-        // Fetching from your Node.js server on Port 3001
-        const response = await fetch('http://localhost:3001/api/orders');
+        const response = await fetch(`http://localhost:3001/api/orders/farmer/${userId}`);
         if (!response.ok) throw new Error('Failed to fetch orders');
         
         orders = await response.json();
-        
-        // Render the "New" (Pending) orders by default
         renderOrders('New'); 
     } catch (error) {
         console.error("Database Error:", error);
-        orderListContainer.innerHTML = `<p style="color:red; text-align:center;">Database Connection Error</p>`;
+        orderListContainer.innerHTML = `<p style="color:red; text-align:center;">Connection Error</p>`;
     }
 }
 async function handleOrderAction(orderId, action) {
@@ -27,6 +25,8 @@ async function handleOrderAction(orderId, action) {
 
         if (response.ok) {
             alert(`Order ${orderId} is now ${newStatus}`);
+            // Example link generation in your order list
+            card.onclick = () => window.location.href = `../order page/index.html?id=${order.id}`;
             loadRealOrders(); // Refresh the list from the database
         }
     } catch (error) {

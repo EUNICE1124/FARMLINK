@@ -1,34 +1,49 @@
+/**
+ * UPDATED: Farmer dashboard.JS
+ */
+
 document.addEventListener('DOMContentLoaded', async () => {
     const userNameElement = document.querySelector('.user-info p');
+    const salesText = document.getElementById('total-sales');
+    const ordersText = document.getElementById('total-orders');
     const navItems = document.querySelectorAll('.nav-item');
+    const timeDropdown = document.getElementById('time-range');
     
-    // 1. FETCH DASHBOARD DATA FROM BACKEND
+    // 1. FETCH DASHBOARD DATA
     const userId = localStorage.getItem('userId');
     
     if (userId) {
-    try {
-        const response = await fetch(`http://localhost:3001/api/users/dashboard/${userId}`);
-        const data = await response.json();
-        
-        if (response.ok) {
-            // Update UI with real data
-            document.querySelector('.user-info p').textContent = `HI, ${data.userName}`;
-            document.getElementById('total-sales').textContent = `${data.totalSales.toLocaleString()} CFA`;
-            document.getElementById('total-orders').textContent = data.orderCount;
-        }
-    } catch (error) {
-        console.error('Failed to fetch dashboard data:', error);
-    }
-}
-    const timeDropdown = document.getElementById('time-range');
-    const salesText = document.getElementById('total-sales');
+        try {
+            // Fetch User Profile Name from userController
+            const profileRes = await fetch(`http://localhost:3001/api/users/profile/${userId}`);
+            if (profileRes.ok) {
+                const userData = await profileRes.json();
+                userNameElement.textContent = `HI, ${userData.full_name || 'Farmer'}`;
+            }
 
-    // Fake data to simulate the change
+            // Fetch Order Statistics from orderController
+            const statsRes = await fetch(`http://localhost:3001/api/orders/stats/${userId}`);
+            if (statsRes.ok) {
+                const statsData = await statsRes.json();
+                // Update UI with real aggregated data
+                salesText.textContent = `${Number(statsData.totalSales).toLocaleString()} CFA`;
+                ordersText.textContent = statsData.orderCount;
+            }
+        } catch (error) {
+            console.error('Failed to connect to backend controllers:', error);
+            salesText.textContent = "Error Loading";
+        }
+    } else {
+        console.warn("No userId found in localStorage. Redirecting to login...");
+        // window.location.href = '../login/index.html';
+    }
+
+    // 2. PERFORMANCE FILTER (Simulated range logic)
     const performanceData = {
-        "7": { sales: "$350", orders: "12" },
-        "30": { sales: "$1,200", orders: "45" },
-        "90": { sales: "$4,100", orders: "130" },
-        "365": { sales: "$15,000", orders: "520" }
+        "7": { sales: "35,000 CFA", orders: "12" },
+        "30": { sales: "120,000 CFA", orders: "45" },
+        "90": { sales: "410,000 CFA", orders: "130" },
+        "365": { sales: "1,500,000 CFA", orders: "520" }
     };
 
     if (timeDropdown) {
@@ -36,37 +51,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             const selectedValue = event.target.value;
             const newData = performanceData[selectedValue];
 
-            // Add a small fade effect or just swap the text
             salesText.style.opacity = 0;
-
             setTimeout(() => {
                 salesText.innerText = newData.sales;
+                ordersText.innerText = newData.orders;
                 salesText.style.opacity = 1;
             }, 200);
-
-            console.log(`Updated dashboard for the last ${selectedValue} days.`);
         });
     }
 
-    // 2. NAVIGATION LOGIC
+    // 3. NAVIGATION LOGIC
     navItems.forEach(item => {
         item.addEventListener('click', (event) => {
             event.preventDefault(); 
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            const pageName = item.querySelector('span').textContent;
+            const pageName = item.querySelector('span').textContent.trim();
             
-            // Route to different pages based on selection
-         
-           
+            // Map the sidebar buttons to your project folders
+            if (pageName === "Inventory") window.location.href = "../Inventory/inventory.html";
+            if (pageName === "Orders") window.location.href = "../View All Orders/index.html";
+            if (pageName === "Messages") window.location.href = "../Messages/index.html";
+            if (pageName === "Settings") window.location.href = "../Edit Profile/index.html";
         });
-    });
-
-    // 3. SEARCH LOGIC
-    const searchInput = document.querySelector('.search-bar input');
-    searchInput.addEventListener('input', (e) => {
-        console.log('Searching for:', e.target.value);
-       
     });
 });

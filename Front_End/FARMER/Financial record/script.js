@@ -39,8 +39,8 @@ async function fetchFinancialTrends() {
             const apiData = await response.json();
             
             // Extract labels and values for Chart.js
-            const labels = apiData.map(item => item.category);
-            const values = apiData.map(item => item.total);
+           const labels = apiData.map(item => item.category);
+           const values = apiData.map(item => Number(item.total)); 
 
             // Update chart
             revenueChart.data.labels = labels;
@@ -56,5 +56,10 @@ async function fetchFinancialTrends() {
 document.addEventListener('DOMContentLoaded', fetchFinancialTrends);
 
 // Button placeholders
-document.getElementById('btnHistory').addEventListener('click', () => alert('Showing History...'));
-document.getElementById('btnReceipts').addEventListener('click', () => alert('Opening Receipts...'));
+document.getElementById('btnHistory').addEventListener('click', () => {
+    window.location.href = '../View All Orders/index.html'; 
+});
+
+document.getElementById('btnReceipts').addEventListener('click', () => {
+    window.location.href = '../Order Tracking/index.html'; 
+});

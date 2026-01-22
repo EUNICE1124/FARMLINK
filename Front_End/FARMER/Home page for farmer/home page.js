@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const headerIcons =document.querySelector('.header-icons');
     if(headerIcons) {
 headerIcons.addEventListener('click', () => {
-    windows.location.href = '../'
+    window.location.href = '../'
 }) 
     }
 

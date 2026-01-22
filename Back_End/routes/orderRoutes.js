@@ -2,12 +2,30 @@ const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
 
-router.get('/latest', orderController.getLatestOrder);
-router.get('/', orderController.getAllOrders); // Matches fetch('http://localhost:3001/api/orders')
-router.patch('/:id', orderController.updateOrderStatus); // Matches fetch('http://localhost:3001/api/orders/${orderId}')
-router.post('/', orderController.placeOrder); 
+// --- 1. GET ROUTES ---
+
+// Summary view: Matches fetch('.../api/orders/latest/15')
+router.get('/latest/:userId', orderController.getLatestOrder);
+
+// History view: Matches fetch('.../api/orders')
+router.get('/', orderController.getAllOrders);
+
+// Status check: Matches fetch('.../api/orders/status/5')
 router.get('/status/:id', orderController.getOrderStatus);
-// This matches: fetch('http://localhost:3001/api/orders/cart/add')
+
+
+// --- 2. POST ROUTES ---
+
+// Create new order
+router.post('/', orderController.placeOrder);
+
+// Cart management: Matches fetch('.../api/orders/cart/add')
 router.post('/cart/add', orderController.addToCart);
+
+
+// --- 3. PATCH ROUTES ---
+
+// Update status (Approve/Cancel): Matches fetch('.../api/orders/12')
+router.patch('/:id', orderController.updateOrderStatus);
 
 module.exports = router;

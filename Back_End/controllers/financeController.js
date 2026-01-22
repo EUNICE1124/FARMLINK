@@ -6,10 +6,11 @@ exports.getRevenueData = async (req, res) => {
 
     try {
         const sql = `
-            SELECT category, SUM(amount_cfa) as total 
-            FROM transactions 
-            WHERE farmer_id = ? 
-            GROUP BY category
+          SELECT p.category, SUM(o.total_price) AS total 
+          FROM orders o 
+          JOIN products p ON o.product_id = p.id 
+          WHERE o.farmer_id = ? 
+          GROUP BY p.category
         `;
         const [rows] = await db.execute(sql, [userId]);
         res.status(200).json(rows);

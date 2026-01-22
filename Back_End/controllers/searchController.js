@@ -42,3 +42,24 @@ exports.searchProducts = (req, res) => {
         });
     });
 };
+const performSearch = async () => {
+    const query = searchInput?.value.trim();
+    if (query) {
+        // Fetch real results from your Node.js/Java API
+        try {
+            const response = await fetch(`http://localhost:3001/api/search?q=${encodeURIComponent(query)}`);
+            const results = await response.json();
+            
+            // Render results instead of just history
+            renderSearchResults(results); 
+            
+            // Add to history
+            if (!recentSearches.includes(query)) {
+                recentSearches.unshift(query);
+            }
+            renderSearches();
+        } catch (error) {
+            console.error("Search failed:", error);
+        }
+    }
+};

@@ -1,175 +1,113 @@
 const db = require('../config/db');
 
-// GET /api/orders/latest
+// 1. GET FARMER STATS (For Farmer Dashboard)
+// Route: GET /api/orders/stats/:userId
+exports.getFarmerStats = (req, res) => {
+    const { userId } = req.params;
+    const sql = `
+        SELECT 
+            SUM(total_price) AS totalSales, 
+            COUNT(*) AS orderCount 
+        FROM orders 
+        WHERE farmer_id = ?`;
+
+    db.query(sql, [userId], (err, results) => {
+        if (err) {
+            console.error("Dashboard Stats Error:", err);
+            return res.status(500).json({ error: "Failed to fetch sales statistics." });
+        }
+        res.json({
+            totalSales: results[0].totalSales || 0,
+            orderCount: results[0].orderCount || 0
+        });
+    });
+};
+
+// 2. GET LATEST ORDER (For summary view)
+// Route: GET /api/orders/latest/:userId
 exports.getLatestOrder = (req, res) => {
-    const { userId } = req.query; // Get the ID from the frontend
-    const query = "SELECT * FROM orders WHERE customer_id = ? ORDER BY id DESC LIMIT 1";
-
-    db.query(query, [userId], (err, results) => {
-        if (err) return res.status(500).json({ error: "Database error", details: err.message });
-        if (results.length === 0) return res.status(404).json({ message: "No orders found" });
-
-        const order = results[0];
-
-        res.status(200).json({
-            id: `FL-${order.id}`,
-            customerName: order.customer_name || "Guest",
-            productCount: order.product_items || "1x Order",
-            status: order.status || "Processing",
-            date: new Date(order.placed_time || Date.now()).toLocaleDateString('en-US', {
-                month: 'short', day: 'numeric', year: 'numeric'
-            }),
-            buyerNumber: order.phone,
-            adminNumber: order.admin_phone || "694002750"
-        });
-    });
-};
-
-// GET /api/orders/:orderId
-
-exports.getOrderDetails = async (req, res) => {
-    const orderId = req.params.orderId;
-    // Join with products table to show what they are buying
-    const query = `
-        SELECT o.id, o.customer_name, o.status, o.total_amount, p.name AS product_name 
+    const userId = req.params.userId; 
+    const sql = `
+        SELECT 
+            o.id, 
+            u.name AS customerName, 
+            o.status, 
+            o.created_at AS date 
         FROM orders o
-        JOIN products p ON o.product_id = p.id
-        WHERE o.id = ?`;
+        JOIN users u ON o.customer_id = u.id
+        WHERE o.farmer_id = ?
+        ORDER BY o.created_at DESC 
+        LIMIT 1`;
 
-    db.query(query, [orderId], (err, results) => {
+    db.query(sql, [userId], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (results.length === 0) return res.status(404).json({ message: "Order not found" });
-
-        const order = results[0];
-        // Send data back in the format the JS expects
-        res.status(200).json({
-            customerName: order.customer_name,
-            orderId: order.id,
-            amount: order.total_amount,
-            status: order.status,
-            productName: order.product_name
-        });
-    });
-};
-/**
- * 2. POST NEW ORDER (From Checkout Page)
- */
-exports.placeOrder = (req, res) => {
-    const { customer_id, customer_name, city, region, phone, provider, total_price, status } = req.body;
-    const sql = `INSERT INTO orders (customer_id, customer_name, city, region, phone, provider, total_price, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    
-    db.query(sql, [customer_id, customer_name, city, region, phone, provider, total_price, status], (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ message: "Order saved!", orderId: result.insertId });
+        if (results.length === 0) return res.status(404).json({ error: "No orders found." });
+        res.json(results[0]);
     });
 };
 
-/**
- * 3. GET ORDER STATUS (For Visual Tracking Page)
- * Endpoint: /api/orders/status/:id
- */
+// 3. GET ALL ORDERS (History view)
+// Route: GET /api/orders
+exports.getAllOrders = (req, res) => {
+    const sql = "SELECT * FROM orders ORDER BY created_at DESC";
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(results);
+    });
+};
+
+// 4. GET ORDER STATUS DETAILS (Tracking)
+// Route: GET /api/orders/status/:id
 exports.getOrderStatus = (req, res) => {
     const { id } = req.params;
-    const query = "SELECT * FROM orders WHERE id = ?";
+    const sql = `
+        SELECT 
+            customer_phone AS customerNumber, 
+            admin_contact AS adminNumber, 
+            delivery_date AS deliveryDate, 
+            status_step AS statusStep 
+        FROM orders 
+        WHERE id = ?`;
 
-    db.query(query, [id], (err, results) => {
-        if (err || results.length === 0) {
-            return res.status(404).json({ message: "Order not found" });
-        }
-
-        const order = results[0];
-        
-        // Map string status to numerical step for the UI (1, 2, or 3)
-        let step = 1;
-        if (order.status === 'Shipped') step = 2;
-        if (order.status === 'Delivered') step = 3;
-
-        res.status(200).json({
-            status: order.status, // e.g., 'Processing'
-            buyerNumber: order.phone,
-            adminNumber: order.admin_phone,
-            date: order.placed_time
-        });
+    db.query(sql, [id], (err, results) => {
+        if (err || results.length === 0) return res.status(404).json({ error: "Order not found." });
+        res.json(results[0]);
     });
 };
 
-/**
- * 4. GET ALL ORDERS (For Admin View)
- */
-exports.getAllOrders = (req, res) => {
-    const query = "SELECT * FROM orders ORDER BY id DESC";
-
-    db.query(query, (err, results) => {
-        if (err) {
-            return res.status(500).json({ message: "Error fetching orders" });
-        }
-        res.status(200).json(results);
-    });
-};
-
-/**
- * 5. PATCH UPDATE STATUS (Admin changing status)
- */
+// 5. UPDATE ORDER STATUS (Approve/Cancel)
+// Route: PATCH /api/orders/:id
 exports.updateOrderStatus = (req, res) => {
     const { id } = req.params;
-    const { status } = req.body; // e.g., 'Shipped' or 'Delivered'
+    const { status } = req.body; 
 
-    const query = "UPDATE orders SET status = ? WHERE id = ?";
-
-    db.query(query, [status, id], (err, result) => {
+    const sql = "UPDATE orders SET status = ? WHERE id = ?";
+    db.query(sql, [status, id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.affectedRows === 0) return res.status(404).json({ message: "Order not found" });
-        
-        res.status(200).json({ message: "Status updated to " + status });
+        res.status(200).json({ message: "Order status updated successfully" });
     });
 };
-// New function to match index.js logic
-exports.addToCart = (req, res) => {
-    const { product_id, quantity_label, user_id } = req.body; // Matches index.js keys
 
-    const query = "INSERT INTO cart (product_id, user_id, quantity_label) VALUES (?, ?, ?)";
+// 6. PLACE NEW ORDER (Buyer Checkout)
+// Route: POST /api/orders
+exports.placeOrder = (req, res) => {
+    const { buyer_id, farmer_id, total_price } = req.body;
+    const sql = "INSERT INTO orders (buyer_id, farmer_id, total_price, status) VALUES (?, ?, ?, 'Pending')";
     
-    db.query(query, [product_id, user_id, quantity_label], (err, result) => {
-        if (err) {
-            console.error("Database Error:", err);
-            return res.status(500).json({ message: "Database error", error: err });
-        }
-        res.status(201).json({ message: "Successfully added to cart", cartId: result.insertId });
-    });
-};
-/**
- * FETCH ALL ORDERS
- * Matches: fetch('http://localhost:3001/api/orders')
- */
-exports.getAllOrders = (req, res) => {
-    // JOIN with users to get the Customer Name for the UI
-    const query = `
-        SELECT o.*, u.name AS customer_name 
-        FROM orders o 
-        LEFT JOIN users u ON o.customer_id = u.id 
-        ORDER BY o.id DESC
-    `;
-
-    db.query(query, (err, results) => {
+    db.query(sql, [buyer_id, farmer_id, total_price], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.status(200).json(results);
+        res.status(201).json({ message: "Order placed successfully", orderId: result.insertId });
     });
 };
 
-/**
- * UPDATE ORDER STATUS
- * Matches: fetch('http://localhost:3001/api/orders/${orderId}', { method: 'PATCH' ... })
- */
-exports.updateStatusPatch = (req, res) => {
-    const { id } = req.params;
-    const { status } = req.body;
-
-    const query = "UPDATE orders SET status = ? WHERE id = ?";
-
-    db.query(query, [status, id], (err, result) => {
+// 7. ADD TO CART
+// Route: POST /api/orders/cart/add
+exports.addToCart = (req, res) => {
+    const { userId, productId, quantity } = req.body;
+    const sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
+    
+    db.query(sql, [userId, productId, quantity], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.affectedRows === 0) return res.status(404).json({ message: "Order not found" });
-        
-        res.status(200).json({ message: "Status updated successfully" });
+        res.status(200).json({ message: "Product added to cart" });
     });
 };
