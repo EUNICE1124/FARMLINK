@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartBtn = document.querySelector('.cart-action-btn');
 
     // Get real user data from localStorage
-    const savedUser = JSON.parse(localStorage.getItem('farmlink_user')) || { name: "Guest", phone: "00000000", id: 0 };
+    const savedUser = JSON.parse(localStorage.getItem('userId')) || { name: "Guest", phone: "00000000", id: 0 };
 
     chips.forEach(chip => {
         chip.addEventListener('click', function () {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('http://localhost:3001/api/cart/add', {
+                const response = await fetch('http://localhost:3001/api/marketplace/cart/add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(cartData)

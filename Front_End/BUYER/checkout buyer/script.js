@@ -69,16 +69,20 @@ function updateAddress(city, region) {
 // --- 4. BACKEND CONNECTION (Place Order) ---
 
 async function placeOrder() {
+    const savedUser = JSON.parse(localStorage.getItem('userId')) || { id: 1 };
+    
     const orderData = {
-        name: document.getElementById('input-name').value,
+        customer_id: savedUser.id,
+        customer_name: document.getElementById('input-name').value,
         city: document.getElementById('display-city').innerText,
         region: document.getElementById('display-region').innerText,
         phone: document.getElementById('momo-phone').value,
         provider: document.getElementById('btn-mtn').classList.contains('selected') ? "MTN" : "Orange",
-        total: 6500
+        total_price: 6500, 
+        status: 'New'
     };
 
-    if (!orderData.name || !orderData.phone) {
+    if (!orderData.customer_name || !orderData.phone) {
         alert("Please enter your name and phone number!");
         return;
     }
@@ -90,12 +94,19 @@ async function placeOrder() {
             body: JSON.stringify(orderData)
         });
 
+        const result = await response.json();
+
         if (response.ok) {
             alert("Order Placed Successfully!");
+            // Clear the cart since the order is placed
+            localStorage.removeItem('cartItems'); 
             window.location.href = '../View All Orders/index.html';
+        } else {
+            alert("Error: " + result.message);
         }
     } catch (error) {
-        alert("Server Error: Ensure your backend is running on port 3001");
+        console.error("Order Error:", error);
+        alert("Could not connect to the server.");
     }
 }
 

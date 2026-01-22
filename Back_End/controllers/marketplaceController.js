@@ -39,15 +39,15 @@ exports.getProductsGrid = async (req, res) => {
 
 // Save a new product WITH Multer image upload
 exports.saveProduct = (req, res) => {
-    const { name, price, isFruit, isVegetable } = req.body;
+    const { name, price, category, farmer_id } = req.body;
     const image_url = req.file ? `images/${req.file.filename}` : 'images/images.jpg';
 
     let category = 'Other';
     if (isFruit === 'true' || isFruit === true) category = 'Fruit';
     else if (isVegetable === 'true' || isVegetable === true) category = 'Vegetable';
 
-    const sql = "INSERT INTO products (name, price, category, image_url) VALUES (?, ?, ?, ?)";
-    db.query(sql, [name, price, category, image_url], (err, result) => {
+    const sql = "INSERT INTO products (name, price, category, image_url, farmer_id) VALUES (?, ?, ?, ?, ?)";
+    db.query(sql, [name, price, category, image_url, farmer_id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.status(201).json({ message: "Product saved successfully!", id: result.insertId });
     });

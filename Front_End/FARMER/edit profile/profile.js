@@ -71,5 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 4. LOAD SAVED DATA FROM DATABASE ON PAGE LOAD
-    // (Optional: You'd fetch current user data here to fill the inputs)
+    async function loadProfileData() {
+    const userId = localStorage.getItem('userId');
+    try {
+        const response = await fetch(`http://localhost:3001/api/users/profile/${userId}`);
+        if (response.ok) {
+            const data = await response.json();
+            fullNameInput.value = data.full_name || "";
+            emailInput.value = data.email || "";
+            phoneInput.value = data.phone || "";
+            genderSelect.value = data.gender || "male";
+            if (data.profile_pic) profilePic.src = `http://localhost:3001/${data.profile_pic}`;
+        }
+    } catch (error) {
+        console.error("Failed to load profile:", error);
+    }
+}
+loadProfileData(); 
 });

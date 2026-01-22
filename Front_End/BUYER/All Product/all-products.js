@@ -22,3 +22,26 @@ async function loadMarket() {
         grid.innerHTML = "<p class='loading-msg'>Market connection failed. Check if server is running.</p>";
     }
 }
+async function addToCart(productId) {
+    const userId = localStorage.getItem('userId') || 1; // Fallback for testing
+    try {
+        const response = await fetch('http://localhost:3001/api/marketplace/cart/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                product_id: productId, 
+                user_id: userId, 
+                quantity_label: '1 unit' 
+            })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("Added to cart!");
+        } else {
+            alert("Error: " + result.message);
+        }
+    } catch (error) {
+        console.error("Cart error:", error);
+    }
+}

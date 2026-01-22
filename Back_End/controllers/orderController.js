@@ -2,9 +2,10 @@ const db = require('../config/db');
 
 // GET /api/orders/latest
 exports.getLatestOrder = (req, res) => {
-    const query = "SELECT * FROM orders ORDER BY id DESC LIMIT 1";
+    const { userId } = req.query; // Get the ID from the frontend
+    const query = "SELECT * FROM orders WHERE customer_id = ? ORDER BY id DESC LIMIT 1";
 
-    db.query(query, (err, results) => {
+    db.query(query, [userId], (err, results) => {
         if (err) return res.status(500).json({ error: "Database error", details: err.message });
         if (results.length === 0) return res.status(404).json({ message: "No orders found" });
 
@@ -19,7 +20,7 @@ exports.getLatestOrder = (req, res) => {
                 month: 'short', day: 'numeric', year: 'numeric'
             }),
             buyerNumber: order.phone,
-            adminNumber: order.admin_phone || "677000000"
+            adminNumber: order.admin_phone || "694002750"
         });
     });
 };
@@ -54,24 +55,12 @@ exports.getOrderDetails = async (req, res) => {
  * 2. POST NEW ORDER (From Checkout Page)
  */
 exports.placeOrder = (req, res) => {
-    const { name, phone, city, region, items, total } = req.body;
+    const { customer_id, customer_name, city, region, phone, provider, total_price, status } = req.body;
+    const sql = `INSERT INTO orders (customer_id, customer_name, city, region, phone, provider, total_price, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     
-    // Ensure table has customer_name, phone, city, region, product_items, total_price, status
-    const query = `
-        INSERT INTO orders 
-        (customer_name, phone, city, region, product_items, total_price, status) 
-        VALUES (?, ?, ?, ?, ?, ?, 'Processing')
-    `;
-
-    db.query(query, [name, phone, city, region, items, total], (err, result) => {
-        if (err) {
-            console.error("Insert Error:", err.message);
-            return res.status(500).json({ message: "Failed to place order", error: err.message });
-        }
-        res.status(201).json({ 
-            message: "Order placed successfully!", 
-            orderId: result.insertId 
-        });
+    db.query(sql, [customer_id, customer_name, city, region, phone, provider, total_price, status], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(201).json({ message: "Order saved!", orderId: result.insertId });
     });
 };
 
@@ -96,10 +85,10 @@ exports.getOrderStatus = (req, res) => {
         if (order.status === 'Delivered') step = 3;
 
         res.status(200).json({
-            customerNumber: order.phone,
-            adminNumber: order.admin_phone || "677-000-000",
-            deliveryDate: "3-5 Working Days",
-            statusStep: step
+            status: order.status, // e.g., 'Processing'
+            buyerNumber: order.phone,
+            adminNumber: order.admin_phone,
+            date: order.placed_time
         });
     });
 };

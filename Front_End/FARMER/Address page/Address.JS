@@ -35,7 +35,7 @@ form.addEventListener('submit', async (event) => {
 
     const formData = {
         userId: userId, // Add this line!
-        fullName: fullNameInput.value.trim(),
+        full_name: fullNameInput.value.trim(),
         province: provinceSelect.value,
         district: districtInput.value.trim(),
         city: cityInput.value.trim()

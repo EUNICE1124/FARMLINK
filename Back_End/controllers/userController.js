@@ -66,13 +66,9 @@ exports.registerAddress = async (req, res) => {
     }
 
     // 3. SQL Query: Make sure these match your table columns exactly
-    const sql = `
-        INSERT INTO user_addresses (user_id, full_name, province, district, city) 
-        VALUES (?, ?, ?, ?, ?)
-    `;
-
+   const sql = "UPDATE users SET full_name = ?, region = ?, district = ?, city = ? WHERE id = ?";
     try {
-        const [result] = await db.execute(sql, [userId, fullName, province, district, city]);
+        const [result] = await db.execute(sql, [fullName, province, district, city, userId]);
         res.status(200).json({ message: "Address saved successfully!", id: result.insertId });
     } catch (err) {
         console.error("Database Error:", err.message);
@@ -107,6 +103,16 @@ exports.updateProfile = async (req, res) => {
             res.status(500).json({ message: "Update failed", error: err.message });
         }
     }
+};
+// PUT /api/users/profile - Update user profile details (from profile.js auto-save)
+exports.updateProfile = (req, res) => {
+    const { userId, fullName, email, phone, gender } = req.body; // Keys from your profile.js
+    const sql = "UPDATE users SET full_name = ?, email = ?, phone = ?, gender = ? WHERE id = ?";
+    
+    db.query(sql, [fullName, email, phone, gender, userId], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(200).json({ message: "Profile synchronized!" });
+    });
 };
 // GET /api/users/dashboard/:id - Fetch data for the Farmer Dashboard
 exports.getDashboardData = async (req, res) => {

@@ -24,7 +24,7 @@ signupForm.addEventListener('submit', async (e) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            username: formData.username,
+            name: formData.username,
             email: formData.email,
             phone: formData.phone,
             password: formData.passwords[0].value
@@ -34,6 +34,11 @@ signupForm.addEventListener('submit', async (e) => {
     const result = await response.json();
 
     if (response.ok) {
+        localStorage.setItem('userId', JSON.stringify({
+        id: result.id,
+        name: formData.username,
+        email: formData.email
+    }));
         alert("Welcome to FarmLink! Account created.");
         window.location.href = '../buyer home page/index.html'; // Redirect to login
     } else {
