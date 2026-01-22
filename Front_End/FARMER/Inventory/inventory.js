@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         item.addEventListener('click', () => {
             const page = item.querySelector('span').textContent;
             if (page === 'Home') window.location.href = '../home page for farmer/home page.html';
-            if (page === 'Orders') window.location.href = '../../admin/order management/index.html';
+            if (page === 'Orders') window.location.href = '../order management/index.html';
+            if (page === 'Account') window.location.href = '../profile account interface/index.html';
         });
     });
 

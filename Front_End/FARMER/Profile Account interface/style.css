@@ -60,7 +60,10 @@ body {
     font-weight: bold;
     font-size: 1.1rem;
 }
-
+.user-card-link{
+    text-decoration: none;
+    color: inherit;
+}
 .user-location {
     font-size: 0.9rem;
     color: #666;
