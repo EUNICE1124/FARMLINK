@@ -1,7 +1,9 @@
 :root {
-    --primary-green: #388e3c;
-    --light-green: #4caf50;
+    --primary-green: #1b5e20;
+    --light-green: #388e3c;
+    --unread-bg: #f1f8e9; /* Soft green for unread messages */
     --bg-white: #ffffff;
+    --border-color: #eeeeee;
 }
 
 body {
@@ -22,10 +24,10 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Header Gradient */
+/* Header */
 .main-header {
-    background: linear-gradient(to bottom, #1b5e20, #388e3c);
-    padding: 10px 15px;
+    background: linear-gradient(to bottom, var(--primary-green), var(--light-green));
+    padding: 15px;
     color: white;
 }
 
@@ -44,47 +46,77 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--light-green);
-}
-
-.header-title {
-    font-size: 1.1rem;
+    color: #666;
 }
 
 /* Tabs */
 .tabs {
     display: flex;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tab {
     flex: 1;
     text-align: center;
     padding: 15px 0;
-    color: #333;
     cursor: pointer;
+    font-weight: 600;
+    color: #888;
+    transition: 0.3s;
 }
 
 .tab.active {
-    font-weight: bold;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
 }
 
-/* Content */
-#messageDisplay {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.empty-state {
-    color: #333;
-    font-size: 1.2rem;
-}
-
+/* Message Items */
 .message-item {
     padding: 15px;
-    border-bottom: 1px solid #eee;
-    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
+.message-item:hover {
+    background-color: #f9f9f9;
+}
+
+.message-item.unread {
+    background-color: var(--unread-bg);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #333;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.message-preview {
+    font-size: 0.9rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #ccc;
+    text-align: center;
+}

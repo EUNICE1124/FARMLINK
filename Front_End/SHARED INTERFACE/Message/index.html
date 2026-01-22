@@ -13,7 +13,7 @@
             <div class="top-row">
                 <i class="fas fa-bars menu-icon"></i>
                 <div class="search-container">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-arrow-left" onclick="window.history.back()"></i>
                     <span class="header-title">Messages</span>
                     <i class="fas fa-search"></i>
                 </div>
@@ -22,18 +22,15 @@
         </header>
 
         <nav class="tabs">
-            <div class="tab" onclick="filterMessages('all')">All</div>
-            <div class="tab active" onclick="filterMessages('unread')">Unread</div>
-            <div class="tab" onclick="filterMessages('all')">All</div>
+            <div class="tab" onclick="filterMessages('all', this)">All</div>
+            <div class="tab active" onclick="filterMessages('unread', this)">Unread</div>
         </nav>
 
         <main id="messageDisplay">
             <div class="empty-state">
-                <p>No Messages</p>
+                <p>Loading messages...</p>
             </div>
         </main>
-         
-        </nav>
     </div>
 
     <script src="script.js"></script>

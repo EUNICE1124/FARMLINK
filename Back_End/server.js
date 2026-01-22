@@ -9,10 +9,15 @@ const orderRoutes = require('./routes/orderRoutes');
 const userRoutes = require('./routes/userRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const marketplaceRoutes = require('./routes/marketplaceRoutes'); // Now handles all product/cart logic
+const authRoutes = require('./routes/authRoutes');
+const messageRoutes = require('./routes/messageRoutes');
+
 
 // 2. Import Controllers (Only the ones currently in use)
 const userController = require('./controllers/userController'); 
 const financeController = require('./controllers/financeController');
+const messageController = require('./controllers/messageController');
+
 
 const app = express();
 
@@ -36,12 +41,20 @@ app.put('/api/users/profile', userController.updateProfile);
 app.get('/api/users/verify/:userId', userController.checkAccountStatus);
 app.get('/api/finance/revenue', financeController.getRevenueData); // Consolidated to financeController
 
+// Messages
+app.get('/api/messages', messageController.getMessages);
+
+
 // --- Mounting Routers ---
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/search', searchRoutes);
-app.use('/api/marketplace', marketplaceRoutes); // Unified endpoint for grid, save, and cart
+app.use('/api/marketplace', marketplaceRoutes); 
+app.use('/api/messages', messageRoutes);
+app.use('/api/auth', authRoutes);
+
+
 
 // --- Server Start ---
 const PORT = process.env.PORT || 3001;
