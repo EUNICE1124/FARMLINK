@@ -28,11 +28,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = '../profile account interface/index.html';
         });
     }
+    const headerIcons =document.querySelector('.header-icons');
+    if(headerIcons) {
+headerIcons.addEventListener('click', () => {
+    windows.location.href = '../'
+}) 
+    }
 
     const salesTrigger = document.getElementById('sales-trigger');
     if (salesTrigger) {
         salesTrigger.addEventListener('click', () => {
             window.location.href = '../farmer dashboard/farmer dashboard.html';
+        });
+    }
+    const stockTrigger = document.getElementById('stock-trigger');
+    if (stockTrigger) {
+        stockTrigger.addEventListener('click', () => {
+            window.location.href = '../inventory/inventory.html';
         });
     }
 

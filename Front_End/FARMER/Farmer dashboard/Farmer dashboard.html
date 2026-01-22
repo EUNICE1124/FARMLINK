@@ -15,7 +15,8 @@
                 <p>HI, Farmer John</p>
                 <div class="header-icons">
                     <i class="bi bi-bell"></i>
-                    <div class="user-avatar-small">
+                    <div class="user-avatar-small"  style="cursor: pointer; z-index: 10000;" 
+         onclick="window.location.href='../profile account interface/index.html'">
                         <i class="bi bi-person"></i> 
                     </div>
                 </div>
@@ -26,7 +27,8 @@
             
             <div class="search-bar">
                 <i class="bi bi-search"></i>
-                <input type="text" placeholder="Search products, orders or customers">
+                <input type="text" placeholder="Search products, orders or customers" style="cursor: pointer;"
+           onclick="window.location.href='../../shared interface/search/index.html'">
             </div>
 
             <div class="performance-controls">
@@ -102,7 +104,7 @@
                 <span>Products</span>
             </a>
             <a href="#" class="nav-item" style="z-index: 100000; position: relative;" 
-            onclick="window.location.href='../../admin/order management/index.html'">
+            onclick="window.location.href='../order management/index.html'">
                 <i class="bi bi-bag"></i>
                 <span>Orders</span>
             </a>

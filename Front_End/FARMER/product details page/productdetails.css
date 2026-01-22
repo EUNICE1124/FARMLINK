@@ -13,7 +13,7 @@ body {
     height: 100vh;
 }
 
-.phone {
+.container {
     width: 360px;
     height: 700px;
     background: #f8f9f5;
@@ -26,7 +26,7 @@ body {
 .header {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 40px;
     border-bottom: 1px solid #ccc;
 }
 
