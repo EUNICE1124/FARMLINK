@@ -6,22 +6,21 @@
 }
 
 body {
-    background: #686565;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
 .phone {
-      width: 100%;
-      background-color: #fff;
-      max-width: 414px; 
-      min-height: 100vh; 
-      position: relative; 
-      padding-bottom: 90px; 
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+    width: 100%;
+    max-width: 412px; 
+    min-height: 100vh; 
+    background-color: var(--background-white);
+    position: relative;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
 .header {

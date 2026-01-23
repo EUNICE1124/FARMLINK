@@ -12,17 +12,15 @@ body {
     padding: 20px 0;
 }
 
-/* Forces the "Android" narrow look */
+
 .mobile-container {
-      width: 100%;
-      max-width: 414px; 
-      background-color: #fff;
-      min-height: 100vh; 
-      position: relative; 
-      padding-bottom: 90px; 
-      overflow: hidden;
-      display: flex;
-      flex-direction: column; 
+    width: 100%;
+    max-width: 412px; 
+    min-height: 100vh; 
+    background-color: var(--background-white);
+    position: relative;
+    overflow-y: auto; 
+    overflow-x: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
