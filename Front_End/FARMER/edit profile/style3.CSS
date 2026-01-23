@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #fff; /* Changed to white so the 'overflow' matches the app */
+    background: #fff; 
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -14,13 +14,14 @@ body {
 }
 
 .container {
-    width: 100%;       
-    max-width: 500px;  
-    min-height: 100vh; 
-    background: #fff;
-    margin: 0 auto;    
-    position: relative;
-    border-radius: 0; 
+     width: 100%;
+      max-width: 414px; 
+      min-height: 100vh; 
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 }
 
 /* HEADER */

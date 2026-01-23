@@ -1,15 +1,20 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: grey;
+    background-color: #fff;
     display: flex;
     justify-content: center;
 }
 .container{
-    height: 736px;
-    width: 360px;
-    background-color: white;
-    position: relative;
+      width: 100%;
+      max-width: 414px; 
+      min-height: 100vh; 
+      background-color: #fff;
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 }
 
 .header {

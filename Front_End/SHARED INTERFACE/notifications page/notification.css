@@ -10,10 +10,15 @@ body {
 
 /* phone container */
 .phone {
-    width: 360px;
-    height: 640px;
-    background: #fff;
-    overflow: hidden;
+    width: 100%;
+      max-width: 414px; 
+      background-color: #fff;
+      min-height: 100vh; 
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 }
 
 /* header */

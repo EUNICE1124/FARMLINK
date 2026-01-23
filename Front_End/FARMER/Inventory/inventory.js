@@ -78,5 +78,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Global function for edit button
 function editProduct(id) {
     console.log("Editing product ID:", id);
+    window.location.href = `../Add Product/index.html?id=${id}`;
     // Redirect to an edit page or open a modal
 }

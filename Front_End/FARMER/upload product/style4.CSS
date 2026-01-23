@@ -13,12 +13,15 @@ body {
 }
 
 .phone {
-    width: 360px;
-    height: 720px;
-    background: #F6F6F6;
-    border-radius: 20px;
-    padding: 15px;
-    overflow-y: auto;
+      width: 100%;
+      background-color: #fff;
+      max-width: 414px; 
+      min-height: 100vh; 
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 }
 
 .header {

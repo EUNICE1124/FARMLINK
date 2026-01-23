@@ -14,20 +14,22 @@
 }
 
 body {
-    background-color: #333; 
+    background-color: #fff; 
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
 .mobile-container {
-    width: 375px;
-    height: 100vh; 
-    background: white;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden; 
+      width: 100%;
+      background-color: #fff;
+      max-width: 414px; 
+      min-height: 100vh; 
+      position: relative; 
+      padding-bottom: 90px; 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 }
 .top-sticky {
     flex-shrink: 0;
