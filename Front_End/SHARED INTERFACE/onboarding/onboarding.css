@@ -105,3 +105,19 @@ h1 { font-size: 1.5rem; font-weight: 400; }
     cursor: pointer;
     transition: opacity 0.3s;
 }
+.footer-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.footer-link a {
+    color: #4eb32a; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
