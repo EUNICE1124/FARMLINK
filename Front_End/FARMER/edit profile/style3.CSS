@@ -20,8 +20,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 412px; 
-    min-height: 100vh; 
+    max-width:fit-content; 
     background-color: var(--background-white);
     position: relative;
     overflow-y: auto; 
