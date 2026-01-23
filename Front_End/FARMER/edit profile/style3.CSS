@@ -6,20 +6,21 @@
 }
 
 body {
-    background: #111;
+    background: #fff; /* Changed to white so the 'overflow' matches the app */
+    margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* PHONE CONTAINER */
 .container {
-    width: 360px;
-    height: 700px;
+    width: 100%;       
+    max-width: 500px;  
+    min-height: 100vh; 
     background: #fff;
-    border-radius: 20px;
+    margin: 0 auto;    
     position: relative;
+    border-radius: 0; 
 }
 
 /* HEADER */
