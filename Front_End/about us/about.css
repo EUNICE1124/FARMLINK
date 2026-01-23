@@ -21,7 +21,7 @@ body {
 
 /* Header Styling */
 .about-header {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/farm-bg.jpg');
+    background: linear-gradient(rgba(45, 231, 86, 0.6), rgba(16, 157, 63, 0.6)), url('images/farm-bg.jpg');
     background-size: cover;
     color: white;
     text-align: center;
@@ -52,7 +52,7 @@ body {
 
 .img-wrapper {
     position: relative;
-    height: 250px;
+    height: 400px;
 }
 
 .img-wrapper img {
