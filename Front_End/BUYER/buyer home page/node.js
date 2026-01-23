@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!productGrid) return;
     productGrid.innerHTML = products.map(product => `
         <div class="product-card" data-id="${product.id}">
-            <img src="${product.image_url || 'images/images.jpg'}" alt="${product.name}" class="product-image">
+            <img src="${product.image_url || '/Front_End/BUYER/buyer home page/images'}" alt="${product.name}" class="product-image">
             <div class="product-details">
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">${product.price}cfa</div>

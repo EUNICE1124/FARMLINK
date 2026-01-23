@@ -20,7 +20,7 @@ async function fetchOrderData() {
 
         // 2. Populate UI
         document.getElementById('customerNum').value = data.buyerNumber || data.phone;
-        document.getElementById('adminNumber').innerText = data.adminNumber || "677000000";
+        document.getElementById('adminNumber').innerText = data.adminNumber || "694002750";
         document.getElementById('deliveryDate').innerText = data.date || "Calculating...";
 
         // 3. Update visual tracking
