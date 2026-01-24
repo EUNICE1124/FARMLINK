@@ -19,7 +19,7 @@ async function loadFarmerProfile() {
     const nameDisplay = document.getElementById('userNameDisplay');
 
     try {
-        const response = await fetch(`http://root:173.234.79.54/api/users/dashboard/${userId}`);
+        const response = await fetch(`http://173.234.79.54:3001/api/users/dashboard/${userId}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -40,7 +40,7 @@ async function handleDashboardSearch(query) {
     if (!query) return;
 
     try {
-        const response = await fetch(`http://root:173.234.79.54/api/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`http://173.234.79.54:3001/api/search?q=${encodeURIComponent(query)}`);
         const results = await response.json();
 
         if (response.ok) {

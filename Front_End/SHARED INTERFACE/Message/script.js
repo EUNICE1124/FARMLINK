@@ -24,7 +24,7 @@ async function filterMessages(type, element) {
     // 3. API Fetch
     try {
         // Ensure you pass the userId and filter type (all vs unread)
-        const response = await fetch(`http://localhost:3001/api/messages?userId=${userId}&type=${type}`);
+        const response = await fetch(`http://173.234.79.54:3001/api/messages?userId=${userId}&type=${type}`);
         
         if (!response.ok) throw new Error('Failed to fetch data');
         

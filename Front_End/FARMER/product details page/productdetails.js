@@ -17,7 +17,7 @@ saveBtn.addEventListener("click", async () => {
     formData.append('isVegetable', category === 'vegetable');
 
     try {
-        const response = await fetch('http://root:173.234.79.54/api/marketplace/save', {
+        const response = await fetch('http://173.234.79.54:3001/api/marketplace/save', {
             method: 'POST',
             body: formData // No headers needed, browser handles multipart
         });
