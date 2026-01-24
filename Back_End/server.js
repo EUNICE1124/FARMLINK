@@ -26,7 +26,6 @@ app.use(cors());
 app.use(express.json()); 
 
 // --- Static Folders ---
-// Allows the frontend to access images: http://localhost:3001/images/example.jpg
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // --- Direct API Routes (Manual Mounts) ---
@@ -58,7 +57,8 @@ app.use('/api/auth', authRoutes);
 
 // --- Server Start ---
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📁 Static images available at http://localhost:${PORT}/images`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is LIVE and listening on all interfaces at port ${PORT}`);
+    console.log(`🔗 Local access: http://localhost:${PORT}`);
+    console.log(`🌐 Public access: http://173.234.79.54:${PORT}`);
 });
