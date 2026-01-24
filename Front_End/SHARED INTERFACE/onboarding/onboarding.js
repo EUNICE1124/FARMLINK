@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             continueBtn.disabled = true;
             continueBtn.innerText = "Saving...";
 
-            const response = await fetch('http://localhost:3001/api/auth/select-role', {
+            const response = await fetch('http://root:173.234.79.54/api/auth/select-role', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

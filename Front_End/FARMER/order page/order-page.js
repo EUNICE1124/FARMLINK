@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 2. FETCH ORDER DATA
     async function loadOrderDetails() {
         try {
-            const response = await fetch(`http://localhost:3001/api/orders/${orderId}`);
+            const response = await fetch(`http://root:173.234.79.54/api/orders/${orderId}`);
             const order = await response.json();
             if (response.ok) {
                  // Correctly accessing the keys sent by the updated controller
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 3. UPDATE STATUS FUNCTION
     async function handleStatusUpdate(newStatus) {
         try {
-            const response = await fetch('http://localhost:3001/api/orders/status', {
+            const response = await fetch('http://root:173.234.79.54/api/orders/status', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderId: orderId, status: newStatus })

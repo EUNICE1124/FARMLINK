@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3001/api";
+const API_BASE_URL = "http://root:173.234.79.54/api";
 
 // --- 2. PRODUCT MANAGEMENT LOGIC ---
 // Captures data from the Product Management screen (IMG-20251226-WA0005.jpg)

@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (userId) {
         try {
             // Fetch User Profile Name from userController
-            const profileRes = await fetch(`http://localhost:3001/api/users/profile/${userId}`);
+            const profileRes = await fetch(`http://root:173.234.79.54/api/users/profile/${userId}`);
             if (profileRes.ok) {
                 const userData = await profileRes.json();
                 userNameElement.textContent = `HI, ${userData.full_name || 'Farmer'}`;
             }
 
             // Fetch Order Statistics from orderController
-            const statsRes = await fetch(`http://localhost:3001/api/orders/stats/${userId}`);
+            const statsRes = await fetch(`http://root:173.234.79.54/api/orders/stats/${userId}`);
             if (statsRes.ok) {
                 const statsData = await statsRes.json();
                 // Update UI with real aggregated data

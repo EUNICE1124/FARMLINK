@@ -42,7 +42,7 @@ form.addEventListener('submit', async (event) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3001/api/users/address', {
+        const response = await fetch('http://root:173.234.79.54/api/users/address', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
