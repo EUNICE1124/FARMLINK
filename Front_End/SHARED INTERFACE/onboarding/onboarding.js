@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 // Navigate based on the selected role
                 if (selectedRole === 'farmer') {
-                    window.location.href = '/Front_End/FARMER/signup as farmer/signup.html';
+                    window.location.href = '../../FARMER/signup as farmer/signup.html';
                 } else if (selectedRole === 'buyer') {
-                    window.location.href = '/Front_End/BUYER/Sign-up as buyer/signup buyer.html';
+                    window.location.href = '../../BUYER/Sign-up as buyer/signup buyer.html';
                 }
             } else {
                 alert("Error: " + result.message);
