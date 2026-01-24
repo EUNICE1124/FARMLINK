@@ -4,7 +4,7 @@ async function fetchOrderData() {
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get('id') || 1; 
 
-        const response = await fetch(`http://localhost:3001/api/orders/status/${orderId}`);
+        const response = await fetch(`http://173.234.79.54:3001/api/orders/status/${orderId}`);
         if (!response.ok) throw new Error('Order not found');
         
         const data = await response.json();

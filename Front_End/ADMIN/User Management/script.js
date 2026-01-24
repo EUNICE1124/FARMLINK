@@ -10,7 +10,7 @@ async function fetchUsers() {
     try {
         userListContainer.innerHTML = '<p style="padding:20px;">Loading users...</p>';
         
-        const response = await fetch('http://localhost:3001/api/users');
+        const response = await fetch('http://173.234.79.54:3001/api/users');
         if (!response.ok) throw new Error('Failed to connect to server');
         
         const users = await response.json();
@@ -78,7 +78,7 @@ fabButton.addEventListener('click', async () => {
     const email = prompt("Enter User Email:");
 if (name && email) {
     try {
-        const response = await fetch('http://localhost:3001/api/users', {
+        const response = await fetch('http://173.234.79.54:3001/api/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, role: 'Buyer', password: 'defaultPassword' })

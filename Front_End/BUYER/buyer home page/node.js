@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     async function loadProducts() {
         try {
-            const response = await fetch(`http://localhost:3001/api/marketplace/grid?category=All`);
+            const response = await fetch(`http://173.234.79.54:3001/api/marketplace/grid?category=All`);
             if (!response.ok) throw new Error("Server down");
             const products = await response.json();
             renderProducts(products);
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const cartData = { product_id: productId, user_id: savedUser.id, quantity_label: "1 unit" };
 
                 try {
-                    const res = await fetch('http://localhost:3001/api/marketplace/cart/add', {
+                    const res = await fetch('http://173.234.79.54:3001/api/marketplace/cart/add', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(cartData)

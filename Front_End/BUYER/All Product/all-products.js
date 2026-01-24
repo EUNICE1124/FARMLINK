@@ -2,7 +2,7 @@
 async function loadMarket() {
     const grid = document.getElementById('marketGrid');
     try {
-        const res = await fetch('http://localhost:3001/api/marketplace');
+        const res = await fetch('http://173.234.79.54:3001/marketplace');
         const products = await res.json();
 
         grid.innerHTML = products.map(p => `
@@ -25,7 +25,7 @@ async function loadMarket() {
 async function addToCart(productId) {
     const userId = localStorage.getItem('userId') || 1; // Fallback for testing
     try {
-        const response = await fetch('http://localhost:3001/api/marketplace/cart/add', {
+        const response = await fetch('http://173.234.79.54:3001/api/marketplace/cart/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

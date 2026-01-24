@@ -88,7 +88,7 @@ async function placeOrder() {
     }
 
     try {
-        const response = await fetch('http://localhost:3001/api/orders', {
+        const response = await fetch('http://173.234.79.54:3001/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)

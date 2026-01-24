@@ -2,7 +2,7 @@
 const currentUserId = localStorage.getItem('userId') || 1; // Fallback to 1 for testing
 
 // 2. Updated API URL to include the userId as a query parameter
-const ORDER_API = `http://localhost:3001/api/orders/latest?userId=${currentUserId}`;
+const ORDER_API = `http://173.234.79.54:3001/api/orders/latest?userId=${currentUserId}`;
 
 async function fetchOrderData() {
     try {

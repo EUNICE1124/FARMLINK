@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('http://localhost:3001/api/marketplace/cart/add', {
+                const response = await fetch('http://173.234.79.54:3001/api/marketplace/cart/add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(cartData)
