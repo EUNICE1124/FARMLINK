@@ -28,44 +28,38 @@ document.addEventListener('DOMContentLoaded', function () {
         
         const userId = localStorage.getItem('userId') || 1; 
 
-        try {
-            // Disable button to prevent double-clicks
-            continueBtn.disabled = true;
-            continueBtn.innerText = "Saving...";
+       // Replace your try/catch block with this:
+try {
+    continueBtn.disabled = true;
+    continueBtn.innerText = "Saving...";
 
-            const response = await fetch('http://173.234.79.54:3001/api/auth/select-role', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    role: selectedRole,
-                    userId: userId
-                })
-            });
+    // Add a timeout to prevent infinite "Saving..."
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second limit
 
-            const result = await response.json();
+    const response = await fetch('http://173.234.79.54:3001/api/auth/select-role', {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: selectedRole, userId: userId })
+    });
 
-            if (response.ok) {
-                console.log("Success:", result.message);
-                
-                // Navigate based on the selected role
-                if (selectedRole === 'farmer') {
-                    window.location.href = '../../FARMER/signup as farmer/signup.html';
-                } else if (selectedRole === 'buyer') {
-                    window.location.href = '../../BUYER/Sign-up as buyer/signup buyer.html';
-                }
-            } else {
-                alert("Error: " + result.message);
-                continueBtn.disabled = false;
-                continueBtn.innerText = "Continue";
-            }
+    clearTimeout(timeoutId);
+    const result = await response.json();
 
-        } catch (error) {
-            console.error("Connection Error:", error);
-            alert("Could not connect to the server. Please check if Node.js is running.");
-            continueBtn.disabled = false;
-            continueBtn.innerText = "Continue";
-        }
+    if (response.ok) {
+        window.location.href = selectedRole === 'farmer' 
+            ? '../../FARMER/signup as farmer/signup.html' 
+            : '../../BUYER/Sign-up as buyer/signup buyer.html';
+    } else {
+        throw new Error(result.message || "Server rejected the request");
+    }
+
+} catch (error) {
+    console.error("DETAILED ERROR:", error);
+    alert("Submission Failed: " + error.message);
+    continueBtn.disabled = false;
+    continueBtn.innerText = "Continue";
+}
     });
 });
