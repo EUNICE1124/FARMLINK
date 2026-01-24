@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!userId) return;
 
         try {
-            const response = await fetch(`http://root:173.234.79.54/api/farmer/inventory/${userId}`);
+            const response = await fetch(`http://173.234.79.54:3001/api/farmer/inventory/${userId}`);
             const products = await response.json();
 
             if (response.ok) {

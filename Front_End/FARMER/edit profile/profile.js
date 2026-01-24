@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('http://root:173.234.79.54/api/users/profile', {
+                const response = await fetch('http://173.234.79.54:3001/api/users/profile', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(profileData)
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadProfileData() {
     const userId = localStorage.getItem('userId');
     try {
-        const response = await fetch(`http://root:173.234.79.54/api/users/profile/${userId}`);
+        const response = await fetch(`http://173.234.79.54:3001/api/users/profile/${userId}`);
         if (response.ok) {
             const data = await response.json();
             fullNameInput.value = data.full_name || "";
             emailInput.value = data.email || "";
             phoneInput.value = data.phone || "";
             genderSelect.value = data.gender || "male";
-            if (data.profile_pic) profilePic.src = `http://root:173.234.79.54/${data.profile_pic}`;
+            if (data.profile_pic) profilePic.src = `http://173.234.79.54:3001/${data.profile_pic}`;
         }
     } catch (error) {
         console.error("Failed to load profile:", error);
