@@ -23,7 +23,7 @@ saveBtn.addEventListener("click", async () => {
 
     try {
         // 4. Point to the CORRECT port (3001) and merged route
-        const response = await fetch("http://localhost:3001/api/marketplace/save", {
+        const response = await fetch("http://root:173.234.79.54/api/marketplace/save", {
             method: "POST",
             body: formData
         });

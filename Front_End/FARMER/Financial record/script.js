@@ -1,6 +1,6 @@
 // --- API CONFIGURATION ---
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:3001/api',
+    BASE_URL: 'http://root:173.234.79.54/api',
     REVENUE_DATA_ENDPOINT: '/finance/revenue',
     HEADERS: { 'Content-Type': 'application/json' }
 };

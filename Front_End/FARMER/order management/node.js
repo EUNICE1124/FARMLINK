@@ -3,7 +3,7 @@ let orders = [];
 async function loadRealOrders() {
     const userId = localStorage.getItem('userId'); // Ensure we only get THIS farmer's orders
     try {
-        const response = await fetch(`http://localhost:3001/api/orders/farmer/${userId}`);
+        const response = await fetch(`http://root:173.234.79.54/api/orders/farmer/${userId}`);
         if (!response.ok) throw new Error('Failed to fetch orders');
         
         orders = await response.json();
@@ -17,7 +17,7 @@ async function handleOrderAction(orderId, action) {
     const newStatus = action === 'Approve' ? 'Processing' : 'Cancelled';
     
     try {
-        const response = await fetch(`http://localhost:3001/api/orders/${orderId}`, {
+        const response = await fetch(`http://root:173.234.79.54/api/orders/${orderId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: newStatus })
