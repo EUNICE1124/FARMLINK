@@ -1,7 +1,6 @@
 require('dotenv').config(); // Loads variables from your .env file
 const mysql = require('mysql2');
 
-// Create a connection pool (better for group projects/multiple users)
 const pool = mysql.createPool({
     host: process.env.DB_HOST || '127.0.0.1',
     user: process.env.DB_USER || 'root',

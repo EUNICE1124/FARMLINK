@@ -7,7 +7,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
 
     // 2. API Linking (The Backend Connection)
     try {
-      const response = await fetch('http://localhost:3001/api/admin/login', {
+      const response = await fetch('http://173.234.79.54:3001/api/admin/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
